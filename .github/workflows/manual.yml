@@ -1,0 +1,64 @@
+name: Playwright Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'The browser to use'
+        default: 'chromium'
+        required: true
+        type: choice
+        options:
+        - all
+        - chromium
+        - firefox
+        - webkit
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.41.0-jammy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          playwright install
+      - name: Test
+        run: pytest --browser ${{ inputs.browser }}
+        env:
+          HOME: /root
+      - name: Archive Allure results
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporting/allure-results
+          path: reporting/allure-results
+
+  report:
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:8-jre
+    env:
+      ALLURE: 2.27.0
+    steps:
+      - name: Report
+        run: |
+          curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
+          unzip /tmp/allure.zip -d /usr/local/
+          ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
+          allure generate \
+            --clean \
+            --output reporting/allure-reports/report-python \
+            --single-file reporting/allure-results/python-results
+      - name: Commit
+        run: |
+          # Stage the file, commit and push
+          rm -rf /docs/*
+          mv reporting/allure-results/python-results/* docs/
+          git add docs/*
+          git commit -m "Github Commit"
+          git push origin main
