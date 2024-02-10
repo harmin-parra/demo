@@ -31,10 +31,14 @@ jobs:
       - name: Test
         run: |
           cd tests-python
-          pytest --browser ${{ inputs.browser }}
+          behave cucumber/features/petstore.feature
+          export PYTHONPATH=$(pwd)
+          pytest web_playwright/tests/ --browser ${{ inputs.browser }}
+          unset PYTHONPATH
+          cd ..
         env:
           HOME: /root
-      - name: Archive Allure results
+      - name: Archive
         uses: actions/upload-artifact@v4
         with:
           name: reporting/allure-results
