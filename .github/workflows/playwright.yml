@@ -26,10 +26,12 @@ jobs:
           python-version: '3.11'
       - name: Install
         run: |
-          pip install -r requirements.txt
+          pip install -r tests-python/requirements.txt
           playwright install
       - name: Test
-        run: pytest --browser ${{ inputs.browser }}
+        run: |
+          cd tests-python
+          pytest --browser ${{ inputs.browser }}
         env:
           HOME: /root
       - name: Archive Allure results
