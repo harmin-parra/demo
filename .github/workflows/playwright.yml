@@ -52,6 +52,10 @@ jobs:
     env:
       ALLURE: 2.27.0
     steps:
+      - name: Download archive
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-results
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
