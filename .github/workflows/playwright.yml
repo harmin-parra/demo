@@ -41,7 +41,7 @@ jobs:
       - name: Archive
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results
+          name: artifact
           path: reporting/allure-results/python-results
 
   report:
@@ -55,7 +55,7 @@ jobs:
       - name: Download archive
         uses: actions/download-artifact@v4
         with:
-          name: allure-results
+          name: artifact
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -66,7 +66,7 @@ jobs:
             --clean \
             --output allure-report \
             --single-file \
-            allure-results
+            reporting/allure-results/python-results
       - name: Commit
         run: |
           rm -rf docs/*
