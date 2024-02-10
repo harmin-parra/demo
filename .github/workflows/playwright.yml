@@ -66,9 +66,13 @@ jobs:
             --output allure-report \
             --single-file \
             allure-results/python-results
+          ls
+          ls allure-report
       - uses: actions/checkout@v4
       - name: Commit
         run: |
+          ls
+          ls allure-report
           rm -rf docs/*
           mv allure-report/* docs/
           git add docs/*
