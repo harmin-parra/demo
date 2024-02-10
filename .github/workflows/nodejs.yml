@@ -94,5 +94,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add docs/*
-          git commit -m "Github Commit"
+          git commit -m "Github Commit - Node.js tests"
           git push origin main
