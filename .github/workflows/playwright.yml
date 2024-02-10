@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact
-          path: reporting/allure-results/python-results
+          path: reporting/
 
   report:
     needs: test
@@ -59,18 +59,17 @@ jobs:
       - shell: bash
         run: |
           ls
-          ls reporting/allure-results/python-results
+          ls allure-results/python-results
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
-          ls reporting/allure-results/python-results
           allure generate \
             --clean \
             --output allure-report \
             --single-file \
-            reporting/allure-results/python-results
+            allure-results/python-results
       - name: Commit
         run: |
           rm -rf docs/*
