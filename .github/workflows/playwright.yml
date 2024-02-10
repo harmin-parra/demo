@@ -73,7 +73,7 @@ jobs:
       - name: Commit
         run: |
           rm -rf docs/*
-          mv allure-reports/* docs/
+          mv allure-report/* docs/
           git add docs/*
           git commit -m "Github Commit"
           git push origin main
