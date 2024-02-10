@@ -63,8 +63,7 @@ jobs:
             --single-file reporting/allure-results/python-results
       - name: Commit
         run: |
-          # Stage the file, commit and push
-          rm -rf /docs/*
+          rm -rf docs/*
           mv reporting/allure-reports/report-python/* docs/
           git add docs/*
           git commit -m "Github Commit"
