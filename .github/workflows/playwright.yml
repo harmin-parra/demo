@@ -20,7 +20,8 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright/python:v1.41.0-jammy
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
@@ -41,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact
+          name: artifact_test
           path: reporting/
 
   report:
@@ -52,11 +53,12 @@ jobs:
     env:
       ALLURE: 2.27.0
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact
+          name: artifact_test
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -69,12 +71,32 @@ jobs:
             allure-results/python-results
           ls
           ls allure-report
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_report
+          path: allure-report/index.html
+
+  publish:
+    needs: report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Git config
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_report
       - name: Commit
         run: |
-          ls
-          ls allure-report
+          #ls
+          #ls allure-report
           rm -rf docs/*
-          mv allure-report/* docs/
+          mv index.html docs/
           git add docs/*
           git commit -m "Github Commit"
           git push origin main
