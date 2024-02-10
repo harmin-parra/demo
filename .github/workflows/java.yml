@@ -29,7 +29,7 @@ jobs:
       - name: Install
         run: |
           cd tests-java
-          mvn resolve
+          mvn dependency:resolve
           cd ..
       - name: Test
         run: |
