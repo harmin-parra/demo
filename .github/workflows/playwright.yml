@@ -98,5 +98,5 @@ jobs:
           commit_options: '--no-verify --signoff'
           commit_user_name: GitHub Actions
           commit_user_email: noreply@github.com
-          file_pattern: index.html
+          file_pattern: docs/*
           commit_message: Github Commit          
