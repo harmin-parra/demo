@@ -38,7 +38,7 @@ jobs:
           cd ..
         env:
           HOME: /root
-      - name: Archive
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: artifact
@@ -52,14 +52,10 @@ jobs:
     env:
       ALLURE: 2.27.0
     steps:
-      - name: Download archive
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: artifact
-      - shell: bash
-        run: |
-          ls
-          ls allure-results/python-results
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -70,6 +66,7 @@ jobs:
             --output allure-report \
             --single-file \
             allure-results/python-results
+      - uses: actions/checkout@v4
       - name: Commit
         run: |
           rm -rf docs/*
