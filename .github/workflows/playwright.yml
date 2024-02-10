@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           # name: reporting/allure-results
-          path: reporting/allure-results
+          path: reporting/allure-results/python-results
 
   report:
     needs: test
@@ -65,7 +65,7 @@ jobs:
         run: |
           # Stage the file, commit and push
           rm -rf /docs/*
-          mv reporting/allure-results/python-results/* docs/
+          mv reporting/allure-reports/report-python/* docs/
           git add docs/*
           git commit -m "Github Commit"
           git push origin main
