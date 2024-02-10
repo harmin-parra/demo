@@ -4,6 +4,10 @@ Sample source code of automated test of web pages and a REST api.
 
 The objective is to implement the same tests using different automation test tools and different programming languages.
 
+## HTML report
+
+https://harmin-parra.github.io/demo/
+
 ## Test Targets
 
 The web pages under test:
