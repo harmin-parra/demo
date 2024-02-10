@@ -1,0 +1,15 @@
+**/.idea
+**/.project
+**/.settings/
+
+**/.classpath
+**/.mvn/
+**/target/
+
+**/node_modules
+**/package-lock.json
+
+**/.pytest_cache
+**/__pycache__
+
+reporting/*

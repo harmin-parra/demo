@@ -1,0 +1,121 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+
+
+stages:
+  - test
+  - report
+  - commit
+
+
+variables:
+  ALLURE: "2.27.0"
+  TOKEN: "glpat-64VubsDGWUwgPgYkgEjs"
+  LANGUAGE:
+    value: "All"
+    options:
+      - "All"
+      - "Java"
+      - "Node.js"
+      - "Python"
+    description: "The development language test implementation target."
+
+
+tests java:
+  stage: test
+  image: mcr.microsoft.com/playwright/java:v1.41.0-jammy
+  rules:
+    - if: $LANGUAGE == "All"
+    - if: $LANGUAGE == "Java"
+  script:
+    - mvn -f tests-java/pom.xml dependency:resolve
+    - ./run.sh --lang Java
+    - echo $CI_JOB_URL > reporting/allure-results/java-results/job.url
+  artifacts:
+    paths:
+      - reporting/allure-results/java-results/
+    expire_in: 10 mins
+
+
+tests node:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.41.1-jammy
+  rules:
+    - if: $LANGUAGE == "All"
+    - if: $LANGUAGE == "Node.js"
+  script:
+    - npm install tests-nodejs/
+    - ./run.sh --lang Node.js
+    - echo $CI_JOB_URL > reporting/allure-results/nodejs-results/job.url
+  artifacts:
+    paths:
+      - reporting/allure-results/nodejs-results/
+    expire_in: 10 mins
+
+
+tests python:
+  stage: test
+  image: mcr.microsoft.com/playwright/python:v1.41.0-jammy
+  rules:
+    - if: $LANGUAGE == "All"
+    - if: $LANGUAGE == "Python"
+  script:
+    - pip install -r tests-python/requirements.txt
+    - playwright install
+    - ./run.sh --lang Python
+    - echo $CI_JOB_URL > reporting/allure-results/python-results/job.url
+  artifacts:
+    paths:
+      - reporting/allure-results/python-results/*
+    expire_in: 10 mins
+
+
+report:
+  stage: report
+  image: openjdk:8-jre
+  script:
+    - curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
+    - unzip /tmp/allure.zip -d /usr/local/
+    - ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
+    - >
+      if [ $LANGUAGE = "Python" ]; then
+        ./allure.sh --lang $LANGUAGE --job-python $(cat reporting/allure-results/python-results/job.url)
+      elif [ $LANGUAGE = "Java" ]; then
+        ./allure.sh --lang $LANGUAGE --job-java   $(cat reporting/allure-results/java-results/job.url)
+      elif [ $LANGUAGE = "Node.js" ]; then
+        ./allure.sh --lang $LANGUAGE --job-nodejs $(cat reporting/allure-results/nodejs-results/job.url)
+      else  # $LANGUAGE = "All"
+        ./allure.sh --lang $LANGUAGE \
+                    --job-python $(cat reporting/allure-results/python-results/job.url) \
+                    --job-java   $(cat reporting/allure-results/java-results/job.url) \
+                    --job-nodejs $(cat reporting/allure-results/nodejs-results/job.url)
+      fi
+  artifacts:
+    paths:
+      - reporting/allure-reports/*
+    expire_in: 10 mins
+
+
+commit:
+  stage: commit
+  image: bitnami/git
+  script:
+    - git config --global user.name "Gitlab CI"
+    - git config --global user.email "gitlab@mg.gitlab.com"
+    - git clone https://gitlab-ci-token:${TOKEN}@gitlab.com/harmin-demo/reports.git
+    - cp -r reporting/allure-reports/* reports/
+    - cd reports
+    - git add *
+    - git commit -m "Gitlab-CI commit"
+    - git push
+
+
+#pages:
+#  stage: pages
+#  script:
+#    - mkdir public
+#    - mv reporting/allure-reports/* public/
+#  artifacts:
+#    paths:
+#      - public

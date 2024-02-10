@@ -1,0 +1,8 @@
+allure-behave
+allure-pytest
+behave
+playwright
+pytest
+pytest-playwright
+requests
+#selenium
