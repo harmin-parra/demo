@@ -56,6 +56,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact
+      - shell: bash
+        run: |
+          ls
+          ls reporting/allure-results/python-results
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
