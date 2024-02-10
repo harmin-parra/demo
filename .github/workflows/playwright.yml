@@ -41,7 +41,7 @@ jobs:
       - name: Archive
         uses: actions/upload-artifact@v4
         with:
-          # name: reporting/allure-results
+          name: allure-results
           path: reporting/allure-results/python-results
 
   report:
@@ -59,8 +59,9 @@ jobs:
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
           allure generate \
             --clean \
-            --output reporting/allure-reports/report-python \
-            --single-file reporting/allure-results/python-results
+            --output allure-report \
+            --single-file \
+            allure-results
       - name: Commit
         run: |
           rm -rf docs/*
