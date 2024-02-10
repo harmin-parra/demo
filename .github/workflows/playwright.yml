@@ -83,20 +83,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      #- name: Git config
-      #  run: |
-      #    git config user.name "GitHub Actions"
-      #    git config user.email "noreply@github.com"
+      - name: Git config
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           name: artifact_report
       - name: Commit
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          repository: .
-          # commit_options: '--no-verify --signoff'
-          commit_user_name: GitHub Actions
-          commit_user_email: noreply@github.com
-          file_pattern: docs/*
-          commit_message: Github Commit          
+        run: |
+          rm -rf docs/*
+          mv index.html docs/
+          git add docs/*
+          git commit -m "Github Commit"
+          git push origin main
+      #- name: Commit
+      #  uses: stefanzweifel/git-auto-commit-action@v5
+      #  with:
+      #    repository: .
+      #    # commit_options: '--no-verify --signoff'
+      #    commit_user_name: GitHub Actions
+      #    commit_user_email: noreply@github.com
+      #    file_pattern: docs/*
+      #    commit_message: Github Commit          
