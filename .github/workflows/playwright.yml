@@ -95,6 +95,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           repository: .
+          commit_options: '--no-verify --signoff'
           commit_user_name: GitHub Actions
           commit_user_email: noreply@github.com
           file_pattern: index.html
