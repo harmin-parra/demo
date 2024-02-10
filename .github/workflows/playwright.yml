@@ -61,6 +61,7 @@ jobs:
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
+          ls allure-results
           allure generate \
             --clean \
             --output allure-report \
@@ -69,7 +70,7 @@ jobs:
       - name: Commit
         run: |
           rm -rf docs/*
-          mv reporting/allure-reports/report-python/* docs/
+          mv allure-reports/* docs/
           git add docs/*
           git commit -m "Github Commit"
           git push origin main
