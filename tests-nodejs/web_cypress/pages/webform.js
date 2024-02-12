@@ -44,6 +44,8 @@ class WebFormPage {
   set_date(value) {
     this.elements.date().type(value);
     cy.get("body").click();
+    //this.elements.date().invoke('val', value);
+    //this.elements.date().then(($elem) => $elem.val(value));
   }
 
   set_range(value) {

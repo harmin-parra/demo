@@ -54,9 +54,7 @@ class WebformPage {
   }
 
   async set_date(value) {
-    await this.date.fill(value);
-    await this.date.press("Enter");
-    await this.page.locator("body").click();
+    await this.date.evaluate((elem, value) => elem.setAttribute("value", value), value);
   }
 
   async set_file(value) {
