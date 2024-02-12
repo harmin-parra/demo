@@ -33,6 +33,8 @@ jobs:
           cd ..
       - name: Test
         run: |
+          chmod +x webdrivers/*
+          mvwebdrivers/* webdrivers/* /usr/local/bin/
           cd tests-java
           mvn -Dtest="web_selenium/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
@@ -75,3 +77,23 @@ jobs:
         with:
           name: artifact_report
           path: allure-report/index.html
+
+  publish:
+    needs: report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_report
+      - name: Commit
+        run: |
+          rm -rf docs/*
+          mv index.html docs/
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
+          git add docs/*
+          git commit -m "Github Commit - Selenium tests"
+          git push origin main
