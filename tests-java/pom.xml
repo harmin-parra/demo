@@ -71,6 +71,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
             <version>5.3.1</version>
@@ -115,6 +120,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <!--systemPropertyVariables>
+                        <browser>${browser}</browser>
+                    <systemPropertyVariables-->
+                    <systemProperties>
+                        <property>
+                            <name>browser</name>
+                            <value>${browser}</value>
+                        </property>
+                    </systemProperties>
                     <properties>
                         <configurationParameters>cucumber.junit-platform.naming-strategy=long</configurationParameters>
                     </properties>

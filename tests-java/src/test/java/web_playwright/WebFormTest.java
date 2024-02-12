@@ -6,10 +6,13 @@ import web_playwright.WebFormPage;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.BrowserType.LaunchOptions;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 import java.io.ByteArrayInputStream;
+
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -26,7 +29,15 @@ public class WebFormTest {
     @BeforeAll
     static void launchBrowser() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
+        LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(true);
+        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
+        if (browserName.equals("chromium")) {
+          browser = playwright.chromium().launch(options);
+        } else if (browserName.equals("firefox")) {
+          browser = playwright.firefox().launch(options);
+        } else if (browserName.equals("webkit")) {
+          browser = playwright.webkit().launch(options);
+        }
     }
 
     @BeforeEach
