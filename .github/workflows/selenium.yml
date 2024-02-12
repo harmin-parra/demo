@@ -28,15 +28,6 @@ jobs:
           apt-get -y install wget default-jdk-headless maven
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           apt-get -y install ./google-chrome-stable_current_amd64.deb
-          #wget https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_linux-x64_bin.tar.gz
-          #tar -xf openjdk-17+35_linux-x64_bin.tar.gz
-          #mv jdk-17 /opt/
-          #ln -s /opt/jdk-17/bin/java /usr/local/bin/
-          #ln -s /opt/jdk-17/bin/javac /usr/local/bin/
-          #wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
-          #tar -xf apache-maven-3.9.6-bin.tar.gz
-          #mv apache-maven-3.9.6 /opt/
-          #ln -s /opt/apache-maven-3.9.6/bin/mvn /usr/local/bin/
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
           cd tests-java
@@ -44,15 +35,8 @@ jobs:
           cd ..
       - name: Test
         run: |
-          #JAVA_HOME='/opt/jdk-17'
-          #PATH="$JAVA_HOME/bin:$PATH"
-          #M2_HOME='/opt/apache-maven-3.9.6'
-          #PATH="$M2_HOME/bin:$PATH"
-          #export PATH
-          #which google-chrome
-          #which firefox
           cd tests-java
-          mvn -Dtest="web_selenium/**" -Dbrowser=${{ inputs.browser }} test
+          mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" test
           cd ..
         env:
           HOME: /root
