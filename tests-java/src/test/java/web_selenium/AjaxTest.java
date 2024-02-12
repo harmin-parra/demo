@@ -17,7 +17,7 @@ public class AjaxTest {
     @BeforeEach
     public void setup() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments();  //"--headless=new");
+        options.addArguments("--headless");
         this.driver = new ChromeDriver(options);
     }
 
