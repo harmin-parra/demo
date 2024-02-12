@@ -43,6 +43,11 @@ jobs:
           cd ..
       - name: Test
         run: |
+          JAVA_HOME='/opt/jdk-17'
+          PATH="$JAVA_HOME/bin:$PATH"
+          M2_HOME='/opt/apache-maven-3.9.6'
+          PATH="$M2_HOME/bin:$PATH"
+          export PATH
           cd tests-java
           mvn -Dtest="web_selenium/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
