@@ -22,12 +22,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
       - name: Install
         run: |
+          sudo apt -y install default-jre maven
           cd tests-java
           mvn dependency:resolve
           cd ..
