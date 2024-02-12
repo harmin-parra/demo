@@ -24,8 +24,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install
         run: |
-          cat /etc/os-release
-          apt -y install default-jre maven
+          apt-get update
+          apt-get -y install default-jre maven
           cd tests-java
           mvn dependency:resolve
           cd ..
