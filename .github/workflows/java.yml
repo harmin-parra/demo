@@ -35,7 +35,7 @@ jobs:
         run: |
           cd tests-java
           # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
-          mvn -Dtest="web_playwright/**, cucumber/petstore/**" test
+          mvn -Dtest="web_playwright/**, cucumber/petstore/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
         env:
           HOME: /root
