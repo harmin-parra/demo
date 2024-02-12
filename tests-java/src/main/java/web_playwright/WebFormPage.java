@@ -63,11 +63,7 @@ public class WebFormPage {
     }
 
     public void set_date(String value) {
-        this.date.fill(value);
-        this.date.press("Enter");
-        // Click elsewhere to close the calendar
-        this.page.locator("//body").click();
-        //this.date.evaluate("node => { node.value = " + value + "}");
+        this.date.evaluate("node => { node.value = '" + value + "'}");
     }
 
     public void set_range(int value) {
