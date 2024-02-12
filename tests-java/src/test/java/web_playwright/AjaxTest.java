@@ -30,7 +30,7 @@ public class AjaxTest {
     @BeforeAll
     static void launchBrowser() {
         playwright = Playwright.create();
-        LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(false);
+        LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(true);
         String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
         if (browserName.equals("chromium")) {
           browser = playwright.chromium().launch(options);
