@@ -27,18 +27,18 @@ jobs:
           wget https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_linux-x64_bin.tar.gz
           tar -xf openjdk-17+35_linux-x64_bin.tar.gz
           mv jdk-17 /opt/
-          JAVA_HOME='/opt/jdk-17'
-          PATH="$JAVA_HOME/bin:$PATH"
-          export PATH
-          ln -s $JAVA_HOME/bin/java /usr/local/bin/
-          ln -s $JAVA_HOME/bin/javac /usr/local/bin/
+          #JAVA_HOME='/opt/jdk-17'
+          #PATH="$JAVA_HOME/bin:$PATH"
+          #export PATH
+          ln -s /opt/jdk-17/bin/java /usr/local/bin/
+          ln -s /opt/jdk-17/bin/javac /usr/local/bin/
           wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
           tar -xf apache-maven-3.9.6-bin.tar.gz
           mv apache-maven-3.9.6 /opt/
-          M2_HOME='/opt/apache-maven-3.9.6'
-          PATH="$M2_HOME/bin:$PATH"
-          export PATH
-          ln -s $M2_HOME/bin/mvn /usr/local/bin/
+          #M2_HOME='/opt/apache-maven-3.9.6'
+          #PATH="$M2_HOME/bin:$PATH"
+          #export PATH
+          ln -s /opt/apache-maven-3.9.6/bin/mvn /usr/local/bin/
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
           cd tests-java
