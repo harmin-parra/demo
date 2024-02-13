@@ -6,7 +6,7 @@ on:
       browser:
         description: 'The browser to use'
         default: 'firefox'
-        #required: true
+        required: true
         type: choice
         options:
         - chrome
