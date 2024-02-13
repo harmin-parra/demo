@@ -26,9 +26,10 @@ jobs:
       - name: Install
         run: |
           sudo snap remove firefox
-          sudo apt-get -y remove firefox
-          wget http://ftp.us.debian.org/debian/pool/main/f/firefox/firefox_122.0.1-1_amd64.deb
-          sudo apt-get -y install ./firefox_122.0.1-1_amd64.deb
+          firefox --version
+          #sudo apt-get -y remove firefox
+          #wget http://ftp.us.debian.org/debian/pool/main/f/firefox/firefox_122.0.1-1_amd64.deb
+          #sudo apt-get -y install ./firefox_122.0.1-1_amd64.deb
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
           cd tests-java
