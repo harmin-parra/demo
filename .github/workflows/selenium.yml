@@ -6,7 +6,7 @@ on:
       browser:
         description: 'The browser to use'
         default: 'firefox'
-        required: true
+        #required: true
         type: choice
         options:
         - chrome
@@ -25,10 +25,6 @@ jobs:
           java-version: '17'
       - name: Install
         run: |
-          #apt-get update
-          #apt-get -y install wget default-jdk-headless maven
-          #wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          #apt-get -y install ./google-chrome-stable_current_amd64.deb
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
           cd tests-java
