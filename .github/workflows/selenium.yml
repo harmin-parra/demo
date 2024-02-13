@@ -25,6 +25,7 @@ jobs:
           java-version: '17'
       - name: Install
         run: |
+          which chromium
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
           cd tests-java
