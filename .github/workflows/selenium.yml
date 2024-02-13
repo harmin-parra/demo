@@ -25,9 +25,9 @@ jobs:
           java-version: '17'
       - name: Install
         run: |
-          ls /usr/bin/*edge*
-          exit
+          ls /usr/bin/*chromium*
           which chromium
+          exit
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
           cd tests-java
