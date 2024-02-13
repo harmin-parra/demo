@@ -40,6 +40,12 @@ public class AjaxTest {
 			opt3.addArguments("--headless=new");
 			this.driver = new EdgeDriver(opt3);
 			break;
+		case "chromium":
+			ChromeOptions opt4 = new ChromeOptions();
+			opt4.addArguments("--headless=new");
+			opt4.setBinary("/usr/bin/chromium");
+			this.driver = new ChromeDriver(opt4);
+			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + browserName);
 		}
