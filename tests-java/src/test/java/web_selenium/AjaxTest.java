@@ -12,6 +12,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
+import org.openqa.selenium.chromium.ChromiumDriver;
 
 import web_selenium.AjaxPage;
 
@@ -21,7 +23,7 @@ public class AjaxTest {
 
 	@BeforeEach
 	public void setup() {
-		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "firefox" : System.getProperty("browser");
+		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
 		switch (browserName) {
 		case "firefox":
 			FirefoxOptions opt1 = new FirefoxOptions();

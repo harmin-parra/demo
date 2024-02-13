@@ -21,7 +21,7 @@ public class WebFormTest {
 
 	@BeforeEach
 	public void setup() {
-		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "firefox" : System.getProperty("browser");
+		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
 		switch (browserName) {
 		case "firefox":
 			FirefoxOptions opt1 = new FirefoxOptions();
