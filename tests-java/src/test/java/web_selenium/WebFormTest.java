@@ -41,6 +41,7 @@ public class WebFormTest {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + browserName);
 		}
+		this.driver.manage().window().maximize();
 	}
 
 	@Test
