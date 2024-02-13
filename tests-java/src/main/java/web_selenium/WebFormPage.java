@@ -35,7 +35,7 @@ public class WebFormPage {
         this.date = driver.findElement(By.name("my-date"));
         this.range = driver.findElement(By.name("my-range"));
         this.file = driver.findElement(By.name("my-file"));
-        this.button = driver.findElement(By.xpath("//button[@type='submit']"));
+        this.button = driver.findElement(By.xpath("//button"));
     }
 
     public void set_input(String value) {
