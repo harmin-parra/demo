@@ -25,6 +25,8 @@ jobs:
           java-version: '17'
       - name: Install
         run: |
+          ls /usr/bin/*edge*
+          exit
           which chromium
           chmod +x webdrivers/*
           mv webdrivers/* /usr/local/bin/
