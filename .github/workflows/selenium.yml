@@ -10,8 +10,8 @@ on:
         type: choice
         options:
         - chrome
-        - firefox
         - edge
+        - firefox
 
 jobs:
   test:
