@@ -92,7 +92,8 @@ jobs:
           ls allure-report/
           ls playwright-report/
           rm -rf docs/*
-          mv *.html docs/
+          mv allure-report/* docs/
+          mv playwright-report/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add docs/*
