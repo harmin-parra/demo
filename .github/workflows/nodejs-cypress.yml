@@ -34,3 +34,28 @@ jobs:
           npx cucumber-js cucumber/features/petstore.feature
           npx cypress run --browser ${{ inputs.browser }}
           cd ..
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_test
+          path: cypress/report/index.html
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_report
+      - name: Commit
+        run: |
+          rm -rf docs/*
+          mv index.html docs/
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
+          git add docs/*
+          git commit -m "Github Commit - Node.js Cypress tests"
+          git push origin main
