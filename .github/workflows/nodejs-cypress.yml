@@ -9,9 +9,9 @@ on:
         required: true
         type: choice
         options:
-        - chromium
+        - chrome
+        - electron
         - firefox
-        - webkit
 
 jobs:
   test:
@@ -24,6 +24,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install
         run: |
+          find / -name "*edge*"
+          find / -name "*chromium*"
           cd tests-nodejs
           npm install
           cd ..
