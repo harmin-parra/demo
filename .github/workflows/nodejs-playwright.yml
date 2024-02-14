@@ -67,7 +67,7 @@ jobs:
             --clean \
             --output allure-report \
             --single-file \
-            allure-results/nodejs-results
+            reporting/allure-results/nodejs-results
           ls
           ls allure-report
       - name: Upload artifact
@@ -75,6 +75,7 @@ jobs:
         with:
           name: artifact_report
           path: |
+            reporting/
             allure-report/
             playwright-report/
 
