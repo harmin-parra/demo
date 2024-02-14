@@ -1,4 +1,4 @@
-name: Node.js Tests
+name: Node.js Playwright Tests
 
 on:
   workflow_dispatch:
@@ -93,5 +93,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add docs/*
-          git commit -m "Github Commit - Node.js tests"
+          git commit -m "Github Commit - Node.js Playwright tests"
           git push origin main
