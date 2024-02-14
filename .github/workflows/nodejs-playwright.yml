@@ -36,8 +36,8 @@ jobs:
           # npx playwright test webform.spec.ts --project ${{ inputs.browser }}
           npx playwright test --project ${{ inputs.browser }}
           cd ..
-        env:
-          HOME: /root
+        #env:
+        #  HOME: /root
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
