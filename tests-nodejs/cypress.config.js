@@ -8,7 +8,7 @@ module.exports = defineConfig({
     reportPageTitle: 'Cypress Report',
     embeddedScreenshots: true, 
     inlineAssets: true,
-    reportDir: "cypress/report",
+    reportDir: "../reporting/cypress-report",
   },
   e2e: {
     experimentalStudio: true,
