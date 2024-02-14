@@ -5,7 +5,7 @@ module.exports = defineConfig({
   video: false,
   reporterOptions: {
     charts: true,
-    reportPageTitle: 'Cypress Inline Reporter',
+    reportPageTitle: 'Cypress Report',
     embeddedScreenshots: true, 
     inlineAssets: true,
     reportDir: "cypress/report",
