@@ -89,6 +89,8 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
+          ls allure-report/
+          ls playwright-report/
           rm -rf docs/*
           mv *.html docs/
           git config user.name "GitHub Actions"
