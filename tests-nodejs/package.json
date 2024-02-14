@@ -13,6 +13,7 @@
     "cypress-mochawesome-reporter": "^3.8.1",
     "@playwright/test": "^1.41.1",
     "@types/node": "^20.11.5",
+    "@shelex/cypress-allure-plugin": "^2.40.1",
     "allure-cucumberjs": "^2.11.1",
     "allure-playwright": "^2.11.1",
     "axios": "^1.6.6"
