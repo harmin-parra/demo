@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_test
-          path: cypress/report/index.html
+          path: tests-nodejs/cypress/report/index.html
 
   publish:
     needs: test
@@ -49,7 +49,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_report
+          name: artifact_test
       - name: Commit
         run: |
           rm -rf docs/*
