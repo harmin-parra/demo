@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install
         run: |
+          cat /etc/passwd
           cd tests-nodejs
           npm install
           cd ..
