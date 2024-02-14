@@ -1,0 +1,94 @@
+name: Node.js Cypress Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'The browser to use'
+        default: 'chromium'
+        required: true
+        type: choice
+        options:
+        - chromium
+        - firefox
+        - webkit
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install
+        run: |
+          cd tests-nodejs
+          npm install
+          cd ..
+      - name: Test
+        run: |
+          cd tests-nodejs
+          npx cucumber-js cucumber/features/petstore.feature
+          npx cypress run --browser ${{ inputs.browser }}
+          cd ..
+        env:
+          HOME: /root
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_test
+          path: reporting/
+
+  report:
+    needs: test
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:8-jre
+    env:
+      ALLURE: 2.27.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_test
+      - name: Report
+        run: |
+          curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
+          unzip /tmp/allure.zip -d /usr/local/
+          ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
+          allure generate \
+            --clean \
+            --output allure-report \
+            --single-file \
+            allure-results/nodejs-results
+          ls
+          ls allure-report
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_report
+          path: allure-report/index.html
+
+  publish:
+    needs: report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_report
+      - name: Commit
+        run: |
+          rm -rf docs/*
+          mv index.html docs/
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
+          git add docs/*
+          git commit -m "Github Commit - Node.js Cypress tests"
+          git push origin main
