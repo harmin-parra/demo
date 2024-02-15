@@ -27,10 +27,11 @@ jobs:
         with:
           distribution: 'oracle'
           java-version: '17'
+          cache: maven
       - name: Install
         run: |
-          apt-get update
-          apt-get install maven
+          #apt-get update
+          #apt-get install maven
           chmod +x webdrivers/*
           #mv webdrivers/* /usr/local/bin/
           cd tests-java
