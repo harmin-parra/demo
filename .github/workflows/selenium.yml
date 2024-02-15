@@ -18,8 +18,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      #image: cypress/browsers
-      image: mcr.microsoft.com/playwright:v1.41.0-jammy
+      image: cypress/browsers
       #options: --user 1001
     steps:
       - name: Checkout
@@ -30,8 +29,8 @@ jobs:
           java-version: '17'
       - name: Install
         run: |
-          which firefox
-          which google-chrome
+          #which firefox
+          #which google-chrome
           #apt-get update
           #apt-get install maven
           chmod +x webdrivers/*
