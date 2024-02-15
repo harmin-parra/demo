@@ -18,18 +18,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers
-      options: --user 1001
+      #image: cypress/browsers
+      image: mcr.microsoft.com/playwright/java:v1.41.0-jammy
+      #options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: 'oracle'
           java-version: '17'
-          cache: maven
       - name: Install
         run: |
+          which firefox
+          which google-chrome
           #apt-get update
           #apt-get install maven
           chmod +x webdrivers/*
