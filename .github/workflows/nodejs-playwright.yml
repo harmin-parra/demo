@@ -68,7 +68,8 @@ jobs:
             --output allure-report \
             --single-file \
             allure-results/nodejs-results
-          mv playwright-report/index.html playwright-report/index2.html
+          mv allure-report/index.html allure-report/report1.html
+          mv playwright-report/index.html playwright-report/report2.html
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
