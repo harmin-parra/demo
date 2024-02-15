@@ -90,8 +90,6 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
-          ls allure-report/
-          ls playwright-report/
           rm -rf docs/report* docs/data/
           mv allure-report/* docs/
           mv playwright-report/* docs/
