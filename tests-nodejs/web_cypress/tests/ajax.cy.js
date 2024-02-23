@@ -3,8 +3,8 @@ import AjaxPage from "../pages/ajax.js";
 
 describe("Ajax page", () => {
 
-  it("Ajax verification with intercept", () =>{
-    cy.visit("https://harmin-demo.gitlab.io/reports/web/ajax.html")
+  it("Ajax verification with intercept", () => {
+    cy.visit("https://harmin-demo.gitlab.io/reports/web/ajax.html");
     const page = new AjaxPage();
     cy.screenshot();
     page.click();
@@ -16,16 +16,16 @@ describe("Ajax page", () => {
   });
 
 
-  it("Ajax verification with get+should", () =>{
-    cy.visit("https://harmin-demo.gitlab.io/reports/web/ajax.html")
+  it("Ajax verification with get+should", () => {
+    cy.visit("https://harmin-demo.gitlab.io/reports/web/ajax.html");
     const page = new AjaxPage();
     cy.screenshot();
     page.click();
     cy.screenshot();
     cy.get("#title", { timeout: 10000 }).should("exist");
-    cy.get("#title", { timeout: 10000 }).should(($input) => {
-      expect($input).to.exist;
-    })
+    // cy.get("#title", { timeout: 10000 }).should(($input) => {
+    //   expect($input).to.exist;
+    // });
     cy.screenshot();
     page.verify();
   });
