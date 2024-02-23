@@ -23,9 +23,9 @@ describe("Ajax page", () => {
     page.click();
     cy.screenshot();
     cy.get("#title", { timeout: 10000 }).should("exist");
-    // cy.get("#title", { timeout: 10000 }).should(($input) => {
-    //   expect($input).to.exist;
-    // })
+    cy.get("#title", { timeout: 10000 }).should(($input) => {
+      expect($input).to.exist;
+    })
     cy.screenshot();
     page.verify();
   });
