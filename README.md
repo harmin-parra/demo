@@ -6,9 +6,9 @@ The objective is to implement the same tests using different automation test too
 
 ## HTML reports
 
-https://harmin-parra.github.io/demo/report-allure.html (for Java, Python and Playwright tests)
+https://harmin-parra.github.io/demo/report-allure.html (for Playwright Java/Python/Node.js tests)
 
-https://harmin-parra.github.io/demo/report-playwright.html (for Playwright tests)
+https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
 
 https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
 
