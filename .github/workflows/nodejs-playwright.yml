@@ -68,8 +68,8 @@ jobs:
             --output allure-report \
             --single-file \
             allure-results/nodejs-results
-          mv allure-report/index.html allure-report/report1.html
-          mv playwright-report/index.html playwright-report/report2.html
+          # mv allure-report/index.html allure-report/report1.html
+          # mv playwright-report/index.html playwright-report/report2.html
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -91,8 +91,8 @@ jobs:
       - name: Commit
         run: |
           rm -rf docs/report* docs/data/
-          mv allure-report/* docs/
-          mv playwright-report/* docs/
+          mv allure-report/index.html docs/report-allure.html
+          mv playwright-report/index.html docs/report-playwright.html
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add docs/*
