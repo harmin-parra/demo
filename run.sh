@@ -57,6 +57,6 @@ if [ $LANG = "java" ] || [ $LANG = "all" ]; then
 
   cd tests-java
   # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
-  mvn -Dtest="web_playwright/**, cucumber/petstore/**" test
+  mvn -Dtest="web_playwright/**, petstore, cucumber/calculator/**" test
   cd ..
 fi
