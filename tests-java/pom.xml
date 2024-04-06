@@ -6,11 +6,11 @@
     <version>0.0.1</version>
 
     <properties>
-        <allure.version>2.25.0</allure.version>
-        <playwright.version>1.41.0</playwright.version>
+        <allure.version>2.26.0</allure.version>
+        <playwright.version>1.42.0</playwright.version>
         <selenium.version>4.17.0</selenium.version>
-        <cucumber.version>7.15.0</cucumber.version>
-        <junit.version>5.10.1</junit.version>
+        <cucumber.version>7.16.0</cucumber.version>
+        <junit.version>5.10.2</junit.version>
         <rest-assured.version>5.4.0</rest-assured.version>
     </properties>
 
