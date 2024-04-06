@@ -49,6 +49,7 @@ public class AjaxTest {
 
     @Test
     public void ajax_response() {
+        Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
     	Allure.epic("Web interface");
     	//Allure.story("Ajax page");
     	Allure.suite("Web interface");

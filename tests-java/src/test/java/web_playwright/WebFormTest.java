@@ -48,6 +48,7 @@ public class WebFormTest {
 
     @Test
     public void fill_in_form() {
+        Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
     	Allure.epic("Web interface");
     	//Allure.story("Web Form");
     	Allure.suite("Web interface");
