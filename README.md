@@ -4,9 +4,13 @@ Sample source code of automated test of web pages and a REST api.
 
 The objective is to implement the same tests using different automation test tools and different programming languages.
 
-## HTML report
+## HTML reports
 
-https://harmin-parra.github.io/demo/
+https://harmin-parra.github.io/demo/report-allure.html (for Playwright Java/Python/Node.js tests)
+
+https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
+
+https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
 
 ## Test Targets
 
