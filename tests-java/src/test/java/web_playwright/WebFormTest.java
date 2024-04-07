@@ -1,7 +1,6 @@
 package web_playwright;
 
 import io.qameta.allure.Allure;
-import web_playwright.WebFormPage;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
@@ -11,13 +10,14 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 import java.io.ByteArrayInputStream;
-
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import web_playwright.WebFormPage;
 
 public class WebFormTest {
 

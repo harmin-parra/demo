@@ -12,7 +12,6 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -25,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class PetstoreTest {
 	

@@ -4,11 +4,11 @@ import java.io.File;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebFormPage {
 
@@ -81,7 +81,7 @@ public class WebFormPage {
         float step = dimensions.width / (Integer.valueOf(this.range.getAttribute("max")) - Integer.valueOf(this.range.getAttribute("min")));
         float offset = (value - current) * step;
         new Actions(this.driver).moveToElement(this.range, (int)offset, 0).perform();
-         */
+        */
         this.range.sendKeys(String.valueOf(value));
         JavascriptExecutor js = (JavascriptExecutor) driver;  
         js.executeScript("document.getElementsByName('my-range')[0].value = '" + value + "'");
