@@ -6,15 +6,18 @@
     <version>0.0.1</version>
 
     <properties>
-        <allure.version>2.25.0</allure.version>
-        <playwright.version>1.41.0</playwright.version>
-        <selenium.version>4.17.0</selenium.version>
-        <cucumber.version>7.15.0</cucumber.version>
-        <junit.version>5.10.1</junit.version>
+        <allure.version>2.27.0</allure.version>
+        <playwright.version>1.44.0</playwright.version>
+        <selenium.version>4.21.0</selenium.version>
+        <cucumber.version>7.16.0</cucumber.version>
+        <junit.version>5.10.2</junit.version>
         <rest-assured.version>5.4.0</rest-assured.version>
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
