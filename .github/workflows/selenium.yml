@@ -20,6 +20,8 @@ jobs:
     services:
       selenium:
         image: selenium/standalone-${{ inputs.browser }}
+        ports: 
+        - "4444:4444"
         options: --shm-size=2gb
     container:
        image: maven:3-eclipse-temurin-17-focal
