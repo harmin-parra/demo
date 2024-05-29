@@ -63,7 +63,7 @@ jobs:
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
-          ./allure.sh --lang $LANGUAGE --docker playwright --browser ${{ inputs.browser }}
+          ./allure.sh --lang $LANGUAGE --browser ${{ inputs.browser }}
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
