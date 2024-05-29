@@ -17,11 +17,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    #env:
-      #browser: ${{ inputs.browser }}
     container:
       image: selenium/standalone-${{ inputs.browser }}
-      #options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,7 +32,7 @@ jobs:
           #which google-chrome
           #apt-get update
           #apt-get install maven
-          chmod +x webdrivers/*
+          #chmod +x webdrivers/*
           #mv webdrivers/* /usr/local/bin/
           cd tests-java
           mvn dependency:resolve
@@ -43,15 +40,15 @@ jobs:
       - name: Test
         run: |
           cd tests-java
-          mvn -Dtest="web_selenium/**" \
-          -Dbrowser="${{ inputs.browser }}" \
-          -Dwebdriver.chrome.driver="webdrivers/chromedriver" \
-          -Dwebdriver.edge.driver="webdrivers/msedgedriver" \
-          -Dwebdriver.firefox.driver="webdrivers/geckodriver" \
-          test
+          mvn -Dtest="web_selenium/**"
+          -Dbrowser="${{ inputs.browser }}" test
+          #-Dwebdriver.chrome.driver="webdrivers/chromedriver" \
+          #-Dwebdriver.edge.driver="webdrivers/msedgedriver" \
+          #-Dwebdriver.firefox.driver="webdrivers/geckodriver" \
+          #test
           cd ..
-        env:
-          HOME: /root
+        #env:
+        #  HOME: /root
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
