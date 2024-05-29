@@ -44,11 +44,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_test
-          path: reporting/
+          name: artifact_playwright
+          path: reporting/allure-results/python
 
   report:
-    needs: test
+    needs: [test_playwright]
     runs-on: ubuntu-latest
     container:
       image: openjdk:8-jre
@@ -85,10 +85,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifact
+      - name: Download Playwright artifact
         uses: actions/download-artifact@v4
         with:
           name: artifact_report
+          path: reporting/allure-results/python1
       - name: Commit
         run: |
           rm -rf docs/*
