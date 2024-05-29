@@ -40,13 +40,14 @@ rm -rf reporting/*
 # Python tests
 #
 if [ $LANG = "python" ] || [ $LANG = "all" ]; then
-  rm -rf reporting/allure-results/python-results reporting/allure-reports/report-python reporting/playwright-report/*
-
   cd tests-python
-  behave cucumber/features/petstore.feature
   export PYTHONPATH=$(pwd)
-  # pytest web_playwright/tests/webform_test.py
-  pytest web_playwright/tests/
+  if [ $DOCKER = "playwright" ]; then
+    behave cucumber/features/petstore.feature
+    pytest web_playwright/tests/ --browser $BROWSER
+  else
+    pytest web_selenium/tests/
+  fi
   unset PYTHONPATH
   cd ..
 fi
