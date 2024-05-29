@@ -18,7 +18,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: selenium/standalone-$browser
+      image: selenium/standalone-${browser}
       #options: --user 1001
     steps:
       - name: Checkout
