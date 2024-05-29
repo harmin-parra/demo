@@ -1,5 +1,8 @@
 name: Python Tests
 
+env:
+  LANGUAGE: 'Python'
+
 on:
   workflow_dispatch:
     inputs:
@@ -14,10 +17,10 @@ on:
         - webkit
 
 jobs:
-  test:
+  test_playwright:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright/python:v1.42.0-jammy
+      image: mcr.microsoft.com/playwright/python:v1.44.0-jammy
     steps:
       - name: Checkout
         uses: actions/checkout@v4
