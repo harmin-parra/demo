@@ -16,7 +16,7 @@ jobs:
   test_playwright:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright/java:v1.42.0-jammy
+      image: mcr.microsoft.com/playwright/java:v1.44.0-jammy
     steps:
       - name: Checkout
         uses: actions/checkout@v4
