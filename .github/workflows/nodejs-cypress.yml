@@ -56,6 +56,6 @@ jobs:
           mv index.html docs/report-cypress.html
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
-          git add docs/*
+          git add -f docs/*
           git commit -m "Github Commit - Node.js Cypress tests"
           git push origin main
