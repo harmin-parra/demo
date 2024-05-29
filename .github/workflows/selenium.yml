@@ -46,9 +46,6 @@ jobs:
           cd ..
       - name: Test
         run: |
-          ls /__w/demo/demo/tests-java/
-          ls /__w/demo/demo/tests-java/src
-          ls /__w/demo/demo/tests-java/src/test
           ls /__w/demo/demo/tests-java/src/test/resources
           cd tests-java
           mvn -Dtest="web_selenium/WebFormTest" -Dbrowser="${{ inputs.browser }}" test
@@ -110,7 +107,7 @@ jobs:
       - name: Commit
         run: |
           rm -rf docs/*
-          mv index.html docs/
+          mv index.html docs/report-selenium.html
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add docs/*
