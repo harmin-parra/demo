@@ -27,10 +27,10 @@ public class WebFormTest {
 	@BeforeEach
 	public void setup() {
 		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
-		DesiredCapabilities capabilities = null;
+		String url = StringUtils.isEmpty(System.getProperty("hub")) ? "127.0.0.1" : System.getProperty("hub");
 		URL hub = null;
 		try {
-			hub = new URL("http://localhost:4444/wd/hub");
+            hub = new URL("http://" + url + ":4444/wd/hub");
 		} catch (MalformedURLException e) { e.printStackTrace(); }
 		switch (browserName) {
 		case "firefox":
