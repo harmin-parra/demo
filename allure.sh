@@ -9,6 +9,10 @@ while [ $# -gt 0 ]; do
       LANG="$2"
       shift 2
       ;;
+    --browser)
+      BROWSER="$2"
+      shift 2
+      ;;
     --job-java)
       JOB_JAVA="$2"
       shift 2
@@ -35,9 +39,11 @@ LANG=${LANG,,}
 #
 if [ $LANG == "java" ] || [ $LANG == "all" ]; then
   cat << EOF > reporting/allure-results/java1/environment.properties
+Browser = $BROWSER
 OpenJDK = 17
 Playwright = 1.41.0
 Cucumber-JVM = 7.15.0
+Rest-assured = 5.4.0
 EOF
 
   if [ -f reporting/allure-results/java1/job.url ]; then
