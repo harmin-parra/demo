@@ -60,7 +60,8 @@ public class WebFormPage {
 
     public void set_file(String value) {
         File uploadFile = new File(value);
-        this.file.sendKeys(uploadFile.getAbsolutePath());
+        this.file.sendKeys(uploadFile.getPath());
+        //this.file.sendKeys(uploadFile.getAbsolutePath());
     }
 
     public void set_color(String value) {
