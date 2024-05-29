@@ -53,7 +53,7 @@ fi
 # Java tests
 #
 if [ $LANG = "java" ] || [ $LANG = "all" ]; then
-  rm -rf reporting/allure-results/java reporting/allure-reports/java reporting/playwright-report/*
+  rm -rf reporting/allure-results/java reporting/allure-reports/java reporting/playwright/*
 
   cd tests-java
   # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
