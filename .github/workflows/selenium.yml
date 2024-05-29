@@ -48,7 +48,7 @@ jobs:
         run: |
           ls /__w/demo/demo/tests-java/src/test/resources
           cd tests-java
-          mvn -Dtest="web_selenium/WebFormTest" -Dbrowser="${{ inputs.browser }}" test
+          mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" -Dhub="172.17.0.1" test
           #-Dwebdriver.chrome.driver="webdrivers/chromedriver" \
           #-Dwebdriver.edge.driver="webdrivers/msedgedriver" \
           #-Dwebdriver.firefox.driver="webdrivers/geckodriver" \
