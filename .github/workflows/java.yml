@@ -52,7 +52,7 @@ jobs:
         - 4444:4444
         options: --shm-size=2gb
     container:
-       image: maven:3-eclipse-temurin-17-focal
+       image: maven:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
