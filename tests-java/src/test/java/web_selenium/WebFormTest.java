@@ -75,9 +75,9 @@ public class WebFormTest {
     @Test
     public void testFillInForm() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-        Allure.epic("Web interface");
+        Allure.epic("Web interface (Selenium)");
         //Allure.story("Web Form");
-        Allure.suite("Web interface");
+        Allure.suite("Web interface (Selenium)");
         Allure.feature("Web Form");
         this.driver.get("https://www.selenium.dev/selenium/web/web-form.html");
         WebFormPage page = new WebFormPage(this.driver);

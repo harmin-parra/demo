@@ -74,7 +74,7 @@ public class AjaxTest {
 	public void ajax_response() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
-        Allure.story("Web Form");
+        //Allure.story("Web Form");
         Allure.suite("Web interface (Selenium)");
         Allure.feature("Ajax page");
 		this.driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html");

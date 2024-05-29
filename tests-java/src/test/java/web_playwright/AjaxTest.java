@@ -48,9 +48,9 @@ public class AjaxTest {
     @Test
     public void ajax_response() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-    	Allure.epic("Web interface");
+    	Allure.epic("Web interface (Playwright)");
     	//Allure.story("Ajax page");
-    	Allure.suite("Web interface");
+    	Allure.suite("Web interface (Playwright)");
     	Allure.feature("Ajax page");
         this.page.navigate("http://harmin-demo.gitlab.io/reports/web/ajax.html");
         byte[] buffer = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
