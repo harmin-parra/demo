@@ -38,7 +38,7 @@ jobs:
           # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
           mvn -Dtest="web_playwright/**, petstore/**, cucumber/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
-          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs/${{ github.job }} > reporting/allure-results/java/job.url
         env:
           HOME: /root
       - name: Upload artifact
@@ -71,7 +71,7 @@ jobs:
           cd tests-java
           mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" -Dhub="172.17.0.1" test
           cd ..
-          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs/${{ github.job }} > reporting/allure-results/java/job.url
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
