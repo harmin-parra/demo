@@ -18,7 +18,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers
+      image: selenium/standalone-$browser
       #options: --user 1001
     steps:
       - name: Checkout
