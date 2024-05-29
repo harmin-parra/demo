@@ -34,26 +34,40 @@ LANG=${LANG,,}
 # Java tests
 #
 if [ $LANG == "java" ] || [ $LANG == "all" ]; then
-  cat << EOF > reporting/allure-results/java/environment.properties
-OpenJDK = 17.0.9
+  cat << EOF > reporting/allure-results/java1/environment.properties
+OpenJDK = 17
 Playwright = 1.41.0
 Cucumber-JVM = 7.15.0
 EOF
 
-  cat << EOF > reporting/allure-results/java/executor.json
+  if [ -f reporting/allure-results/java1/job.url ]; then
+    cat << EOF > reporting/allure-results/java1/executor.json
 {
-  "name": "Gitlab CI",
-  "type": "gitlab",
+  "name": "Github Actions",
+  "type": "github",
   "buildName": "Build log",
-  "buildUrl": "${JOB_JAVA}",
+  "buildUrl": "$(cat reporting/allure-results/java1/job.url)",
   "reportName": "Demo Java report"
 }
 EOF
+  fi
+
+  if [ -f reporting/allure-results/java2/job.url ]; then
+    cat << EOF > reporting/allure-results/java2/executor.json
+{
+  "name": "Github Actions",
+  "type": "github",
+  "buildName": "Build log",
+  "buildUrl": "$(cat reporting/allure-results/java2/job.url)",
+  "reportName": "Demo Java report"
+}
+EOF
+  fi
 
   allure generate \
     --clean \
     --output reporting/allure-reports/java \
-    --single-file reporting/allure-results/java
+    --single-file reporting/allure-results/java1 reporting/allure-results/java2
 fi
 
 #
@@ -68,8 +82,8 @@ EOF
 
   cat << EOF > reporting/allure-results/nodejs-results/executor.json
 {
-  "name": "Gitlab CI",
-  "type": "gitlab",
+  "name": "Github Actions",
+  "type": "github",
   "buildName": "Build log",
   "buildUrl": "${JOB_NODEJS}",
   "reportName": "Demo Node.js report"
@@ -94,8 +108,8 @@ EOF
 
   cat << EOF > reporting/allure-results/python-results/executor.json
 {
-  "name": "Gitlab CI",
-  "type": "gitlab",
+  "name": "Github Actions",
+  "type": "github",
   "buildName": "Build log",
   "buildUrl": "${JOB_PYTHON}",
   "reportName": "Demo Python report"
