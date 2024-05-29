@@ -84,10 +84,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifact
+      - name: Download Playwright artifact
         uses: actions/download-artifact@v4
         with:
-          merge-multiple: true
+          name: artifact_playwright
+          path: allure-results/java1
+      - name: Download Selenium artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_selenium
+          path: allure-results/java2
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -97,7 +103,7 @@ jobs:
             --clean \
             --output allure-report \
             --single-file \
-            allure-results/java-results
+            allure-results/java1 allure-results/java2
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
