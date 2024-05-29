@@ -1,5 +1,8 @@
 name: Java Tests
 
+env:
+  LANGUAGE: 'Java'
+
 on:
   workflow_dispatch:
     inputs:
@@ -68,6 +71,7 @@ jobs:
           cd tests-java
           mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" -Dhub="172.17.0.1" test
           cd ..
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -89,12 +93,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_playwright
-          path: allure-results/java1
+          path: reporting/allure-results/java1
       - name: Download Selenium artifact
         uses: actions/download-artifact@v4
         with:
           name: artifact_selenium
-          path: allure-results/java2
+          path: reporting/allure-results/java2
       - name: Report
         run: |
           ls
@@ -102,11 +106,7 @@ jobs:
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
-          allure generate \
-            --clean \
-            --output allure-report \
-            --single-file \
-            allure-results/java1 allure-results/java2
+          ./allure.sh --lang $LANGUAGE --browser $BROWSER
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
