@@ -46,6 +46,10 @@ jobs:
           cd ..
       - name: Test
         run: |
+          ls /__w/demo/demo/tests-java/
+          ls /__w/demo/demo/tests-java/src
+          ls /__w/demo/demo/tests-java/src/test
+          ls /__w/demo/demo/tests-java/src/test/resources
           cd tests-java
           mvn -Dtest="web_selenium/WebFormTest" -Dbrowser="${{ inputs.browser }}" test
           #-Dwebdriver.chrome.driver="webdrivers/chromedriver" \
