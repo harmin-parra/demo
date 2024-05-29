@@ -17,8 +17,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    #env:
+      #browser: ${{ inputs.browser }}
     container:
-      image: selenium/standalone-${browser}
+      image: selenium/standalone-${{ inputs.browser }}
       #options: --user 1001
     steps:
       - name: Checkout
