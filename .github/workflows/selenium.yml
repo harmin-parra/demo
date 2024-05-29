@@ -45,8 +45,7 @@ jobs:
       - name: Test
         run: |
           cd tests-java
-          mvn -Dtest="web_selenium/**"
-          -Dbrowser="${{ inputs.browser }}" test
+          mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" test
           #-Dwebdriver.chrome.driver="webdrivers/chromedriver" \
           #-Dwebdriver.edge.driver="webdrivers/msedgedriver" \
           #-Dwebdriver.firefox.driver="webdrivers/geckodriver" \
