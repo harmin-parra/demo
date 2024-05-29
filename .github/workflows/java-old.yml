@@ -1,4 +1,4 @@
-name: Java Playwright Tests
+name: Java Tests (old)
 
 on:
   workflow_dispatch:
