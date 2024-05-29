@@ -35,8 +35,8 @@ jobs:
           # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
           mvn -Dtest="web_playwright/**, petstore/**, cucumber/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
-        #env:
-        #  HOME: /root
+        env:
+          HOME: /root
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
