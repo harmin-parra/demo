@@ -108,6 +108,7 @@ jobs:
           ./allure.sh --lang $LANGUAGE --browser ${{ inputs.browser }}
           cat reporting/allure-results/java1/executor.json
           cat reporting/allure-results/java2/executor.json
+          cat reporting/allure-results/java1/environment.properties
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
