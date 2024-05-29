@@ -1,6 +1,6 @@
-Feature: Arithmetic_operations
+Feature: Cucumber
 
-  Scenario Outline: Addition
+  Scenario Outline: Calculator - Addition
     Given I have a calculator
     When I add <x> and <y>
     Then the calculator returns <sum>
