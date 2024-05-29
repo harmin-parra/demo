@@ -1,7 +1,7 @@
-@allure.label.parentSuite:Cucumber
+@allure.label.parentSuite:REST_api
 @allure.label.suite:Petstore
-@allure.label.epic:Cucumber
-@allure.label.package:cucumber.features.petstore
+@allure.label.epic:REST_api
+@allure.label.package:rest_assured.features.petstore
 Feature: Petstore
 
   Scenario: Add a pet
