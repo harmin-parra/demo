@@ -79,7 +79,7 @@ public class AjaxTest {
         Allure.feature("Ajax page");
 		this.driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html");
         byte[] buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-        Allure.addAttachment("Empty form", new ByteArrayInputStream(buffer));
+        Allure.addAttachment("Initial page", new ByteArrayInputStream(buffer));
 		AjaxPage page = new AjaxPage(this.driver);
 		page.click();
         buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
