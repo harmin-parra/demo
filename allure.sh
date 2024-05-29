@@ -33,6 +33,8 @@ while [ $# -gt 0 ]; do
 done
 
 LANG=${LANG,,}
+BROWSER=${BROWSER,,}
+BROWSER=${BROWSER^}
 
 #
 # Java tests
