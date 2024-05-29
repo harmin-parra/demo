@@ -4,9 +4,9 @@ from playwright.sync_api import Page, expect
 from web_playwright import pages
 
 
-@allure.parent_suite("Web interface")
+@allure.parent_suite("Web interface (Playwright)")
 @allure.suite("Ajax")
-@allure.epic("Web interface")
+@allure.epic("Web interface (Playwright)")
 #@allure.story("Ajax")
 @allure.feature("Ajax")
 def test_ajax_response(page: Page):
