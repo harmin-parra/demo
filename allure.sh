@@ -17,10 +17,6 @@ while [ $# -gt 0 ]; do
       JOB_NODEJS="$2"
       shift 2
       ;;
-    --job-python)
-      JOB_PYTHON="$2"
-      shift 2
-      ;;
     *)
       echo "Unknown option $1"
       exit 1
@@ -105,14 +101,14 @@ fi
 # Python tests
 #
 if [ $LANG == "python" ] || [ $LANG == "all" ]; then
-  cat << EOF > reporting/allure-results/python-results/environment.properties
+  cat << EOF > reporting/allure-results/python/environment.properties
 Browser = $BROWSER
 Python = 3.10.12
 Playwright = 1.41.0
 Behave = 1.2.6
 EOF
 
-  cat << EOF > reporting/allure-results/python-results/executor.json
+  cat << EOF > reporting/allure-results/python1/executor.json
 {
   "name": "Github Actions",
   "type": "github",
@@ -122,10 +118,34 @@ EOF
 }
 EOF
 
+  if [ -f reporting/allure-results/python1/job.url ]; then
+    cat << EOF > reporting/allure-results/python1/executor.json
+{
+  "name": "Github Actions",
+  "type": "github",
+  "buildName": "Build log",
+  "buildUrl": "$(cat reporting/allure-results/python1/job.url)",
+  "reportName": "Demo Java report"
+}
+EOF
+  fi
+
+  if [ -f reporting/allure-results/python2/job.url ]; then
+    cat << EOF > reporting/allure-results/python2/executor.json
+{
+  "name": "Github Actions",
+  "type": "github",
+  "buildName": "Build log",
+  "buildUrl": "$(cat reporting/allure-results/python2/job.url)",
+  "reportName": "Demo Java report"
+}
+EOF
+  fi
+
   allure generate \
     --clean \
-    --output reporting/allure-reports/report-python \
-    --single-file reporting/allure-results/python-results
+    --output reporting/allure-reports/python \
+    --single-file reporting/allure-results/python1 reporting/allure-results/python2
 
 fi
 
