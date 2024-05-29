@@ -1,11 +1,16 @@
 package web_selenium;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,7 +26,9 @@ public class WebFormTest {
 
 	@BeforeEach
 	public void setup() {
-		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
+		//String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
+		DesiredCapabilities capabilities = null;
+		/*
 		switch (browserName) {
 		case "firefox":
 			FirefoxOptions opt1 = new FirefoxOptions();
@@ -46,6 +53,12 @@ public class WebFormTest {
 			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + browserName);
+		}
+		*/
+		try {
+			this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
 		}
 		this.driver.manage().window().maximize();
 	}
