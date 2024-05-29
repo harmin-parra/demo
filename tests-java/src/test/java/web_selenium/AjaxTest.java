@@ -26,11 +26,11 @@ import web_selenium.AjaxPage;
 
 public class AjaxTest {
 
-	private WebDriver driver;
+    private WebDriver driver;
 
-	@BeforeEach
-	public void setup() {
-		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
+    @BeforeEach
+    public void setup() {
+        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
         String url = StringUtils.isEmpty(System.getProperty("hub")) ? "172.17.0.1" : System.getProperty("hub");
         URL hub = null;
         try {
@@ -68,30 +68,30 @@ public class AjaxTest {
             throw new IllegalArgumentException("Unexpected value: " + browserName);
         }
         this.driver.manage().window().maximize();
-	}
+    }
 
-	@Test
-	public void ajax_response() {
+    @Test
+    public void ajax_response() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
         //Allure.story("Web Form");
         Allure.suite("Web interface (Selenium)");
         Allure.feature("Ajax page");
-		this.driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html");
+	this.driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html");
         byte[] buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Initial page", new ByteArrayInputStream(buffer));
-		AjaxPage page = new AjaxPage(this.driver);
-		page.click();
+	AjaxPage page = new AjaxPage(this.driver);
+	page.click();
         buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Trigger event", new ByteArrayInputStream(buffer));
-		page.wait_ajax();
+	page.wait_ajax();
         buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Verify event result", new ByteArrayInputStream(buffer));
         page.verify();
-	}
+    }
 
-	@AfterEach
-	public void teardown() {
-		try { this.driver.quit(); } catch(Exception e) { }
-	}
+    @AfterEach
+    public void teardown() {
+	try { this.driver.quit(); } catch(Exception e) { }
+    }
 }
