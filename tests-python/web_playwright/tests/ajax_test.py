@@ -35,9 +35,9 @@ def test_ajax_response(page: Page):
     )
 
 
-# @allure.parent_suite("Web interface")
+# @allure.parent_suite("Web interface (Playwright)")
 # @allure.suite("Ajax")
-# @allure.epic("Web interface")
+# @allure.epic("Web interface (Playwright)")
 # @allure.story("Ajax")
 # @allure.feature("Ajax using expect")
 # def test_ajax_using_sleep(page: Page):
