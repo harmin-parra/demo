@@ -17,15 +17,21 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      selenium:
+        image: selenium/standalone-${{ inputs.browsergithub.event.inputs.browser }}
+        options: --shm-size=2gb
     container:
-      image: selenium/standalone-${{ inputs.browser }}
+       image: maven:3-eclipse-temurin-17-focal
+#      image: selenium/standalone-${{ inputs.browser }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
-        with:
-          distribution: 'oracle'
-          java-version: '17'
+      #- uses: actions/setup-java@v3
+      #  with:
+      #    distribution: 'oracle'
+      #    java-version: '17'
       - name: Install
         run: |
           #which firefox
