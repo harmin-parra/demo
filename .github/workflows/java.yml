@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_playwright
-          path: reporting/
+          path: reporting/allure-results/java
 
   test_selenium:
     runs-on: ubuntu-latest
@@ -71,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_selenium
-          path: reporting/
+          path: reporting/allure-results/java
 
 
   report:
@@ -96,6 +96,8 @@ jobs:
           path: allure-results/java2
       - name: Report
         run: |
+          ls
+          ls -R allure-results
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
