@@ -56,9 +56,9 @@ public class PetstoreTest {
     @Test
     public void add_pet() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-        Allure.feature("Cucumber");
+        Allure.feature("REST api");
         Allure.story("Petstore");
-        Allure.suite("Cucumber");
+        Allure.suite("REST api");
 
     	Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("id", id);
@@ -87,9 +87,9 @@ public class PetstoreTest {
     @Test
     public void get_pet() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-        Allure.feature("Cucumber");
+        Allure.feature("REST api");
         Allure.story("Petstore");
-        Allure.suite("Cucumber");
+        Allure.suite("REST api");
 
         with().
             filters(requestLoggingFilter,responseLoggingFilter).
@@ -112,9 +112,9 @@ public class PetstoreTest {
     @Test
     public void delete_pet() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-        Allure.feature("Cucumber");
+        Allure.feature("REST api");
         Allure.story("Petstore");
-        Allure.suite("Cucumber");
+        Allure.suite("REST api");
 
         // Delete pet
         with().
