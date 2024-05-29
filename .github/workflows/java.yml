@@ -106,6 +106,8 @@ jobs:
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
           ./allure.sh --lang $LANGUAGE --browser ${{ inputs.browser }}
+          cat reporting/allure-results/java1/executor.json
+          cat reporting/allure-results/java2/executor.json
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
