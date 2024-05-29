@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       selenium:
-        image: selenium/standalone-${{ inputs.browsergithub.event.inputs.browser }}
+        image: selenium/standalone-${{ inputs.browser }}
         options: --shm-size=2gb
     container:
        image: maven:3-eclipse-temurin-17-focal
