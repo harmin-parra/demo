@@ -1,12 +1,26 @@
 #!/bin/bash
 
 LANG="All"
+BROWSER="Chromium"
+HUB="localhost"
 
 # Read command-line arguments
 while [ $# -gt 0 ]; do
   case $1 in
     --lang)
       LANG="$2"
+      shift 2
+      ;;
+    --browser)
+      BROWSER="$2"
+      shift 2
+      ;;
+    --hub)
+      HUB="$2"
+      shift 2
+      ;;
+    --docker)
+      DOCKER="$2"
       shift 2
       ;;
     *)
@@ -16,7 +30,11 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+# Change variable values to lowercase
 LANG=${LANG,,}
+BROWSER=${BROWSER,,}
+
+rm -rf reporting/*
 
 #
 # Python tests
@@ -53,10 +71,11 @@ fi
 # Java tests
 #
 if [ $LANG = "java" ] || [ $LANG = "all" ]; then
-  rm -rf reporting/allure-results/java reporting/allure-reports/java reporting/playwright/*
-
   cd tests-java
-  # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
-  mvn -Dtest="web_playwright/**, petstore/**, cucumber/calculator/**" test
+  if [ $DOCKER = "playwright" ]; then
+    mvn -Dtest="web_playwright/**, rest_assured/**" -Dbrowser=$BROWSER test
+  else
+    mvn -Dtest="web_selenium/**" -Dbrowser=$BROWSER -Dhub=$HUB test
+  fi
   cd ..
 fi
