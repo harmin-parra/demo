@@ -28,35 +28,38 @@ public class WebFormTest {
 	public void setup() {
 		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
 		DesiredCapabilities capabilities = null;
+		URL hub = null;
+		try {
+			hub = new URL("http://localhost:4444/wd/hub");
+		} catch (MalformedURLException e) { e.printStackTrace(); }
 		switch (browserName) {
 		case "firefox":
 			FirefoxOptions opt1 = new FirefoxOptions();
 			opt1.addArguments("--headless");
-			this.driver = new FirefoxDriver(opt1);
+			//this.driver = new FirefoxDriver(opt1);
+			this.driver = new RemoteWebDriver(hub, opt1);
 			break;
 		case "chrome":
 			ChromeOptions opt2 = new ChromeOptions();
 			opt2.addArguments("--headless");
-			this.driver = new ChromeDriver(opt2);
+			//this.driver = new ChromeDriver(opt2);
+			this.driver = new RemoteWebDriver(hub, opt2);
 			break;
 		case "edge":
 			EdgeOptions opt3 = new EdgeOptions();
 			opt3.addArguments("--headless=new");
-			this.driver = new EdgeDriver(opt3);
+			//this.driver = new EdgeDriver(opt3);
+			this.driver = new RemoteWebDriver(hub, opt3);
 			break;
 		case "chromium":
 			ChromeOptions opt4 = new ChromeOptions();
 			opt4.addArguments("--headless=new");
-			opt4.setBinary("/usr/bin/chromium");
-			this.driver = new ChromeDriver(opt4);
+			//opt4.setBinary("/usr/bin/chromium");
+			//this.driver = new ChromeDriver(opt4);
+			this.driver = new RemoteWebDriver(hub, opt4);
 			break;
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + browserName);
-		}
-		try {
-			this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new FirefoxOptions());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
 		}
 		this.driver.manage().window().maximize();
 	}
