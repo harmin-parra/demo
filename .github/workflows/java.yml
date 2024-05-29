@@ -35,6 +35,7 @@ jobs:
           # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
           mvn -Dtest="web_playwright/**, petstore/**, cucumber/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
         env:
           HOME: /root
       - name: Upload artifact
