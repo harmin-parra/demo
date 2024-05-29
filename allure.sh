@@ -34,13 +34,13 @@ LANG=${LANG,,}
 # Java tests
 #
 if [ $LANG == "java" ] || [ $LANG == "all" ]; then
-  cat << EOF > reporting/allure-results/java-results/environment.properties
+  cat << EOF > reporting/allure-results/java/environment.properties
 OpenJDK = 17.0.9
 Playwright = 1.41.0
 Cucumber-JVM = 7.15.0
 EOF
 
-  cat << EOF > reporting/allure-results/java-results/executor.json
+  cat << EOF > reporting/allure-results/java/executor.json
 {
   "name": "Gitlab CI",
   "type": "gitlab",
@@ -52,8 +52,8 @@ EOF
 
   allure generate \
     --clean \
-    --output reporting/allure-reports/report-java \
-    --single-file reporting/allure-results/java-results
+    --output reporting/allure-reports/java \
+    --single-file reporting/allure-results/java
 fi
 
 #
