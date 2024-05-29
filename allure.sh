@@ -101,21 +101,11 @@ fi
 # Python tests
 #
 if [ $LANG == "python" ] || [ $LANG == "all" ]; then
-  cat << EOF > reporting/allure-results/python/environment.properties
+  cat << EOF > reporting/allure-results/python1/environment.properties
 Browser = $BROWSER
 Python = 3.10.12
 Playwright = 1.41.0
 Behave = 1.2.6
-EOF
-
-  cat << EOF > reporting/allure-results/python1/executor.json
-{
-  "name": "Github Actions",
-  "type": "github",
-  "buildName": "Build log",
-  "buildUrl": "${JOB_PYTHON}",
-  "reportName": "Demo Python report"
-}
 EOF
 
   if [ -f reporting/allure-results/python1/job.url ]; then
