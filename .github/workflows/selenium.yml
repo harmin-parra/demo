@@ -107,7 +107,7 @@ jobs:
       - name: Commit
         run: |
           rm -rf docs/*
-          mv index.html docs/report-selenium.html
+          mv index.html docs/report-allure.html
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
