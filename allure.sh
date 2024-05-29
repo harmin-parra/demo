@@ -13,10 +13,6 @@ while [ $# -gt 0 ]; do
       BROWSER="$2"
       shift 2
       ;;
-    --job-java)
-      JOB_JAVA="$2"
-      shift 2
-      ;;
     --job-nodejs)
       JOB_NODEJS="$2"
       shift 2
@@ -83,6 +79,7 @@ fi
 #
 if [ $LANG == "node.js" ] || [ $LANG == "all" ]; then
   cat << EOF > reporting/allure-results/nodejs-results/environment.properties
+Browser = $BROWSER
 Node.js = 20.11.0
 Playwright = 1.41.1
 Cucumber.js = 10.3.1
@@ -109,6 +106,7 @@ fi
 #
 if [ $LANG == "python" ] || [ $LANG == "all" ]; then
   cat << EOF > reporting/allure-results/python-results/environment.properties
+Browser = $BROWSER
 Python = 3.10.12
 Playwright = 1.41.0
 Behave = 1.2.6
