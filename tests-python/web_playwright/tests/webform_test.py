@@ -4,9 +4,9 @@ from playwright.sync_api import Page
 from web_playwright import pages
 
 
-@allure.parent_suite("Web interface")
+@allure.parent_suite("Web interface (Playwright)")
 @allure.suite("Web Form")
-@allure.epic("Web interface")
+@allure.epic("Web interface (Playwright)")
 # @allure.story("Web Form")
 @allure.feature("Web Form")
 def test_fill_in_form(page: Page):
