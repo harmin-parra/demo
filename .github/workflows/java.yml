@@ -106,13 +106,13 @@ jobs:
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
           echo "Language = '$LANGUAGE'"
-          echo "Browser = '$BROWSER'"
+          echo "Browser = '${{ inputs.browser }}'"
           ./allure.sh --lang $LANGUAGE --browser ${{ inputs.browser }}
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: allure-report/index.html
+          path: reporting/allure-reports/java/index.html
 
   publish:
     needs: report
