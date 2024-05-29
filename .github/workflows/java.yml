@@ -35,6 +35,9 @@ jobs:
           cd ..
       - name: Test
         run: |
+          echo "Language: '$LANGUAGE'"
+          echo "Browser: '$BROWSER'"
+          echo "Hub: '$HUB'"
           ./run.sh --lang $LANGUAGE --docker playwright --browser $BROWSER
           #cd tests-java
           # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
@@ -71,6 +74,9 @@ jobs:
       - name: Test
         run: |
           #ls /__w/demo/demo/tests-java/src/test/resources
+          echo "Language: '$LANGUAGE'"
+          echo "Browser: '$BROWSER'"
+          echo "Hub: '$HUB'"
           ./run.sh --lang $LANGUAGE --docker selenium --browser $BROWSER --hub "$HUB"
           #cd tests-java
           #mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" -Dhub="$HUB" test
