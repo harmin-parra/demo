@@ -107,7 +107,7 @@ jobs:
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
           echo "Language = '$LANGUAGE'"
           echo "Browser = '$BROWSER'"
-          ./allure.sh --lang $LANGUAGE --browser $BROWSER
+          ./allure.sh --lang $LANGUAGE --browser ${{ inputs.browser }}
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
