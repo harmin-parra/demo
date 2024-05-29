@@ -33,12 +33,8 @@ jobs:
           playwright install
       - name: Test
         run: |
-          cd tests-python
-          behave cucumber/features/petstore.feature
-          export PYTHONPATH=$(pwd)
-          pytest web_playwright/tests/ --browser ${{ inputs.browser }}
-          unset PYTHONPATH
-          cd ..
+          ./run.sh --lang $LANGUAGE --docker playwright --browser ${{ inputs.browser }}
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/python/job.url
         env:
           HOME: /root
       - name: Upload artifact
@@ -60,19 +56,14 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_test
+          name: artifact_playwright
+          path: reporting/allure-results/python1
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
-          allure generate \
-            --clean \
-            --output allure-report \
-            --single-file \
-            allure-results/python-results
-          ls
-          ls allure-report
+          ./allure.sh --lang $LANGUAGE --docker playwright --browser ${{ inputs.browser }}
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -89,7 +80,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_report
-          path: reporting/allure-results/python1
       - name: Commit
         run: |
           rm -rf docs/*
