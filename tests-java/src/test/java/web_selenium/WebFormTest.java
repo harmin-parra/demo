@@ -26,9 +26,8 @@ public class WebFormTest {
 
 	@BeforeEach
 	public void setup() {
-		//String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
+		String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chrome" : System.getProperty("browser");
 		DesiredCapabilities capabilities = null;
-		/*
 		switch (browserName) {
 		case "firefox":
 			FirefoxOptions opt1 = new FirefoxOptions();
@@ -54,9 +53,8 @@ public class WebFormTest {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + browserName);
 		}
-		*/
 		try {
-			this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+			this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), new FirefoxOptions());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
