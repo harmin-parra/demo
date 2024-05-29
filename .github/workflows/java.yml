@@ -11,10 +11,9 @@ on:
         options:
         - chromium
         - firefox
-        - webkit
 
 jobs:
-  test:
+  test_playwright:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright/java:v1.42.0-jammy
@@ -36,16 +35,51 @@ jobs:
           # mvn -Dtest="web_playwright/WebFormTest, cucumber/petstore/**" test
           mvn -Dtest="web_playwright/**, petstore/**, cucumber/**" -Dbrowser=${{ inputs.browser }} test
           cd ..
-        env:
-          HOME: /root
+        #env:
+        #  HOME: /root
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: artifact_test
           path: reporting/
 
+  test_selenium:
+    runs-on: ubuntu-latest
+    services:
+      selenium:
+        image: selenium/standalone-${{ inputs.browser }}
+        #ports: 
+        #- "4444:4444"
+        options: --shm-size=2gb
+    container:
+       image: maven:3-eclipse-temurin-17-focal
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Report artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_test
+      - name: Install
+        run: |
+          cd tests-java
+          mvn dependency:resolve
+          cd ..
+      - name: Test
+        run: |
+          #ls /__w/demo/demo/tests-java/src/test/resources
+          cd tests-java
+          mvn -Dtest="web_selenium/**" -Dbrowser="${{ inputs.browser }}" -Dhub="172.17.0.1" test
+          cd ..
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_test
+          path: reporting/
+
+
   report:
-    needs: test
+    needs: [test_playwright, test_selenium]
     runs-on: ubuntu-latest
     container:
       image: openjdk:8-jre
