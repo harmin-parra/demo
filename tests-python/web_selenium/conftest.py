@@ -9,6 +9,7 @@ from selenium.webdriver.edge.options import Options as Options_Edge
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chromium")
+    parser.addoption("--hub", action="store", default="172.17.0.1")
 
 
 @pytest.fixture(scope='session')
@@ -16,9 +17,14 @@ def browser(request):
     return request.config.getoption("--driver")
 
 
+@pytest.fixture(scope='session')
+def hub(request):
+    return request.config.getoption("--hub")
+
+
 @pytest.fixture(scope="function")
-def driver(browser):
-    server = "http://172.17.0.1:4444/wd/hub"
+def driver(browser, hub):
+    server = f"http://${hub}:4444/wd/hub"
     options = None
     if browser == "chrome":
         options = Options_Chrome()
