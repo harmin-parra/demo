@@ -66,7 +66,7 @@ jobs:
           pip install -r tests-python/requirements.txt
       - name: Test
         run: |
-          #127.0.0.1curl http://${HUB}:4444/wd/hub/
+          curl http://${HUB}:4444/wd/hub/
           ./run.sh --lang $LANGUAGE --docker selenium --browser ${{ inputs.browser }}
 
   report:
