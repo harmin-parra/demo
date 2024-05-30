@@ -3,9 +3,9 @@ import os
 from web_selenium import pages
 
 
-@allure.parent_suite("Web interface (Playwright)")
+@allure.parent_suite("Web interface (Selenium)")
 @allure.suite("Web Form")
-@allure.epic("Web interface (Playwright)")
+@allure.epic("Web interface (Selenium)")
 # @allure.story("Web Form")
 @allure.feature("Web Form")
 def test_fill_in_form(driver):
