@@ -63,7 +63,7 @@ public class WebFormPage {
     }
 
     public void set_date(String value) {
-        this.date.evaluate("node => { node.value = '" + value + "'}");
+        this.date.evaluate("(node, val) => { node.value = val; }", value);
     }
 
     public void set_range(int value) {
