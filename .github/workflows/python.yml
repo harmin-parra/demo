@@ -54,7 +54,7 @@ jobs:
         - 4444:4444
         options: --shm-size=2gb
     container:
-      image: python:v3.11
+      image: python:3.11
     steps:
       - name: Checkout
         uses: actions/checkout@v4
