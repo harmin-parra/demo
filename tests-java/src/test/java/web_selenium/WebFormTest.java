@@ -73,7 +73,7 @@ public class WebFormTest {
     }
 
     @Test
-    public void testFillInForm() {
+    public void fill_in_form() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
         // Allure.story("Web Form");
@@ -103,7 +103,6 @@ public class WebFormTest {
     public void teardown() {
         try {
             this.driver.quit();
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
     }
 }
