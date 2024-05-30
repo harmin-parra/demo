@@ -1,6 +1,7 @@
 package web_playwright;
 
 import io.qameta.allure.Allure;
+import web_playwright.WebFormPage;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
@@ -10,14 +11,13 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 import java.io.ByteArrayInputStream;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import web_playwright.WebFormPage;
 
 public class WebFormTest {
 
@@ -27,21 +27,21 @@ public class WebFormTest {
     private Page page;
 
     @BeforeAll
-    static void launchBrowser() {
+    public static void launchBrowser() {
         playwright = Playwright.create();
         LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(true);
         String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
         if (browserName.equals("chromium")) {
-          browser = playwright.chromium().launch(options);
+            browser = playwright.chromium().launch(options);
         } else if (browserName.equals("firefox")) {
-          browser = playwright.firefox().launch(options);
+            browser = playwright.firefox().launch(options);
         } else if (browserName.equals("webkit")) {
-          browser = playwright.webkit().launch(options);
+            browser = playwright.webkit().launch(options);
         }
     }
 
     @BeforeEach
-    void createContextAndPage() {
+    public void createContextAndPage() {
         this.context = browser.newContext();
         this.page = context.newPage();
     }
@@ -49,10 +49,10 @@ public class WebFormTest {
     @Test
     public void fill_in_form() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-    	Allure.epic("Web interface (Playwright)");
-    	//Allure.story("Web Form");
-    	Allure.suite("Web interface (Playwright)");
-    	Allure.feature("Web Form");
+        Allure.epic("Web interface (Playwright)");
+        //Allure.story("Web Form");
+        Allure.suite("Web interface (Playwright)");
+        Allure.feature("Web Form");
         this.page.navigate("https://www.selenium.dev/selenium/web/web-form.html");
         WebFormPage webform = new WebFormPage(page);
         byte[] buffer = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
@@ -74,12 +74,12 @@ public class WebFormTest {
     }
 
     @AfterAll
-    static void closeBrowser() {
+    public static void closeBrowser() {
         playwright.close();
     }
 
     @AfterEach
-    void closeContext() {
+    public void closeContext() {
         this.context.close();
     }
 
