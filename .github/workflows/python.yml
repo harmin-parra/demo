@@ -66,6 +66,11 @@ jobs:
       - name: Test
         run: |
           ./run.sh --lang $LANGUAGE --docker selenium --browser ${{ inputs.browser }} --hub $HUB
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_selenium
+          path: reporting/allure-results/python
 
   report:
     needs: [test_playwright, test_selenium]
@@ -77,11 +82,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifact
+      - name: Download Playwright artifact
         uses: actions/download-artifact@v4
         with:
           name: artifact_playwright
           path: reporting/allure-results/python1
+      - name: Download Selenium artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_selenium
+          path: reporting/allure-results/python2
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
