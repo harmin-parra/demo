@@ -44,6 +44,7 @@ if [ $LANG = "python" ] || [ $LANG = "all" ]; then
   export PYTHONPATH=$(pwd)
   if [ $DOCKER = "playwright" ]; then
     behave cucumber/features/petstore.feature
+    # pytest web_playwright/tests/webform_test.py
     pytest web_playwright/tests/ --browser $BROWSER
   else
     pytest web_selenium/tests/ --driver $BROWSER --hub $HUB
@@ -74,6 +75,7 @@ fi
 if [ $LANG = "java" ] || [ $LANG = "all" ]; then
   cd tests-java
   if [ $DOCKER = "playwright" ]; then
+    # mvn -Dtest="web_playwright/WebFormTest" test
     mvn -Dtest="web_playwright/**, rest_assured/**" -Dbrowser=$BROWSER test
   else
     mvn -Dtest="web_selenium/**" -Dbrowser=$BROWSER -Dhub=$HUB test
