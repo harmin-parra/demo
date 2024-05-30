@@ -31,13 +31,12 @@ public class WebFormTest {
         playwright = Playwright.create();
         LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(true);
         String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
-        if (browserName.equals("chromium")) {
+        if (browserName.equals("chromium"))
             browser = playwright.chromium().launch(options);
-        } else if (browserName.equals("firefox")) {
+        else if (browserName.equals("firefox"))
             browser = playwright.firefox().launch(options);
-        } else if (browserName.equals("webkit")) {
+        else if (browserName.equals("webkit"))
             browser = playwright.webkit().launch(options);
-        }
     }
 
     @BeforeEach

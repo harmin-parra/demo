@@ -30,7 +30,8 @@ public class AjaxTest {
 
     @BeforeEach
     public void setup() {
-        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
+        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium"
+                : System.getProperty("browser");
         String url = StringUtils.isEmpty(System.getProperty("hub")) ? "localhost" : System.getProperty("hub");
         URL hub = null;
         try {
@@ -39,33 +40,33 @@ public class AjaxTest {
             e.printStackTrace();
         }
         switch (browserName) {
-        case "firefox":
-            FirefoxOptions opt1 = new FirefoxOptions();
-            opt1.addArguments("--headless");
-            // this.driver = new FirefoxDriver(opt1);
-            this.driver = new RemoteWebDriver(hub, opt1);
-            break;
-        case "chrome":
-            ChromeOptions opt2 = new ChromeOptions();
-            opt2.addArguments("--headless");
-            // this.driver = new ChromeDriver(opt2);
-            this.driver = new RemoteWebDriver(hub, opt2);
-            break;
-        case "edge":
-            EdgeOptions opt3 = new EdgeOptions();
-            opt3.addArguments("--headless=new");
-            // this.driver = new EdgeDriver(opt3);
-            this.driver = new RemoteWebDriver(hub, opt3);
-            break;
-        case "chromium":
-            ChromeOptions opt4 = new ChromeOptions();
-            opt4.addArguments("--headless=new");
-            // opt4.setBinary("/usr/bin/chromium");
-            // this.driver = new ChromeDriver(opt4);
-            this.driver = new RemoteWebDriver(hub, opt4);
-            break;
-        default:
-            throw new IllegalArgumentException("Unexpected value: " + browserName);
+            case "firefox":
+                FirefoxOptions opt1 = new FirefoxOptions();
+                opt1.addArguments("--headless");
+                // this.driver = new FirefoxDriver(opt1);
+                this.driver = new RemoteWebDriver(hub, opt1);
+                break;
+            case "chrome":
+                ChromeOptions opt2 = new ChromeOptions();
+                opt2.addArguments("--headless=new");
+                // this.driver = new ChromeDriver(opt2);
+                this.driver = new RemoteWebDriver(hub, opt2);
+                break;
+            case "edge":
+                EdgeOptions opt3 = new EdgeOptions();
+                opt3.addArguments("--headless=new");
+                // this.driver = new EdgeDriver(opt3);
+                this.driver = new RemoteWebDriver(hub, opt3);
+                break;
+            case "chromium":
+                ChromeOptions opt4 = new ChromeOptions();
+                opt4.addArguments("--headless=new");
+                // opt4.setBinary("/usr/bin/chromium");
+                // this.driver = new ChromeDriver(opt4);
+                this.driver = new RemoteWebDriver(hub, opt4);
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + browserName);
         }
         this.driver.manage().window().maximize();
     }
@@ -74,24 +75,26 @@ public class AjaxTest {
     public void ajax_response() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
-        //Allure.story("Web Form");
+        // Allure.story("Web Form");
         Allure.suite("Web interface (Selenium)");
         Allure.feature("Ajax page");
         this.driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html");
-        byte[] buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        byte[] buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Initial page", new ByteArrayInputStream(buffer));
         AjaxPage page = new AjaxPage(this.driver);
         page.click();
-        buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Trigger event", new ByteArrayInputStream(buffer));
         page.wait_ajax();
-        buffer = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+        buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Verify event result", new ByteArrayInputStream(buffer));
         page.verify();
     }
 
     @AfterEach
     public void teardown() {
-        try { this.driver.quit(); } catch(Exception e) { }
+        try {
+            this.driver.quit();
+        } catch (Exception e) { }
     }
 }
