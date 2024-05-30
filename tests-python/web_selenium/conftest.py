@@ -10,12 +10,12 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope='session')
-def browser(request):
+def _browser(request):
     return request.config.getoption("--driver")
 
 
 @pytest.fixture(scope="function")
-def driver(browser):
+def driver(_browser):
     server = "http://172.17.0.1:4444/wd/hub"
     options = Options()
     options.add_argument("--headless")
