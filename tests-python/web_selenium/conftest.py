@@ -9,7 +9,7 @@ from selenium.webdriver.edge.options import Options as Options_Edge
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chromium")
-    parser.addoption("--hub", action="store", default="172.17.0.1")
+    parser.addoption("--hub", action="store", default="localhost")
 
 
 @pytest.fixture(scope='session')
