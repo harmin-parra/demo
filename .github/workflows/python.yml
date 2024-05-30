@@ -63,8 +63,8 @@ jobs:
           python-version: '3.11'
       - name: Test
         run: |
-          curl http://${HUB}:4444/wd/hub/
-
+          #127.0.0.1curl http://${HUB}:4444/wd/hub/
+          ./run.sh --lang $LANGUAGE --docker selenium --driver ${{ inputs.browser }}
 
   report:
     needs: [test_playwright]
