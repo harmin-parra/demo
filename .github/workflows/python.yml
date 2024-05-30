@@ -43,6 +43,25 @@ jobs:
           name: artifact_playwright
           path: reporting/allure-results/python
 
+
+  test_selenium:
+    runs-on: ubuntu-latest
+    services:
+      selenium:
+        image: selenium/standalone-${{ inputs.browser }}
+        ports: 
+        - 4444:4444
+        options: --shm-size=2gb
+    #container:
+    #  image: python:v3.10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+
   report:
     needs: [test_playwright]
     runs-on: ubuntu-latest
