@@ -2,6 +2,7 @@ name: Python Tests
 
 env:
   LANGUAGE: 'Python'
+  HUB: '172.17.0.1'
 
 on:
   workflow_dispatch:
@@ -60,6 +61,9 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+      - name: Test
+        run: |
+          curl http://${HUB}:4444/wd/hub/
 
 
   report:
