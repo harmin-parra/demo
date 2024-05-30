@@ -36,6 +36,7 @@ public class WebFormPage {
         this.color = driver.findElement(By.name("my-colors"));
         this.date = driver.findElement(By.name("my-date"));
         this.range = driver.findElement(By.name("my-range"));
+        ((RemoteWebDriver) this.driver).setFileDetector(new LocalFileDetector());
         this.file = driver.findElement(By.name("my-file"));
         this.button = driver.findElement(By.xpath("//button"));
     }
@@ -61,7 +62,6 @@ public class WebFormPage {
     }
 
     public void set_file(String value) {
-        ((RemoteWebDriver) this.driver).setFileDetector(new LocalFileDetector());
         File uploadFile = new File(value);
         this.file.sendKeys(uploadFile.getAbsolutePath());
     }
