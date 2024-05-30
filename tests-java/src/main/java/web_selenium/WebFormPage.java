@@ -60,7 +60,7 @@ public class WebFormPage {
     }
 
     public void set_file(String value) {
-        this.driver.setFileDetector(new LocalFileDetector());
+        ((RemoteWebDriver) this.driver).setFileDetector(new LocalFileDetector());
         File uploadFile = new File(value);
         this.file.sendKeys(uploadFile.getAbsolutePath());
     }
