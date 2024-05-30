@@ -46,7 +46,7 @@ if [ $LANG = "python" ] || [ $LANG = "all" ]; then
     behave cucumber/features/petstore.feature
     pytest web_playwright/tests/ --browser $BROWSER
   else
-    pytest web_selenium/tests/
+    pytest web_selenium/tests/ --driver $BROWSER
   fi
   unset PYTHONPATH
   cd ..
