@@ -88,7 +88,7 @@ public class WebFormTest {
         page.set_textarea("textarea");
         page.set_number(2);
         page.set_city("Los Angeles");
-        //page.set_file("src/test/resources/file.txt");
+        page.set_file("src/test/resources/file.txt");
         page.set_color("#00ff00");
         page.set_date("01/01/2024");
         page.set_range(1);
