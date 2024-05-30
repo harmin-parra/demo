@@ -1,9 +1,11 @@
 import pytest
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
+
 from selenium import webdriver
 from selenium.webdriver.firefox.webdriver import WebDriver
-
+from selenium.webdriver.firefox.options import Options as Options_Firefox
+from selenium.webdriver.chrome.options import Options as Options_Chrome
+from selenium.webdriver.chromium.options import ChromiumOptions as Options_Chromium
+from selenium.webdriver.edge.options import Options as Options_Edge
 
 def pytest_addoption(parser):
     parser.addoption("--driver", action="store", default="chromium")
@@ -17,9 +19,18 @@ def browser(request):
 @pytest.fixture(scope="function")
 def driver(browser):
     server = "http://172.17.0.1:4444/wd/hub"
-    options = Options()
+    options = None
+    if browser == "chrome":
+        options = Options_Chrome()
+    elif browser == "chromium":
+        options = Options_Chromium()
+    elif browser == "firefox":
+        options = Options_Firefox()
+        #options.add_argument("--headless")
+        #driver = webdriver.Firefox(options=options)
+    elif browser == "edge":
+        options = Options_Edge()
     options.add_argument("--headless")
-    #driver = webdriver.Firefox(options=options)
     driver = webdriver.Remote(command_executor=server, options=options)
     yield driver
     driver.quit()
