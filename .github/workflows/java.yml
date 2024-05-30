@@ -67,7 +67,7 @@ jobs:
           cd ..
       - name: Test
         run: |
-          ./run.sh --lang "$LANGUAGE" --docker "selenium" --browser "${{ inputs.browser }}" --hub "selenium-hub"
+          ./run.sh --lang "$LANGUAGE" --docker "maven" --browser "${{ inputs.browser }}" --hub "selenium-hub"
           #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
       - name: Upload artifact
         uses: actions/upload-artifact@v4
