@@ -1,7 +1,7 @@
 name: Java Tests
 
 env:
-  ALLURE: 2.27.0
+  ALLURE: 2.29.0
   LANGUAGE: 'Java'
 
 on:
