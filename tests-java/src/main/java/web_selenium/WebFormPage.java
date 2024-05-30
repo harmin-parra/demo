@@ -38,6 +38,7 @@ public class WebFormPage {
         this.range = driver.findElement(By.name("my-range"));
         ((RemoteWebDriver) this.driver).setFileDetector(new LocalFileDetector());
         this.file = driver.findElement(By.name("my-file"));
+        //this.button = driver.findElement(By.xpath("//button[@type='submit']"));
         this.button = driver.findElement(By.xpath("//button"));
     }
 
