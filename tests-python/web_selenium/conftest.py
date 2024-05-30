@@ -24,7 +24,7 @@ def hub(request):
 
 @pytest.fixture(scope="function")
 def driver(browser, hub):
-    server = f"http://${hub}:4444/wd/hub"
+    server = f"http://172.17.0.1:4444/wd/hub"
     options = None
     if browser == "chrome":
         options = Options_Chrome()
