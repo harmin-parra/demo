@@ -12,7 +12,7 @@ def test_fill_in_form(driver):
     """ Web form test """
     driver.get("https://www.selenium.dev/selenium/web/web-form.html")
     allure.attach(
-        driver.get_screenshot_as_base64(),
+        driver.get_screenshot_as_png(),
         name="Empty form",
         attachment_type=allure.attachment_type.PNG
     )
@@ -27,13 +27,13 @@ def test_fill_in_form(driver):
     webform.set_date("01/01/2024")
     webform.set_range(1)
     allure.attach(
-        driver.get_screenshot_as_base64(),
+        driver.get_screenshot_as_png(),
         name="Complete form",
         attachment_type=allure.attachment_type.PNG
     )
     webform.submit()
     allure.attach(
-        driver.get_screenshot_as_base64(),
+        driver.get_screenshot_as_png(),
         name="Submit form",
         attachment_type=allure.attachment_type.PNG
     )
