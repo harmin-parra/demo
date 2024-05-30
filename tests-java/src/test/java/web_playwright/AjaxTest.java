@@ -1,8 +1,8 @@
 package web_playwright;
 
+import java.io.ByteArrayInputStream;
 import io.qameta.allure.Allure;
 
-import java.io.ByteArrayInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -26,21 +26,21 @@ public class AjaxTest {
     private Page page;
 
     @BeforeAll
-    static void launchBrowser() {
+    public static void launchBrowser() {
         playwright = Playwright.create();
         LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(true);
         String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
         if (browserName.equals("chromium")) {
-          browser = playwright.chromium().launch(options);
+            browser = playwright.chromium().launch(options);
         } else if (browserName.equals("firefox")) {
-          browser = playwright.firefox().launch(options);
+            browser = playwright.firefox().launch(options);
         } else if (browserName.equals("webkit")) {
-          browser = playwright.webkit().launch(options);
+            browser = playwright.webkit().launch(options);
         }
     }
 
     @BeforeEach
-    void createContextAndPage() {
+    public void createContextAndPage() {
         this.context = browser.newContext();
         this.page = context.newPage();
     }
@@ -48,7 +48,7 @@ public class AjaxTest {
     @Test
     public void ajax_response() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-    	Allure.epic("Web interface (Playwright)");
+       	Allure.epic("Web interface (Playwright)");
     	//Allure.story("Ajax page");
     	Allure.suite("Web interface (Playwright)");
     	Allure.feature("Ajax page");
@@ -87,12 +87,12 @@ public class AjaxTest {
     */
     
     @AfterAll
-    static void closeBrowser() {
+    public static void closeBrowser() {
         playwright.close();
     }
 
     @AfterEach
-    void closeContext() {
+    public void closeContext() {
         this.context.close();
     }
 
