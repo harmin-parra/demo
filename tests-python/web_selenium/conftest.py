@@ -19,7 +19,7 @@ def driver(browser):
     server = "http://172.17.0.1:4444/wd/hub"
     options = Options()
     options.add_argument("--headless")
-    driver = webdriver.Firefox(options=options)
-    #driver = webdriver.Remote(command_executor=server, options=options)
+    #driver = webdriver.Firefox(options=options)
+    driver = webdriver.Remote(command_executor=server, options=options)
     yield driver
     driver.quit()
