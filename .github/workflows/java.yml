@@ -66,6 +66,7 @@ jobs:
           cd ..
       - name: Test
         run: |
+          curl http://${HUB}:4444/wd/hub/
           #ls /__w/demo/demo/tests-java/src/test/resources
           ./run.sh --lang "$LANGUAGE" --docker "selenium" --browser "${{ inputs.browser }}" --hub "$HUB"
           #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
