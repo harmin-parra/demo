@@ -62,7 +62,7 @@ if [ $LANG = "node.js" ] || [ $LANG = "all" ]; then
   cd tests-nodejs
   npx cucumber-js cucumber/features/petstore.feature
   # npx playwright test webform.spec.ts --project chromium
-  npx playwright test --project chromium
+  npx playwright test --project $BROWSER
   # npx cypress run
   cd ..
 fi
