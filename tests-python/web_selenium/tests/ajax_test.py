@@ -3,9 +3,9 @@ from web_selenium.conftest import driver
 from web_selenium import pages
 
 
-@allure.parent_suite("Web interface (Playwright)")
+@allure.parent_suite("Web interface (Selenium)")
 @allure.suite("Ajax")
-@allure.epic("Web interface (Playwright)")
+@allure.epic("Web interface (Selenium)")
 #@allure.story("Ajax")
 @allure.feature("Ajax")
 def test_ajax_response(driver):
