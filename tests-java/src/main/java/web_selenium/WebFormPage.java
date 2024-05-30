@@ -8,6 +8,7 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.support.ui.Select;
 
 public class WebFormPage {
@@ -59,6 +60,7 @@ public class WebFormPage {
     }
 
     public void set_file(String value) {
+        this.driver.setFileDetector(new LocalFileDetector());
         File uploadFile = new File(value);
         this.file.sendKeys(uploadFile.getAbsolutePath());
     }
