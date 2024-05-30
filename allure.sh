@@ -66,7 +66,7 @@ EOF
 
   allure generate \
     --clean \
-    --output reporting/allure-reports/java \
+    --output reporting/allure-reports/report-java \
     --single-file reporting/allure-results/java1 reporting/allure-results/java2
 fi
 
