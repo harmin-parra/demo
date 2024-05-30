@@ -32,7 +32,7 @@ def test_fill_in_form(driver):
         attachment_type=allure.attachment_type.PNG
     )
     webform.submit()
-        allure.attach(
+    allure.attach(
         page.screenshot(full_page=True),
         name="Submit form",
         attachment_type=allure.attachment_type.PNG
