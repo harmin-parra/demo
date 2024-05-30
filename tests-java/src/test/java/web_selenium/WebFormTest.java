@@ -33,7 +33,7 @@ public class WebFormTest {
     @BeforeEach
     public void setup() {
         String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
-        String url = StringUtils.isEmpty(System.getProperty("hub")) ? "172.17.0.1" : System.getProperty("hub");
+        String url = StringUtils.isEmpty(System.getProperty("hub")) ? "localhost" : System.getProperty("hub");
         URL hub = null;
         try {
             hub = new URL("http://" + url + ":4444/wd/hub");
