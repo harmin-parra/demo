@@ -136,4 +136,3 @@ EOF
     --single-file reporting/allure-results/python1 reporting/allure-results/python2
 
 fi
-
