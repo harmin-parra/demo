@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.remote.file_detector import LocalFileDetector
 
 
 class WebFormPage:
@@ -14,6 +15,7 @@ class WebFormPage:
         self.textarea = driver.find_element(By.NAME, "my-textarea")
         self.number = Select(driver.find_element(By.NAME, "my-select"))
         self.city = driver.find_element(By.NAME, "my-datalist")
+        self.driver.file_detector = LocalFileDetector()
         self.file = driver.find_element(By.NAME, "my-file")
         self.color = driver.find_element(By.NAME, "my-colors")
         self.date = driver.find_element(By.NAME, "my-date")
