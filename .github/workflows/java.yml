@@ -36,6 +36,7 @@ jobs:
           cd ..
       - name: Test
         run: |
+          java --version
           ./run.sh --lang "$LANGUAGE" --docker "playwright" --browser "${{ inputs.browser }}"
           echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
         env:
@@ -67,6 +68,7 @@ jobs:
           cd ..
       - name: Test
         run: |
+          java --version
           ./run.sh --lang "$LANGUAGE" --docker "maven" --browser "${{ inputs.browser }}" --hub "selenium-hub"
           #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
       - name: Upload artifact
