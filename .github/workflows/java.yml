@@ -119,6 +119,7 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
+          ls
           rm -rf docs/report-java/
           mkdir report-java
           mv index.html docs/report-java/allure.html
