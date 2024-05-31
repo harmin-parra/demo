@@ -119,8 +119,9 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
-          rm -rf docs/*
-          mv index.html docs/report-allure.html
+          rm -rf docs/report-java/
+          mkdir docs/report-java
+          mv index.html docs/report-java/allure.html
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*

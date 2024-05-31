@@ -98,7 +98,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: reporting/allure-reports/python/index.html
+          path: reporting/allure-reports/report-python/index.html
 
   publish:
     needs: report
