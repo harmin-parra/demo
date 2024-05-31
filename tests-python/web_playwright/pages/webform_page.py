@@ -35,9 +35,10 @@ class WebFormPage:
         self.color.fill(value)
 
     def set_date(self, value):
-        self.date.fill(value)
+        #self.date.fill(value)
         # Click elsewhere to close the calendar
-        self.page.locator("body").click()
+        #self.page.locator("body").click()
+        self.date.evaluate("(elem, val) => elem.setAttribute('value', val);", value)
 
     def set_range(self, value):
         # Two solutions
