@@ -6,7 +6,9 @@ The objective is to implement the same tests using different automation test too
 
 ## HTML reports
 
-https://harmin-parra.github.io/demo/report-allure.html (for Playwright & Selenium tests)
+https://harmin-parra.github.io/demo/report-java/allure.html (for Java tests)
+
+https://harmin-parra.github.io/demo/report-python/allure.html (for Python tests)
 
 https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
 
