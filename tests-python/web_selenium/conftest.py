@@ -5,7 +5,6 @@ from selenium.webdriver.firefox.webdriver import WebDriver as WebDriver_Firefox
 from selenium.webdriver.firefox.options import Options as Options_Firefox
 from selenium.webdriver.chrome.webdriver import WebDriver as WebDriver_Chrome
 from selenium.webdriver.chrome.options import Options as Options_Chrome
-# from selenium.webdriver.chromium.webdriver import WebDriver as WebDriver_Chromium
 from selenium.webdriver.chromium.options import ChromiumOptions as Options_Chromium
 from selenium.webdriver.edge.webdriver import WebDriver as WebDriver_Edge
 from selenium.webdriver.edge.options import Options as Options_Edge
