@@ -113,7 +113,7 @@ EOF
   "type": "${EXECUTOR_TYPE}",
   "buildName": "Build log",
   "buildUrl": "$(cat reporting/allure-results/python1/job.url)",
-  "reportName": "Demo Java report"
+  "reportName": "Demo Python report"
 }
 EOF
   fi
@@ -125,7 +125,7 @@ EOF
   "type": "${EXECUTOR_TYPE}",
   "buildName": "Build log",
   "buildUrl": "$(cat reporting/allure-results/python2/job.url)",
-  "reportName": "Demo Java report"
+  "reportName": "Demo Python report"
 }
 EOF
   fi
