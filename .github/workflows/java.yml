@@ -1,3 +1,4 @@
+https://harmin-parra.github.io/demo/report-python/allure.html (for Python tests)
 name: Java Tests
 
 env:
@@ -119,7 +120,7 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
-          rm -rf docs/report-java/*
+          rm -rf docs/report-java/
           mkdir report-java
           mv index.html docs/report-java/allure.html
           git config user.name "GitHub Actions"
