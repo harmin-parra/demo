@@ -1,4 +1,4 @@
-package rest_assured;
+package rest_api_rest_assured;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -19,19 +19,19 @@ import java.util.Map;
 
 
 public class PetstoreTest {
-    
+
     private int id = 531;
 
 
     @BeforeAll
     public static void setUp() {
-        RestAssured.baseURI = "https://petstore.swagger.io";
-        RestAssured.basePath = "/v2/pet";
-        RestAssured.requestSpecification = 
-            (RequestSpecification) new RequestSpecBuilder()
-                .setContentType(ContentType.JSON)
-                .setAccept(ContentType.JSON)
-                .build(); //.log().uri().log().method();
+    	RestAssured.baseURI = "https://petstore.swagger.io";
+    	RestAssured.basePath = "/v2/pet";
+    	RestAssured.requestSpecification = 
+    	    (RequestSpecification) new RequestSpecBuilder()
+    	        .setContentType(ContentType.JSON)
+    	        .setAccept(ContentType.JSON)
+    	        .build(); //.log().uri().log().method();
     }
 
     @Test
@@ -41,21 +41,21 @@ public class PetstoreTest {
         Allure.story("Petstore");
         Allure.suite("REST api (rest-assured)");
 
-        Map<String, Object> payload = new HashMap<String, Object>();
+    	Map<String, Object> payload = new HashMap<String, Object>();
         payload.put("id", id);
         payload.put("name", "Cookie");
         payload.put("status", "sold");
 
         with().
             filter(new AllureRestAssured()).
-            body(payload).
+    	    body(payload).
         when().
-            post("/").
+        	post("/").
         then().
-            statusCode(200).
-            body("id", equalTo(id)).
-            body("name", equalTo("Cookie")).
-            body("status", equalTo("sold"));
+        	statusCode(200).
+        	body("id", equalTo(id)).
+        	body("name", equalTo("Cookie")).
+        	body("status", equalTo("sold"));
     }
 
     @Test
@@ -68,8 +68,8 @@ public class PetstoreTest {
         with().
             filter(new AllureRestAssured()).
         when().
-            get("/{id}", id).
-        then().
+    	    get("/{id}", id).
+    	then().
             statusCode(200).
             body("id", equalTo(id)).
             body("name", equalTo("Cookie")).

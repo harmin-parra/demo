@@ -1,5 +1,5 @@
 /*
-package rest_assured;
+package rest_api_rest_assured;
 
 import io.qameta.allure.Allure;
 
