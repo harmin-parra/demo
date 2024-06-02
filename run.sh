@@ -78,8 +78,18 @@ if [ $LANG = "java" ] || [ $LANG = "all" ]; then
   if [ $DOCKER = "playwright" ]; then
     # mvn -Dtest="web_playwright/WebFormTest" test
     mvn -Dtest="web_playwright/**, rest_assured/**" -Dbrowser=$BROWSER test
-  else
+  elif [ $DOCKER = "selenium" ]; then
     mvn -Dtest="web_selenium/**" -Dbrowser=$BROWSER -Dhub=$HUB test
+  elif [ $DOCKER = "karate" ]; then
+    # mvn -Dtest="web_karate/**, rest_api_karate/**" -Dbrowser="chrome" test
+    mvn -Dtest="karate/**" -Dbrowser=$BROWSER test
+    for filename in ../reporting/allure-results/java/*result.json; do
+      RES=$(egrep '"testCaseName":"\[[0-9]+:[0-9]+\]' $filename)
+      if [ -n "$RES" ]; then
+        rm -f $filename
+      fi
+    done
   fi
   cd ..
 fi
+
