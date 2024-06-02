@@ -172,7 +172,7 @@ jobs:
           ls -R allure-reports
           rm -rf docs/*
           mv allure-reports/report-java docs/
-          mv karate-report/* docs/
+          mv report-karate/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
