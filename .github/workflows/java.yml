@@ -77,40 +77,40 @@ jobs:
           name: artifact_selenium
           path: reporting/allure-results/java
 
-  test_karate:
-    runs-on: ubuntu-latest
-    container:
-       image: selenium/standalone-${{ inputs.browser }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install
-        run: |
-          curl https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_linux-x64_bin.tar.gz -o openjdk-bin.tar.gz
-          tar -xf openjdk-bin.tar.gz -C /tmp/
-          JAVA_HOME='/tmp/jdk-17'
-          PATH="$JAVA_HOME/bin:$PATH"
-          curl https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz -o maven-bin.tar.gz
-          tar -xf maven-bin.tar.gz -C /tmp/
-          M2_HOME='/tmp/apache-maven-3.9.7'
-          PATH="$M2_HOME/bin:$PATH"
-          export PATH
-          cd tests-java
-          mvn dependency:resolve
-          cd ..
-          ./run.sh --lang "$LANGUAGE" --docker "karate" --browser "${{ inputs.browser }}" --hub "selenium-hub"
-          #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
-          mv tests-java/target/karate-reports reporting/report-karate
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifact_allure_karate
-          path: reporting/allure-results/java
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifact_karate
-          path: reporting/report-karate
+  #test_karate:
+  #  runs-on: ubuntu-latest
+  #  container:
+  #     image: selenium/standalone-${{ inputs.browser }}
+  #  steps:
+  #    - name: Checkout
+  #      uses: actions/checkout@v4
+  #    - name: Install
+  #      run: |
+  #        curl https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_linux-x64_bin.tar.gz -o openjdk-bin.tar.gz
+  #        tar -xf openjdk-bin.tar.gz -C /tmp/
+  #        JAVA_HOME='/tmp/jdk-17'
+  #        PATH="$JAVA_HOME/bin:$PATH"
+  #        curl https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz -o maven-bin.tar.gz
+  #        tar -xf maven-bin.tar.gz -C /tmp/
+  #        M2_HOME='/tmp/apache-maven-3.9.7'
+  #        PATH="$M2_HOME/bin:$PATH"
+  #        export PATH
+  #        cd tests-java
+  #        mvn dependency:resolve
+  #        cd ..
+  #        ./run.sh --lang "$LANGUAGE" --docker "karate" --browser "${{ inputs.browser }}" --hub "selenium-hub"
+  #        #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
+  #        mv tests-java/target/karate-reports reporting/report-karate
+  #    - name: Upload artifact
+  #      uses: actions/upload-artifact@v4
+  #      with:
+  #        name: artifact_allure_karate
+  #        path: reporting/allure-results/java
+  #    - name: Upload artifact
+  #      uses: actions/upload-artifact@v4
+  #      with:
+  #        name: artifact_karate
+  #        path: reporting/report-karate
 
   report:
     needs: [test_playwright, test_selenium, test_karate]
@@ -130,16 +130,16 @@ jobs:
         with:
           name: artifact_allure_selenium
           path: reporting/allure-results/java2
-      - name: Download Allure Karate artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: artifact_allure_karate
-          path: reporting/allure-results/java3
-      - name: Download Karate artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: artifact_karate
-          path: reporting/report-karate
+      #- name: Download Allure Karate artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: artifact_allure_karate
+      #    path: reporting/allure-results/java3
+      #- name: Download Karate artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: artifact_karate
+      #    path: reporting/report-karate
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -152,7 +152,7 @@ jobs:
           name: artifact_report
           path: |
             reporting/allure-reports/report-java
-            reporting/report-karate
+            #reporting/report-karate
 
 
   publish:
@@ -169,7 +169,7 @@ jobs:
         run: |
           rm -rf docs/*
           mv allure-reports/report-java docs/
-          mv report-karate/* docs/
+          #mv report-karate/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
