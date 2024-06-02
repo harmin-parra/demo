@@ -169,10 +169,10 @@ jobs:
       - name: Commit
         run: |
           ls
-          ls -R reporting
-          rm -rf docs/report-java/
-          mkdir docs/report-java
-          mv index.html docs/report-java/allure.html
+          ls -R allure-reports
+          rm -rf docs/*
+          mv allure-reports/report-java docs/
+          mv karate-report/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
