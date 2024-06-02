@@ -113,7 +113,7 @@ jobs:
   #        path: reporting/report-karate
 
   report:
-    needs: [test_playwright, test_selenium, test_karate]
+    needs: [test_playwright, test_selenium]
     runs-on: ubuntu-latest
     container:
       image: openjdk:8-jre
