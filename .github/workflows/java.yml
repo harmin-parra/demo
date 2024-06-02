@@ -99,7 +99,7 @@ jobs:
       - name: Test
         run: |
           java --version
-          ./run.sh --lang "$LANGUAGE" --docker "maven" --browser "${{ inputs.browser }}" --hub "selenium-hub"
+          ./run.sh --lang "$LANGUAGE" --docker "karate" --browser "${{ inputs.browser }}" --hub "selenium-hub"
           #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
           mv tests-java/target/karate-reports reporting/report-karate
       - name: Upload artifact
