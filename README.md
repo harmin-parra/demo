@@ -6,15 +6,10 @@ The objective is to implement the same tests using different automation test too
 
 ## HTML reports
 
-https://harmin-parra.github.io/demo/report-java/index.html (for Allure Java tests)
-
-https://harmin-parra.github.io/demo/report-karate/karate-summary.html (for Karate Java tests)
-
-https://harmin-parra.github.io/demo/report-python/allure.html (for Allure Python tests)
-
-https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
-
-https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
+- https://harmin-parra.github.io/demo/report-java/index.html (for Allure Java tests)
+- https://harmin-parra.github.io/demo/report-python/allure.html (for Allure Python tests)
+- https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
+- https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
 
 
 ## Test Targets
@@ -22,7 +17,6 @@ https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
 The web pages under test:
 
 - https://www.selenium.dev/selenium/web/web-form.html
-
 - http://harmin-demo.gitlab.io/reports/web/ajax.html
 
 The REST api under test:
