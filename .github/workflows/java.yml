@@ -44,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_playwright
+          name: artifact_allure_playwright
           path: reporting/allure-results/java
 
 
@@ -74,9 +74,44 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_selenium
+          name: artifact_allure_selenium
           path: reporting/allure-results/java
 
+
+  test_karate:
+    runs-on: ubuntu-latest
+    services:
+      selenium-hub:
+        image: selenium/standalone-${{ inputs.browser }}
+        ports: 
+        - 4444:4444
+        options: --shm-size=2gb
+    container:
+       image: maven:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install
+        run: |
+          cd tests-java
+          mvn dependency:resolve
+          cd ..
+      - name: Test
+        run: |
+          java --version
+          ./run.sh --lang "$LANGUAGE" --docker "maven" --browser "${{ inputs.browser }}" --hub "selenium-hub"
+          #echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
+          mv tests-java/target/karate-reports reporting/report-karate
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_allure_karate
+          path: reporting/allure-results/java
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_karate
+          path: reporting/report-karate
 
   report:
     needs: [test_playwright, test_selenium]
@@ -86,16 +121,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download Playwright artifact
+      - name: Download Allure Playwright artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_playwright
+          name: artifact_allure_playwright
           path: reporting/allure-results/java1
-      - name: Download Selenium artifact
+      - name: Download Allure Selenium artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_selenium
+          name: artifact_allure_selenium
           path: reporting/allure-results/java2
+      - name: Download Allure Karate artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_allure_karate
+          path: reporting/allure-results/java3
+      - name: Download Karate artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_allure_karate
+          path: reporting/report-karate
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
