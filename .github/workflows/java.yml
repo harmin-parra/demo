@@ -151,7 +151,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: reporting/allure-reports/report-java/index.html
+          path: |
+            reporting/allure-reports/report-java
+            reporting/report-karate
 
 
   publish:
@@ -166,6 +168,8 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
+          ls
+          ls -R reporting
           rm -rf docs/report-java/
           mkdir docs/report-java
           mv index.html docs/report-java/allure.html
