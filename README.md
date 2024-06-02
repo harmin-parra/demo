@@ -6,13 +6,16 @@ The objective is to implement the same tests using different automation test too
 
 ## HTML reports
 
-https://harmin-parra.github.io/demo/report-java/allure.html (for Java tests)
+https://harmin-parra.github.io/demo/report-java/index.html (for Java tests)
+
+https://harmin-parra.github.io/demo/report-karate/karate-summary.html (for Java tests)
 
 https://harmin-parra.github.io/demo/report-python/allure.html (for Python tests)
 
 https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
 
 https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
+
 
 ## Test Targets
 
