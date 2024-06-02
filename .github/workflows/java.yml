@@ -168,8 +168,6 @@ jobs:
           name: artifact_report
       - name: Commit
         run: |
-          ls
-          ls -R allure-reports
           rm -rf docs/*
           mv allure-reports/report-java docs/
           mv report-karate/* docs/
