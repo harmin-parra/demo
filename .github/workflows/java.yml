@@ -139,7 +139,7 @@ jobs:
       - name: Download Karate artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_allure_karate
+          name: artifact_karate
           path: reporting/report-karate
       - name: Report
         run: |
