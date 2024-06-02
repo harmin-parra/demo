@@ -50,19 +50,22 @@ jobs:
 
   test_selenium:
     runs-on: ubuntu-latest
-    services:
-      selenium-hub:
-        image: selenium/standalone-${{ inputs.browser }}
-        ports: 
-        - 4444:4444
-        options: --shm-size=2gb
     container:
-       image: maven:latest
+       image: selenium/standalone-${{ inputs.browser }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install
         run: |
+          curl https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_linux-x64_bin.tar.gz -o openjdk-bin.tar.gz
+          tar -xf openjdk-bin.tar.gz -C /tmp/
+          JAVA_HOME='/tmp/jdk-17'
+          PATH="$JAVA_HOME/bin:$PATH"
+          curl https://dlcdn.apache.org/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz -o maven-bin.tar.gz
+          tar -xf maven-bin.tar.gz -C /tmp/
+          M2_HOME='/tmp/apache-maven-3.9.7'
+          PATH="$M2_HOME/bin:$PATH"
+          export PATH
           cd tests-java
           mvn dependency:resolve
           cd ..
