@@ -2,6 +2,7 @@ allure-behave==2.13.5
 allure-pytest==2.13.5
 behave==1.2.6
 #playwright==1.44.0
+playwright
 pytest
 #pytest-playwright==0.5.0
 requests
@@ -9,5 +10,6 @@ selenium==4.21.0
 invoke == 2.2.0
 rellu == 0.7
 docutils == 0.21.2
-robotframework == 7.0
-robotframework-seleniumlibrary == 6.4.0
+#robotframework == 7.0
+#robotframework-seleniumlibrary == 6.4.0
+robotframework
