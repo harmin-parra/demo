@@ -6,3 +6,8 @@ pytest
 pytest-playwright==0.5.0
 requests
 selenium==4.21.0
+invoke == 2.2.0
+rellu == 0.7
+docutils == 0.21.2
+robotframework == 7.0
+robotframework-seleniumlibrary == 6.4.0
