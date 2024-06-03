@@ -8,7 +8,7 @@ Library           SeleniumLibrary
 
 *** Variables ***
 ${URL}         https://www.selenium.dev/selenium/web/web-form.html
-${BROWSER}     firefox
+${BROWSER}     headlessfirefox
 ${DELAY}       0
 
 
