@@ -32,8 +32,6 @@ jobs:
           mkdir /tmp/test
           #cp tests-python/file.xml /tmp/test/
           pip3 install --break-system-package -r tests-python/requirements.txt
-          find / -name playwright
-          find / -name behave
           playwright install
           mvn -f tests-java/pom.xml dependency:resolve
           cd tests-nodejs
