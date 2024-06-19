@@ -43,6 +43,11 @@ jobs:
       - name: Test
         run: |
           java --version
+          python3 --version
+          nodejs --version
+          npm --version
+          whoami
+          echo $HOME
           ./run.sh --lang "$LANGUAGE" --docker "playwright" --browser "${{ inputs.browser }}"
         env:
           HOME: /root
