@@ -44,8 +44,8 @@ public class WebFormTest {
             case "firefox":
                 FirefoxOptions opt1 = new FirefoxOptions();
                 opt1.addArguments("--headless");
-                // this.driver = new FirefoxDriver(opt1);
-                this.driver = new RemoteWebDriver(hub, opt1);
+                this.driver = new FirefoxDriver(opt1);
+                // this.driver = new RemoteWebDriver(hub, opt1);
                 break;
             case "chrome":
                 ChromeOptions opt2 = new ChromeOptions();
