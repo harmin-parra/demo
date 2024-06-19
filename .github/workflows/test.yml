@@ -44,9 +44,7 @@ jobs:
           python3 --version
           nodejs --version
           npm --version
-          whoami
-          echo $HOME
-          ./run.sh --lang "$LANGUAGE" --docker "selenium" --browser "${{ inputs.browser }}"
+          ./run.sh --lang "$LANGUAGE" --docker "karate" --browser "${{ inputs.browser }}"
         env:
           HOME: /root
       - name: Upload artifact
