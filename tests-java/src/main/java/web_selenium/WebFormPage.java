@@ -36,7 +36,7 @@ public class WebFormPage {
         this.color = driver.findElement(By.name("my-colors"));
         this.date = driver.findElement(By.name("my-date"));
         this.range = driver.findElement(By.name("my-range"));
-        ((RemoteWebDriver) this.driver).setFileDetector(new LocalFileDetector());
+        // ((RemoteWebDriver) this.driver).setFileDetector(new LocalFileDetector());
         this.file = driver.findElement(By.name("my-file"));
         //this.button = driver.findElement(By.xpath("//button[@type='submit']"));
         this.button = driver.findElement(By.xpath("//button"));
