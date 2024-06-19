@@ -41,11 +41,11 @@ def driver(browser, hub):
     elif browser == "firefox":
         options = Options_Firefox()
         options.add_argument("--headless")
-        # driver = webdriver.Firefox(options=options)
+        driver = webdriver.Firefox(options=options)
     elif browser == "edge":
         options = Options_Edge()
         options.add_argument("--headless=new")
         # driver = webdriver.Edge(options=options)
-    driver = webdriver.Remote(command_executor=server, options=options)
+    # driver = webdriver.Remote(command_executor=server, options=options)
     yield driver
     driver.quit()
