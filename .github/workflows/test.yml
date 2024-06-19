@@ -30,7 +30,7 @@ jobs:
           rm -rf reporting/*
           mkdir /tmp/test
           #cp tests-python/file.xml /tmp/test/
-          pip install -r tests-python/requirements.txt
+          pip install --break-system-package -r tests-python/requirements.txt
           playwright install
           mvn -f tests-java/pom.xml dependency:resolve
           cd tests-nodejs
