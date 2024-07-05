@@ -15,4 +15,4 @@ Fill in and Submit web form
     Set City    Los Angeles
     Set Color    \#00FF00
     Set Date    01/01/2024
-    //[Teardown]    Close Browser
+    [Teardown]    Close Browser
