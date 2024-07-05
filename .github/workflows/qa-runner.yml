@@ -12,10 +12,10 @@ on:
         required: true
         type: choice
         options:
-        - Firefox
-        - Chrome
-        - Chromium
-        - Edge
+        - firefox
+        - chrome
+        - chromium
+        - edge
 
 jobs:
   tests:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Test
         run: |
-          ./runner.sh --browser ${{ inputs.browser }}
+          ./runner.sh --browser "${{ inputs.browser }}"
           echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
           echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/nodejs/job.url
           echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/python/job.url
