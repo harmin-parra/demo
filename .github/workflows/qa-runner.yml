@@ -1,0 +1,94 @@
+name: Tests using qa-runner container
+
+env:
+  ALLURE: 2.29.0
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'The browser to use'
+        default: 'firefox'
+        required: true
+        type: choice
+        options:
+        - Firefox
+        - Chrome
+        - Chromium
+        - Edge
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    container:
+      image: harmin/qa-runner:0.0.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test
+        run: |
+          ./runner.sh --browser ${{ inputs.browser }}
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/java/job.url
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/nodejs/job.url
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/python/job.url
+        env:
+          HOME: /root
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_result
+          path: |
+            reporting/allure-results/*
+            reporting/report-*
+
+
+  report:
+    needs: tests
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:8-jre
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download Allure Playwright artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_results
+          path: reporting/
+      - name: Report
+        run: |
+          curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
+          unzip /tmp/allure.zip -d /usr/local/
+          ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
+          ./allure.sh --browser ${{ inputs.browser }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_report
+          path: |
+            reporting/allure-reports/*
+            reporting/report-*
+
+  publish:
+    needs: report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_report
+          path: report-java/
+      - name: Commit
+        run: |
+          rm -rf docs/*
+          #mkdir docs/report-java
+          mv index.html docs/
+          #mv allure-reports/report-java docs/
+          #mv report-karate/* docs/
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
+          git add -f docs/*
+          git commit -m "Github Commit - Java tests"
+          git push origin main
