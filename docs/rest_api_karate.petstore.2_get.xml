@@ -1,9 +1,0 @@
-<testsuite failures="0" name="rest_api_karate/petstore/2_get.feature" skipped="0" tests="1" time="0.023647"><testcase classname="rest_api_karate.petstore.2_get" name="Get pet" time="0.023647"><system-out>* url url_rest_api ........................................................ passed
-Given path '5432' ......................................................... passed
-When method get ........................................................... passed
-Then status 200 ........................................................... passed
-And match response contains {id: 5432} .................................... passed
-And match response contains {name: "doggie"} .............................. passed
-And match response contains {status: "available"} ......................... passed
-</system-out></testcase>
-</testsuite>
