@@ -1,8 +1,7 @@
-name: Selenium-Java Tests
+name: selenium/java
 
 env:
   ALLURE: 2.29.0
-  LANGUAGE: 'Java'
 
 on:
   workflow_dispatch:
@@ -86,11 +85,10 @@ jobs:
           path: reporting
       - name: Commit
         run: |
+          ls -R
           rm -rf docs/*
-          #mkdir docs/report-java
-          mv report-* docs/
+          #mv report-* docs/
           mv allure-reports/report-* docs/
-          #mv report-karate/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
