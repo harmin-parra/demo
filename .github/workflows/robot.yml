@@ -23,10 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
+      #- name: Setup
+      #  uses: actions/setup-python@v4
+      #  with:
+      #    python-version: '3.11'
       - name: Test
         run: |
           ./docker.sh --browser "${{ inputs.browser }}" --docker robotframework/playwright
