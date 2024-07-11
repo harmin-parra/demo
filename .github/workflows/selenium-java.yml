@@ -80,7 +80,6 @@ jobs:
           path: reporting
       - name: Commit
         run: |
-          ls -R
           rm -rf docs/*
           #mv reporting/report-* docs/
           mv reporting/allure-reports/report-* docs/
