@@ -53,7 +53,7 @@ if [ $DOCKER = "playwright/python" ] || [ $DOCKER = "selenium/python" ] || [ $DO
   fi
 
   if [ $DOCKER = "robotframework/playwright" ]; then
-    robot --outputdir ../reporting/report-robot ./
+    robot --variable BROWSER:${BROWSER} --outputdir ../reporting/report-robot ./
   fi
 
   unset PYTHONPATH
