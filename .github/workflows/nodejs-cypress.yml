@@ -1,4 +1,4 @@
-name: Node.js Cypress Tests
+name: cypress
 
 on:
   workflow_dispatch:
@@ -23,17 +23,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install
-        run: |
-          cd tests-nodejs
-          npm install
-          cd ..
       - name: Test
         run: |
-          cd tests-nodejs
-          npx cucumber-js cucumber/features/petstore.feature
-          npx cypress run --browser ${{ inputs.browser }}
-          cd ..
+          ./docker.sh --browser $BROWSER --docker cypress
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
