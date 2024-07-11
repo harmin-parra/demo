@@ -83,16 +83,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_report
-          path: allure-reports/
+          path: reporting
       - name: Commit
         run: |
           rm -rf docs/*
           #mkdir docs/report-java
-          mv index.html docs/
-          mv allure-reports/report-* docs/
+          mv reporting/report-* docs/
+          mv reporting/allure-reports/report-* docs/
           #mv report-karate/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
-          git commit -m "Github Commit - Java tests"
+          git commit -m "Github Commit"
           git push origin main
