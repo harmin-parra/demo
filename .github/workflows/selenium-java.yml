@@ -82,7 +82,7 @@ jobs:
         run: |
           ls -R
           rm -rf docs/*
-          #mv report-* docs/
+          #mv reporting/report-* docs/
           mv reporting/allure-reports/report-* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
