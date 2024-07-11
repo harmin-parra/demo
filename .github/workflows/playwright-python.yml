@@ -1,0 +1,86 @@
+name: playwright/python
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'The browser to use'
+        default: 'chromium'
+        required: true
+        type: choice
+        options:
+        - chromium
+        - firefox
+        - webkit
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright/python:v1.44.0-jammy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Test
+        run: |
+          ./docker.sh --browser "${{ inputs.browser }}" --docker playwright/python
+          echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/python/job.url
+        env:
+          HOME: /root
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_test
+          path: reporting/
+
+  report:
+    needs: test
+    runs-on: ubuntu-latest
+    container:
+      image: openjdk:8-jre
+    env:
+      ALLURE: 2.27.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_test
+          path: reporting
+      - name: Report
+        run: |
+          curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
+          unzip /tmp/allure.zip -d /usr/local/
+          ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
+          ./allure.sh --browser ${{ inputs.browser }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact_report
+          path: reporting
+
+  publish:
+    needs: report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: artifact_report
+          path: reporting
+      - name: Commit
+        run: |
+          rm -rf docs/*
+          #mv reporting/report-* docs/
+          mv reporting/allure-reports/report-* docs/
+          git config user.name "GitHub Actions"
+          git config user.email "noreply@github.com"
+          git add -f docs/*
+          git commit -m "Github Commit"
+          git push origin main
