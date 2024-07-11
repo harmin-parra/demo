@@ -1,8 +1,7 @@
-name: Robot Framework Selenium Tests
+name: robotframework/playwright
 
 env:
   ALLURE: 2.29.0
-  LANGUAGE: 'Python'
 
 on:
   workflow_dispatch:
@@ -17,7 +16,7 @@ on:
         - firefox
 
 jobs:
-  test_robotframework_selenium:
+  test:
     runs-on: ubuntu-latest
     container:
       image: robotframework/rfdocker
@@ -28,45 +27,20 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Install
-        run: |
-          pip install -r tests-python/requirements.txt
       - name: Test
         run: |
-          cd tests-python
-          robot web_robot_framework/tests/webform_page.robot
-          cd ..
+          ./docker.sh --browser "${{ inputs.browser }}" --docker robotframework/playwright
         env:
           HOME: /root
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_robotframework_selenium
-          path: |
-            tests-python/log.html
-            tests-python/report.html
-            
-
-
-
-  report:
-    needs: [test_robotframework_selenium]
-    runs-on: ubuntu-latest
-    container:
-      image: openjdk:8-jre
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4robotframework_selenium
-      - name: Report
-        run: |
-          exit
-          curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
-          unzip /tmp/allure.zip -d /usr/local/
-          ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
-          ./allure.sh --lang $LANGUAGE --browser ${{ inputs.browser }}
+          name: artifact_test
+          path: reporting
+  
 
   publish:
-    needs: report
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -74,15 +48,15 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_robotframework_selenium
+          name: artifact_test
+          path: reporting
       - name: Commit
         run: |
-          #rm -rf docs/report-python/
-          mkdir docs/report-robotframework-selenium
-          mv report.html docs/report-robotframework-selenium/
-          mv log.html docs/report-robotframework-selenium/
+          rm -rf docs/*
+          mv reporting/report-* docs/
+          #mv reporting/allure-reports/report-* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
-          git commit -m "Github Commit - Robot Framework tests"
+          git commit -m "Github Commit"
           git push origin main
