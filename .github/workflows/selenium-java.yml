@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_allure_selenium
-          path: reporting/allure-results/java
+          path: reporting
 
   report:
     needs: [test]
@@ -58,7 +58,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_allure_playwright
-          path: reporting/allure-results/java
+          path: reporting
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -69,8 +69,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: |
-            reporting/allure-reports/
+          path: reporting
 
   publish:
     needs: report
