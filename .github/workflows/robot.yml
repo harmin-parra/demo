@@ -30,8 +30,8 @@ jobs:
       - name: Test
         run: |
           ./docker.sh --browser "${{ inputs.browser }}" --docker robotframework/playwright
-        env:
-          HOME: /root
+        #env:
+        #  HOME: /root
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
