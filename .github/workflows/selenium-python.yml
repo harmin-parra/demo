@@ -27,18 +27,18 @@ jobs:
         - 4444:4444
         options: --shm-size=2gb
     container:
-       image: maven:latest
+       image: python:3.11
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install
-        run: |
-          cd tests-java
-          mvn dependency:resolve
-          cd ..
+      #- name: Install
+      #  run: |
+      #    cd tests-python
+      #    pip install -r tests-python/requirements.txt
+      #    cd ..
       - name: Test
         run: |
-          java --version
+          python3 --version
           ./docker.sh --browser "${{ inputs.browser }}" --docker selenium/python --hub "selenium-hub"
           echo ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} > reporting/allure-results/python/job.url
       - name: Upload artifact
