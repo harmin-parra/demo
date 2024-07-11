@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_test
-          path: reporting/cypress-report/index.html
+          path: reporting
 
   publish:
     needs: test
@@ -50,12 +50,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_test
+          path: reporting
       - name: Commit
         run: |
           rm -rf docs/*
-          mv index.html docs/report-cypress.html
+          mv reporting/report-* docs/
+          #mv reporting/allure-reports/report-* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
-          git commit -m "Github Commit - Node.js Cypress tests"
+          git commit -m "Github Commit"
           git push origin main
