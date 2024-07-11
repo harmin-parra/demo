@@ -1,4 +1,4 @@
-name: Node.js Playwright Tests
+name: playwright
 
 on:
   workflow_dispatch:
@@ -25,18 +25,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install
-        run: |
-          cd tests-nodejs
-          npm install
-          cd ..
       - name: Test
         run: |
-          cd tests-nodejs
-          npx cucumber-js cucumber/features/petstore.feature
-          # npx playwright test webform.spec.ts --project ${{ inputs.browser }}
-          npx playwright test --project ${{ inputs.browser }}
-          cd ..
+          ./docker.sh --browser "${{ inputs.browser }}" --docker playwright/node.js
         env:
           HOME: /root
       - name: Upload artifact
@@ -59,25 +50,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_test
+          path: reporting
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
           unzip /tmp/allure.zip -d /usr/local/
           ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
-          allure generate \
-            --clean \
-            --output allure-report \
-            --single-file \
-            allure-results/nodejs-results
-          # mv allure-report/index.html allure-report/report1.html
-          # mv playwright-report/index.html playwright-report/report2.html
+          ./allure.sh --browser ${{ inputs.browser }}
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: |
-            allure-report/
-            playwright-report/
+          path: reporting
 
   publish:
     needs: report
@@ -89,13 +73,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_report
+          path: reporting
       - name: Commit
         run: |
-          rm -rf docs/report* docs/data/
-          mv allure-report/index.html docs/report-allure.html
-          mv playwright-report/index.html docs/report-playwright.html
+          rm -rf docs/*
+          mv reporting/report-* docs/
+          mv reporting/allure-reports/report-* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
-          git commit -m "Github Commit - Node.js Playwright tests"
+          git commit -m "Github Commit"
           git push origin main
