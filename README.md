@@ -25,6 +25,7 @@ The REST api under test:
 - https://harmin-parra.github.io/demo/report-playwright/index.html (for Playwright/Node.js tests)
 - https://harmin-parra.github.io/demo/report-cypress/index.html (for Cypress tests)
 - https://harmin-parra.github.io/demo/report-robot/report.html (for Robot Framework tests)
+- https://harmin-parra.github.io/demo/report-karate/karate-summary.html (for Karate Framework tests)
 
 
 ## Programming languages
