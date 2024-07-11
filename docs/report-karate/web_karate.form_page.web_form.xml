@@ -1,4 +1,4 @@
-<testsuite failures="0" name="web_karate/form_page/web_form.feature" skipped="0" tests="1" time="2.461322"><testcase classname="web_karate.form_page.web_form" name="web_karate.form_page.web_form_1" time="2.461322"><system-out>* driver url_form_page .................................................... passed
+<testsuite failures="0" name="web_karate/form_page/web_form.feature" skipped="0" tests="1" time="2.588622"><testcase classname="web_karate.form_page.web_form" name="web_karate.form_page.web_form_1" time="2.588622"><system-out>* driver url_form_page .................................................... passed
 * screenshot() ............................................................ passed
 * input('#my-text-id', 'login') ........................................... passed
 * input('input[name=my-password]', 'password') ............................ passed

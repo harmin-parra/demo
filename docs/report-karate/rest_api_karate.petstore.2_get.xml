@@ -1,4 +1,4 @@
-<testsuite failures="0" name="rest_api_karate/petstore/2_get.feature" skipped="0" tests="1" time="0.26878"><testcase classname="rest_api_karate.petstore.2_get" name="Get pet" time="0.26878"><system-out>* url url_rest_api ........................................................ passed
+<testsuite failures="0" name="rest_api_karate/petstore/2_get.feature" skipped="0" tests="1" time="0.026183"><testcase classname="rest_api_karate.petstore.2_get" name="Get pet" time="0.026183"><system-out>* url url_rest_api ........................................................ passed
 Given path '5432' ......................................................... passed
 When method get ........................................................... passed
 Then status 200 ........................................................... passed
