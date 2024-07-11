@@ -88,7 +88,7 @@ jobs:
           ls -R
           rm -rf docs/*
           #mv report-* docs/
-          mv allure-reports/report-* docs/
+          mv reporting/allure-reports/report-* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
