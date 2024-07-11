@@ -19,7 +19,12 @@ The REST api under test:
 
 ## Test reports
 
-https://harmin-demo.gitlab.io/reports
+- https://harmin-parra.github.io/demo/report-java/index.html (for Allure Java tests)
+- https://harmin-parra.github.io/demo/report-nodejs/index.html (for Allure Node.js tests)
+- https://harmin-parra.github.io/demo/report-python/index.html (for Allure Python tests)
+- https://harmin-parra.github.io/demo/report-playwright/index.html (for Playwright/Node.js tests)
+- https://harmin-parra.github.io/demo/report-cypress/index.html (for Cypress tests)
+- https://harmin-parra.github.io/demo/report-robot/report.html (for Robot Framework tests)
 
 
 ## Programming languages
