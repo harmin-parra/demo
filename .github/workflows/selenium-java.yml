@@ -45,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_results
+          name: artifact_test
           path: reporting/*
 
   report:
@@ -59,7 +59,7 @@ jobs:
       - name: Download Allure Playwright artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_results
+          name: artifact_test
           path: reporting
       - name: Report
         run: |
@@ -88,8 +88,8 @@ jobs:
         run: |
           rm -rf docs/*
           #mkdir docs/report-java
-          mv reporting/report-* docs/
-          mv reporting/allure-reports/report-* docs/
+          mv report-* docs/
+          mv allure-reports/report-* docs/
           #mv report-karate/* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
