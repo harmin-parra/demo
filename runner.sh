@@ -84,7 +84,7 @@ mvn -Dtest="web_playwright/**, rest_api_rest_assured/**" -Dbrowser=$BROWSER test
 mvn -Dtest="web_selenium/**" -Dbrowser=$BROWSER test  # -Dhub=$HUB test
 # mvn -Dtest="web_karate/**, rest_api_karate/**" -Dbrowser="chrome" test
 mvn -Dtest="karate/TestRunner#allTests" -Dbrowser=$BROWSER test
-exit
+
 cd ..
 mv tests-java/target/karate-reports reporting/report-karate
 for filename in reporting/allure-results/java/*result.json; do
