@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: marketsquare/robotframework-browser
+      options: --user 1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
