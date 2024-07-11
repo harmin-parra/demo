@@ -16,12 +16,19 @@ on:
         - chrome
         - chromium
         - edge
+      docker:
+        description: 'The docker to run'
+        default: harmin/qa-runner-debian
+        type: choice
+        options:
+        - harmin/qa-runner-debian
+        - harmin/qa-runner-ubuntu
 
 jobs:
   tests:
     runs-on: ubuntu-latest
     container:
-      image: harmin/qa-runner:0.0.1
+      image: ${{ inputs.docker }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,10 +43,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_result
-          path: |
-            reporting/allure-results/*
-            reporting/report-*
+          name: artifact_test
+          path: reporting
 
 
   report:
@@ -50,11 +55,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download Allure Playwright artifact
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_results
-          path: reporting/
+          name: artifact_test
+          path: reporting
       - name: Report
         run: |
           curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
@@ -65,9 +70,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: |
-            reporting/allure-reports/*
-            reporting/report-*
+          path: reporting
+
 
   publish:
     needs: report
@@ -79,14 +83,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: artifact_report
-          path: report-java/
+          path: reporting
       - name: Commit
         run: |
           rm -rf docs/*
-          #mkdir docs/report-java
-          mv index.html docs/
-          #mv allure-reports/report-java docs/
-          #mv report-karate/* docs/
+          mv reporting/report-* docs/
+          mv reporting/allure-reports/report-* docs/
           git config user.name "GitHub Actions"
           git config user.email "noreply@github.com"
           git add -f docs/*
