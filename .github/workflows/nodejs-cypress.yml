@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Test
         run: |
-          ./docker.sh --browser $BROWSER --docker cypress
+          ./docker.sh --browser "${{ inputs.browser }}" --docker cypress
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
