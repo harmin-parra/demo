@@ -1,0 +1,21 @@
+1720708919626	geckodriver	INFO	Listening on 127.0.0.1:60193
+1720708919668	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/usr ... ss" "--remote-debugging-port" "58419" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilegOLFRK"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+[GFX1-]: glxtest: libpci missing
+[GFX1-]: glxtest: Unable to open a connection to the X server
+[GFX1-]: No GPUs detected via PCI
+
+1720708919897	Marionette	INFO	Marionette enabled
+1720708919956	Marionette	INFO	Listening on port 44447
+WebDriver BiDi listening on ws://127.0.0.1:58419
+Read port: 44447
+1720708920106	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://127.0.0.1:58419/devtools/browser/3cc2e1ac-f2c6-460f-84f3-c428b9319f0d
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.selenium.dev."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.selenium.dev."
+console.error: "update.locale" " file doesn't exist in either the application or GRE directories"
+1720708949902	addons.xpi	ERROR	System addon update list error SyntaxError: The URI is malformed.
