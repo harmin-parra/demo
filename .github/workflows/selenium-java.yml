@@ -13,7 +13,9 @@ on:
         required: true
         type: choice
         options:
+        - chrome
         - chromium
+        - edge
         - firefox
 
 jobs:
@@ -43,8 +45,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact_allure_selenium
-          path: reporting
+          name: artifact_results
+          path: reporting/*
 
   report:
     needs: [test]
@@ -57,7 +59,7 @@ jobs:
       - name: Download Allure Playwright artifact
         uses: actions/download-artifact@v4
         with:
-          name: artifact_allure_playwright
+          name: artifact_results
           path: reporting
       - name: Report
         run: |
@@ -69,7 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact_report
-          path: reporting
+          path: reporting/*
 
   publish:
     needs: report
