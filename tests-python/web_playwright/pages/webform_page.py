@@ -39,7 +39,7 @@ class WebFormPage:
         # Click elsewhere to close the calendar
         #self.page.locator("body").click()
         self.date.evaluate("(elem, val) => elem.setAttribute('value', val);", value)
-
+        
     def set_range(self, value):
         # Two solutions
         # Solution #1: Trigger mouse events to move the range handler

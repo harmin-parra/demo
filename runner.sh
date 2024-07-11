@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BROWSER="Chromium"
+BROWSER="Firefox"
 HUB="localhost"
 
 # Read command-line arguments
@@ -33,16 +33,17 @@ python3 --version
 cd tests-python
 export PYTHONPATH=$(pwd)
 
-pip install --break-system-packages -r requirements.txt
+#pip install --break-system-packages -r requirements.txt
+pip install -r requirements.txt
 # playwright install-deps
 playwright install
 rfbrowser init
 
-behave cucumber/features/petstore.feature
+#behave cucumber/features/petstore.feature
 # pytest web_playwright/tests/webform_test.py
 pytest web_playwright/tests/ --browser $BROWSER
 pytest web_selenium/tests/ --driver $BROWSER  # --hub $HUB
-robot --outputdir ../reporting/report-robot ./
+robot --outputdir ../reporting/report-robot --variable BROWSER:${BROWSER} --variable DRIVER:headless${BROWSER} ./
   # --listener allure_robotframework:../reporting/allure-results/python \
   # --outputdir ../reporting/report-robot ./
 
@@ -83,12 +84,12 @@ mvn -Dtest="web_playwright/**, rest_api_rest_assured/**" -Dbrowser=$BROWSER test
 mvn -Dtest="web_selenium/**" -Dbrowser=$BROWSER test  # -Dhub=$HUB test
 # mvn -Dtest="web_karate/**, rest_api_karate/**" -Dbrowser="chrome" test
 mvn -Dtest="karate/TestRunner#allTests" -Dbrowser=$BROWSER test
-for filename in ../reporting/allure-results/java/*result.json; do
+exit
+cd ..
+mv tests-java/target/karate-reports reporting/report-karate
+for filename in reporting/allure-results/java/*result.json; do
   RES=$(egrep '"testCaseName":"\[[0-9]+:[0-9]+\]' $filename)
   if [ -n "$RES" ]; then
     rm -f $filename
   fi
 done
-
-cd ..
-mv tests-java/target/karate-reports reporting/report-karate

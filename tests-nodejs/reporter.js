@@ -3,7 +3,7 @@ const { CucumberJSAllureFormatter, AllureRuntime } = require("allure-cucumberjs"
 function Reporter(options) {
   return new CucumberJSAllureFormatter(
     options,
-    new AllureRuntime({ resultsDir: "../reporting/allure-results/nodejs-results" }),
+    new AllureRuntime({ resultsDir: "../reporting/allure-results/nodejs" }),
     {}
   );
 }

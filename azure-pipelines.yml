@@ -1,0 +1,109 @@
+trigger: none
+
+variables:
+- name: allure
+  value: 2.29.0
+  readonly: true
+- name: token
+  value: ygearrm3gx26babxjayh2qsn2pdt6eve6xvacgawd7w33hywg42a
+  readonly: true
+
+parameters:
+- name: browser
+  displayName: The browser to test
+  type: string
+  default: firefox
+  values:
+  - firefox
+  - chrome
+  - chromium
+  - edge
+- name: docker
+  displayName: The docker to run
+  type: string
+  default: harmin/qa-runner-debian
+  values:
+  - harmin/qa-runner-debian
+  - harmin/qa-runner-ubuntu
+
+
+stages:
+- stage: test
+  jobs:
+  - job: test
+    pool:
+      vmImage: 'ubuntu-latest'
+    container: ${{ parameters.docker }}:latest
+
+    steps:
+    - script: |
+        export PATH=$PATH:$HOME/.local/bin
+        python3 -m venv ~/venv
+        . ~/venv/bin/activate
+        ./runner.sh --browser ${{ parameters.browser }}
+        echo "BuildUri : " $(Build.BuildUri)
+        echo "Repository.Uri : " $(Build.Repository.Uri)
+        echo "BuildNumber : " $(Build.BuildNumber)
+        echo "CollectionUri : " $(System.CollectionUri)
+        echo "TeamFoundationCollectionUri : " $(System.TeamFoundationCollectionUri)
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: 'reporting'
+        artifactName: reporting
+
+
+- stage: report
+  dependsOn: test
+  jobs:
+  - job: allure
+    pool:
+      vmImage: 'ubuntu-latest'
+    container: openjdk:8-jre
+
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'all'
+        artifactName: 'reporting'
+        downloadPath: './'
+
+    - script: |
+        ls
+        curl https://github.com/allure-framework/allure2/releases/download/${{ variables.allure }}/allure-${{ variables.allure }}.zip -L -o /tmp/allure.zip
+        unzip /tmp/allure.zip  -d /tmp/
+        mv /tmp/allure-${{ variables.allure }} /tmp/allure
+        ./allure.sh --browser ${{ parameters.browser }}
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: 'reporting'
+        artifactName: reporting
+
+
+- stage: commit
+  dependsOn: report
+  jobs:
+  - job: commit
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'all'
+        artifactName: 'reporting'
+        downloadPath: './'
+
+    - script: |
+        git config --global user.name "Azure DevOps"
+        git config --global user.email "azure@dev.azure.com"
+        git clone https://Personal%20Access%20Token:${{ variables.token }}@dev.azure.com/harmin-parra/reports/_git/reports
+        cp -r reporting/allure-reports/* reports/
+        cp -r reporting/report-* reports/
+        cd reports
+        git add *
+        git commit -m "Azure DevOps commit"
+        git push

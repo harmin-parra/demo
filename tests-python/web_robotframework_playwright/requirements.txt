@@ -1,0 +1,3 @@
+allure-robotframework
+robotframework==7.0
+robotframework-browser==18.5.1

@@ -10,26 +10,6 @@ def step_impl(context):
     petstore.ping()
 
 
-@given('A pet exists in the store')
-def step_impl(context):
-    context.id = ID
-    petstore.get(context.id)
-
-
-@when('I query a pet')
-def step_impl(context):
-    res = petstore.get(context.id)
-    context.result = res
-
-
-@then('I get the pet information')
-def step_impl(context):
-    assert context.result.status_code == 200
-    assert 'id' in context.result.json()
-    assert 'name' in context.result.json()
-    assert 'status' in context.result.json()
-
-
 @when('I add a pet')
 def step_impl(context):
     payload = {
@@ -52,6 +32,26 @@ def step_impl(context):
         assert pet[key] == context.payload[key]
 
 
+@given('A pet exists in the store')
+def step_impl(context):
+    context.id = ID
+    petstore.get(context.id)
+
+
+@when('I query a pet')
+def step_impl(context):
+    res = petstore.get(context.id)
+    context.result = res
+
+
+@then('I get the pet information')
+def step_impl(context):
+    assert context.result.status_code == 200
+    assert 'id' in context.result.json()
+    assert 'name' in context.result.json()
+    assert 'status' in context.result.json()
+
+
 @when('I delete a pet')
 def step_impl(context):
     result = petstore.delete(context.id)
@@ -62,4 +62,5 @@ def step_impl(context):
 def step_impl(context):
     result = petstore.get(context.id)
     assert result.status_code != 200
+    assert result.json()['type'] == "error"
     assert result.json()['message'] == "Pet not found"

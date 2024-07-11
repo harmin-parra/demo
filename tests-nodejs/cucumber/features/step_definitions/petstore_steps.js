@@ -32,12 +32,17 @@ When('I query an existing pet', async function() {
 
 
 Then('I get the pet information', function() {
-  this.epic("Cucumber");
+  this.description("Find a pet in the store inventory");
+  this.link("https://petstore.swagger.io/", "REST API specification");
+  this.issue("https://example.com/JIRA-123", "JIRA-123");
+  this.tms("https://example.com/TEST-456", "TEST-456");
+  this.epic("REST api");
   //this.feature("Petstore");
-  this.story("Get pet info");
-  this.parentSuite("Cucumber");
+  //this.story("Get pet info");
+  this.parentSuite("REST api");
   //this.suite("Petstore");
-  this.label(LabelName.PACKAGE, "cucumber.features.petstore")
+  this.label(LabelName.PACKAGE, "cucumber.features.petstore");
+  this.attach(JSON.stringify(this.response.data), "application/json");
   assert.equal(typeof this.response.data['id'], 'number');
   assert.equal(typeof this.response.data['name'], 'string');
   assert.equal(typeof this.response.data['status'], 'string');
@@ -64,10 +69,14 @@ When('I add a pet', async function() {
 
 
 Then('The pet is added', async function() {
-  this.epic("Cucumber");
+  this.description("Add a new pet in the store inventory");
+  this.link("https://petstore.swagger.io/", "REST API specification");
+  this.issue("https://example.com/JIRA-123", "JIRA-123");
+  this.tms("https://example.com/TEST-456", "TEST-456");
+  this.epic("REST api");
   //this.feature("Petstore");
   //this.story("Add pet");
-  this.parentSuite("Cucumber");
+  this.parentSuite("REST api");
   //this.suite("Petstore");
   this.label(LabelName.PACKAGE, "cucumber.features.petstore")
   await petstore.get(id, this)
@@ -98,10 +107,14 @@ When('I delete a pet', async function() {
 
 
 Then('The pet is deleted', async function() {
-  this.epic("Cucumber");
+  this.description("Delete a pet from the store inventory");
+  this.link("https://petstore.swagger.io/", "REST API specification");
+  this.issue("https://example.com/JIRA-123", "JIRA-123");
+  this.tms("https://example.com/TEST-456", "TEST-456");
+  this.epic("REST api");
   //this.feature("Petstore");
   //this.story("Delete pet");
-  this.parentSuite("Cucumber");
+  this.parentSuite("REST api");
   //this.suite("Petstore");
   this.label(LabelName.PACKAGE, "cucumber.features.petstore")
   await petstore.get(id, this)
@@ -110,6 +123,6 @@ Then('The pet is deleted', async function() {
       assert.fail("The pet was not deleted");
     })
     .catch(err => {
-      this.attach(err.toString(), "text/plain");
-    })
+      this.attach(JSON.stringify(err.response.data), "application/json");
+    });
 });

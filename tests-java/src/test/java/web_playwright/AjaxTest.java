@@ -2,6 +2,7 @@ package web_playwright;
 
 import java.io.ByteArrayInputStream;
 import io.qameta.allure.Allure;
+import io.qameta.allure.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterAll;
@@ -44,13 +45,22 @@ public class AjaxTest {
         this.page = context.newPage();
     }
 
+    /**
+     * Testing a webpage using AJAX.
+     */
     @Test
+    @Description(useJavaDoc = true)
+    @Link(name = "Target AJAX page", url = "https://harmin-demo.gitlab.io/reports/web/ajax.html")
+    @Issue("JIRA-123")
+    @TmsLink("TEST-456")
+    @Epic("Web interface (Playwright)")
+    @Feature("Ajax page")
     public void ajax_response() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-       	Allure.epic("Web interface (Playwright)");
+       	//Allure.epic("Web interface (Playwright)");
     	//Allure.story("Ajax page");
     	Allure.suite("Web interface (Playwright)");
-    	Allure.feature("Ajax page");
+    	//Allure.feature("Ajax page");
         this.page.navigate("http://harmin-demo.gitlab.io/reports/web/ajax.html");
         byte[] buffer = page.screenshot(new Page.ScreenshotOptions().setFullPage(true));
         Allure.addAttachment("Initial page", new ByteArrayInputStream(buffer));

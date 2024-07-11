@@ -4,15 +4,8 @@ Sample source code of automated test of web pages and a REST api.
 
 The objective is to implement the same tests using different automation test tools and different programming languages.
 
-## HTML reports
 
-- https://harmin-parra.github.io/demo/report-java/index.html (for Allure Java tests)
-- https://harmin-parra.github.io/demo/report-python/allure.html (for Allure Python tests)
-- https://harmin-parra.github.io/demo/report-playwright.html (for Playwright/Node.js tests)
-- https://harmin-parra.github.io/demo/report-cypress.html (for Cypress tests)
-
-
-## Test Targets
+## Test targets
 
 The web pages under test:
 
@@ -23,28 +16,47 @@ The REST api under test:
 
 - https://petstore.swagger.io/
 
+
+## Test reports
+
+https://harmin-demo.gitlab.io/reports
+
+
 ## Programming languages
 
-The same tests were developed using the following programming languages:
+The tests were developed using the following programming languages:
 - Python
 - Java
 - Node.js
 
+
 ## Automation test tools
 
-The same tests were developed using:
-- For web pages tests:
+The tests were developed using:
+
+- For Web tests:
   - [Selenium](https://www.selenium.dev/)
   - [Playwright](https://playwright.dev/)
   - [Cypress](https://www.cypress.io/)
+  - [Karate](https://www.karatelabs.io/)
+  - [Robot Framework](https://robotframework.org/)
+
 - For API tests:
   - [Cucumber](https://cucumber.io/)
+  - [REST-assured](https://rest-assured.io/)
+  - [Karate](https://www.karatelabs.io/)
+  - [Robot Framework](https://robotframework.org/)
+
 
 ## Detail of tools and frameworks
 
-| Category            | Python                        | Java                          | Node.js                      |
-|---------------------|-------------------------------|-------------------------------|------------------------------|
-| Web test tools      | - Playwright <br/> - Selenium | - Playwright <br/> - Selenium | - Playwright <br/> - Cypress |
-| Cucumber            | Behave                        | Cucumber-JVM                  | Cucumber-js                  |
-| Unit test framework | Pytest                        | JUnit5                        | Mocha                        |
-| Package manager     | pip                           | Maven                         | npm                          |
+| Category              | Python        | Java          | Node.js       |
+|-----------------------|---------------|---------------|---------------|
+| Web test tools | <ul><li>Playwright</li> <li>Selenium </li> <li>Robot Framework</li></ul> | <ul><li>Playwright</li> <li>Selenium</li> <li>Karate</li></ul> | <ul><li>Playwright </li> <li>Cypress</li></ul> |
+| REST API test tools   | <ul><li>Behave (Cucumber)</li> <li>Robot Framework</li></ul> | <ul><li>REST-assured</li> <li>Karate</li></ul> | <ul><li>Cucumber-js (Cucumber)</li></ul> |
+| Unit test framework   | Pytest        | JUnit5        | Mocha         |
+| Package manager       | pip           | Maven         | npm           |
+| Test Reporting Tool   | Allure report | Allure report | Allure report |
+| Code repository       | Gitlab        | Gitlab        | Gitlab        |
+| Continuos integration | Gitlab-CI     | Gitlab-CI     | Gitlab-CI     |
+| Test environment      | Docker        | Docker        | Docker        |

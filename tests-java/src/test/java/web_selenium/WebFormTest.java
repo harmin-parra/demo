@@ -1,15 +1,19 @@
 package web_selenium;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,47 +36,27 @@ public class WebFormTest {
 
     @BeforeEach
     public void setup() {
-        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
-        String url = StringUtils.isEmpty(System.getProperty("hub")) ? "localhost" : System.getProperty("hub");
-        URL hub = null;
-        try {
-            hub = new URL("http://" + url + ":4444/wd/hub");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        switch (browserName) {
-            case "firefox":
-                FirefoxOptions opt1 = new FirefoxOptions();
-                opt1.addArguments("--headless");
-                this.driver = new FirefoxDriver(opt1);
-                // this.driver = new RemoteWebDriver(hub, opt1);
-                break;
-            case "chrome":
-                ChromeOptions opt2 = new ChromeOptions();
-                opt2.addArguments("--headless=new");
-                // this.driver = new ChromeDriver(opt2);
-                this.driver = new RemoteWebDriver(hub, opt2);
-                break;
-            case "edge":
-                EdgeOptions opt3 = new EdgeOptions();
-                opt3.addArguments("--headless=new");
-                // this.driver = new EdgeDriver(opt3);
-                this.driver = new RemoteWebDriver(hub, opt3);
-                break;
-            case "chromium":
-                ChromeOptions opt4 = new ChromeOptions();
-                opt4.addArguments("--headless=new");
-                // opt4.setBinary("/usr/bin/chromium");
-                // this.driver = new ChromeDriver(opt4);
-                this.driver = new RemoteWebDriver(hub, opt4);
-                break;
-            default:
-                throw new IllegalArgumentException("Unexpected value: " + browserName);
-        }
-        this.driver.manage().window().maximize();
+        this.driver = Common.getDriver();
     }
 
+    /**
+     * Testing the following field types of a webform :
+     *
+     * <pre>
+     * - Input text
+     * - Text area
+     * - Select
+     * - Checkbox
+     * - Radio button
+     * - File upload
+     * - Color picker
+     * - Date picker
+     * - Input range
+     * - Button
+     * </pre>
+     */
     @Test
+    @Description
     public void fill_in_form() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
@@ -88,12 +72,15 @@ public class WebFormTest {
         page.set_textarea("textarea");
         page.set_number(2);
         page.set_city("Los Angeles");
-        page.set_file("src/test/resources/file.txt");
+        page.set_file("src/test/resources/file.xml");
         page.set_color("#00ff00");
         page.set_date("01/01/2024");
         page.set_range(1);
         buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Complete form", new ByteArrayInputStream(buffer));
+        try {
+            Allure.addAttachment("File to upload", "application/xml", FileUtils.readFileToString(new File("src/test/resources/file.xml"), "UTF-8"), ".xml");
+        } catch (IOException e) { }
         page.submit();
         buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Submit form", new ByteArrayInputStream(buffer));

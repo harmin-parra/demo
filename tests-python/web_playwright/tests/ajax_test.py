@@ -4,14 +4,22 @@ from playwright.sync_api import Page, expect
 from web_playwright import pages
 
 
+@allure.link("https://www.selenium.dev/selenium/web/web-form.html", name="Target webpage")
+@allure.issue("JIRA-123")
+@allure.testcase("TEST-456")
 @allure.parent_suite("Web interface (Playwright)")
 @allure.suite("Ajax")
 @allure.epic("Web interface (Playwright)")
 #@allure.story("Ajax")
 @allure.feature("Ajax")
 def test_ajax_response(page: Page):
-    """ Ajax test using except_response() """
+    """ 
+    Testing a webpage using AJAX.
+    
+    Test using page.expect_response()
+    """
     page.goto("http://harmin-demo.gitlab.io/reports/web/ajax.html")
+    # extras.save_screenshot_for_playwright(page, comment="Initial page")
     allure.attach(
         page.screenshot(full_page=True),
         name="Initial page",
@@ -21,6 +29,7 @@ def test_ajax_response(page: Page):
 
     with page.expect_response("**/ajax.txt") as response:
         ajax.click()
+        # extras.save_screenshot_for_playwright(page, comment="Trigger event")
         allure.attach(
             page.screenshot(full_page=True),
             name="Trigger event",
@@ -28,6 +37,7 @@ def test_ajax_response(page: Page):
         )
 
     ajax.verify_text()
+    # extras.save_screenshot_for_playwright(page, comment="Verify event result")
     allure.attach(
         page.screenshot(full_page=True),
         name="Verify event result",
@@ -41,7 +51,7 @@ def test_ajax_response(page: Page):
 # @allure.story("Ajax")
 # @allure.feature("Ajax using expect")
 # def test_ajax_using_sleep(page: Page):
-#     """ Ajax test using except() """
+#     """ Ajax test using sleep() and default timeout """
 #     page.goto("http://harmin-demo.gitlab.io/reports/web/ajax.html")
 #     allure.attach(
 #         page.screenshot(full_page=True),

@@ -12,6 +12,10 @@ const assert = require('assert');
 
 
   test('Ajax verification', async ({ page }) => {
+    await allure.description("Testing a webpage using AJAX");
+    await allure.link("https://harmin-demo.gitlab.io/reports/web/ajax.html", "Target AJAX page");
+    await allure.issue("JIRA-123", "https://example.com/JIRA-123");
+    await allure.tms("TEST-456", "https://example.com/TEST-456");
     await allure.epic("Web interface");
     //await allure.feature("Ajax");
     await allure.story("Ajax");

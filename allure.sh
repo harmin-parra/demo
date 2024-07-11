@@ -1,7 +1,7 @@
 #!/bin/bash
 
-EXECUTOR_NAME="Github Actions"
-EXECUTOR_TYPE="github"
+EXECUTOR_NAME="Gitlab CI"
+EXECUTOR_TYPE="gitlab"
 
 # Read command-line arguments
 while [ $# -gt 0 ]; do

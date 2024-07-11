@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER=""
-BROWSER="Chromium"
+BROWSER="Firefox"
 HUB=""
 
 # Read command-line arguments
