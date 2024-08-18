@@ -12,10 +12,10 @@ on:
         required: true
         type: choice
         options:
-        - firefox
         - chrome
         - chromium
-        - edge
+        - firefox
+        - msedge
       docker:
         description: 'The docker to run'
         default: harmin/qa-runner-debian
