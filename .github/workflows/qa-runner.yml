@@ -77,22 +77,44 @@ jobs:
 
   publish:
     needs: report
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download artifact
-        uses: actions/download-artifact@v4
         with:
-          name: artifact_report
-          path: reporting
-      - name: Commit
+          repository: https://github.com/harmin-parra/reports.git
+          ref: 'main'
+          token:  ${{ secrets.TOKEN }}
+      - name: Publish
         run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "noreply@github.com"
           rm -rf docs/*
           mv reporting/report-* docs/
           mv reporting/allure-reports/report-* docs/
-          git config user.name "GitHub Actions"
-          git config user.email "noreply@github.com"
           git add -f docs/*
-          git commit -m "Github Commit - Java tests"
+          git commit -m "Github Actions commit"
           git push origin main
+
+        
+#  publish2:
+#    needs: report
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#      - name: Download artifact
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: artifact_report
+#          path: reporting
+#      - name: Commit
+#        run: |
+#          rm -rf docs/*
+#          mv reporting/report-* docs/
+#          mv reporting/allure-reports/report-* docs/
+#          git config user.name "GitHub Actions"
+#          git config user.email "noreply@github.com"
+#          git add -f docs/*
+#          git commit -m "Github Commit - Java tests"
+#          git push origin main
