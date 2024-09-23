@@ -84,7 +84,7 @@ jobs:
         with:
           repository: https://github.com/harmin-parra/reports.git
           ref: 'main'
-          token:  ${{ secrets.TOKEN }}
+          token:  ${{ variables.TOKEN }}
       - name: Publish
         run: |
           git config --global user.name "GitHub Actions"
