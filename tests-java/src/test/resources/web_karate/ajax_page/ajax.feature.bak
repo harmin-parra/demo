@@ -1,5 +1,7 @@
 Feature: Ajax page
 
+  @allure.label.epic:Web_interface_(Karate)
+  @allure.label.suite:Web_interface_(Karate)
   Scenario: Using star notation
     * driver url_ajax_page
     * screenshot()
@@ -12,6 +14,9 @@ Feature: Ajax page
     * match enabled('#button') == true
     * screenshot()
 
+
+  @allure.label.epic:Web_interface_(Karate)
+  @allure.label.suite:Web_interface_(Karate)
   Scenario: Using Gherkin syntax
     Given driver url_ajax_page
     And screenshot()
