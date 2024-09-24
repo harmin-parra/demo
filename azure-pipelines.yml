@@ -10,9 +10,6 @@ variables:
 - name: EXECUTOR_TYPE
   value: "azure"
   readonly: true
-- name: token
-  value: xxxxx
-  readonly: true
 
 
 parameters:
@@ -64,8 +61,6 @@ stages:
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
-        buildType: 'current'
-        downloadType: 'all'
         artifactName: 'reporting'
         downloadPath: './'
 
@@ -91,18 +86,17 @@ stages:
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
-        buildType: 'current'
-        downloadType: 'all'
         artifactName: 'reporting'
         downloadPath: './'
 
     - script: |
         git config --global user.name "Azure DevOps"
         git config --global user.email "azure@dev.azure.com"
-        git clone https://Personal%20Access%20Token:${{ variables.token }}@dev.azure.com/harmin-parra/reports/_git/reports
-        cp -r reporting/allure-reports/* reports/
-        cp -r reporting/report-* reports/
+        git clone https://Personal%20Access%20Token:$(token)@dev.azure.com/harmin-parra/reports/_git/reports
         cd reports
+        git rm -r report-*
+        mv ../reporting/report-* ./
+        mv ../reporting/allure-reports/report-* ./
         git add *
         git commit -m "Azure DevOps commit"
         git push
