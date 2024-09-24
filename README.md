@@ -10,7 +10,7 @@ The objective is to implement the same tests using different automation test too
 The web pages under test:
 
 - https://www.selenium.dev/selenium/web/web-form.html
-- http://harmin-demo.gitlab.io/reports/web/ajax.html
+- http://qa-demo.gitlab.io/reports/web/ajax.html
 
 The REST api under test:
 
@@ -19,13 +19,7 @@ The REST api under test:
 
 ## Test reports
 
-- https://harmin-parra.github.io/demo/report-java/index.html (for Allure Java tests)
-- https://harmin-parra.github.io/demo/report-nodejs/index.html (for Allure Node.js tests)
-- https://harmin-parra.github.io/demo/report-python/index.html (for Allure Python tests)
-- https://harmin-parra.github.io/demo/report-playwright/index.html (for Playwright/Node.js tests)
-- https://harmin-parra.github.io/demo/report-cypress/index.html (for Cypress tests)
-- https://harmin-parra.github.io/demo/report-robot/report.html (for Robot Framework tests)
-- https://harmin-parra.github.io/demo/report-karate/karate-summary.html (for Karate Framework tests)
+https://qa-demo.gitlab.io/reports
 
 
 ## Programming languages
@@ -45,12 +39,14 @@ The tests were developed using:
   - [Playwright](https://playwright.dev/)
   - [Cypress](https://www.cypress.io/)
   - [Karate](https://www.karatelabs.io/)
+  - [Serenity BDD](https://serenity-bdd.info/)
   - [Robot Framework](https://robotframework.org/)
 
 - For API tests:
   - [Cucumber](https://cucumber.io/)
   - [REST-assured](https://rest-assured.io/)
   - [Karate](https://www.karatelabs.io/)
+  - [Serenity BDD](https://serenity-bdd.info/)
   - [Robot Framework](https://robotframework.org/)
 
 
@@ -58,8 +54,8 @@ The tests were developed using:
 
 | Category              | Python        | Java          | Node.js       |
 |-----------------------|---------------|---------------|---------------|
-| Web test tools | <ul><li>Playwright</li> <li>Selenium </li> <li>Robot Framework</li></ul> | <ul><li>Playwright</li> <li>Selenium</li> <li>Karate</li></ul> | <ul><li>Playwright </li> <li>Cypress</li></ul> |
-| REST API test tools   | <ul><li>Behave (Cucumber)</li> <li>Robot Framework</li></ul> | <ul><li>REST-assured</li> <li>Karate</li></ul> | <ul><li>Cucumber-js (Cucumber)</li></ul> |
+| Web test tools | <ul><li>Playwright</li> <li>Selenium </li> <li>Robot Framework</li></ul> | <ul><li>Playwright</li> <li>Selenium</li> <li>Karate</li> <li>Serenity BDD</li></ul> | <ul><li>Playwright </li> <li>Cypress</li></ul> |
+| REST API test tools   | <ul><li>Behave (Cucumber)</li> <li>Robot Framework</li></ul> | <ul><li>REST-assured</li> <li>Karate</li> <li>Serenity BDD</li></ul> | <ul><li>Cucumber-js (Cucumber)</li></ul> |
 | Unit test framework   | Pytest        | JUnit5        | Mocha         |
 | Package manager       | pip           | Maven         | npm           |
 | Test Reporting Tool   | Allure report | Allure report | Allure report |
