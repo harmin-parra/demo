@@ -12,5 +12,5 @@ class AjaxPage:
         self.button.click()
 
     def verify_text(self):
-        expect(self.title).to_be_visible()
+        expect(self.title).to_be_visible(timeout=15_000)
         expect(self.title).to_have_text("AJAX")

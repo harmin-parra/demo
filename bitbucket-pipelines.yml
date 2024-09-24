@@ -3,12 +3,12 @@ pipelines:
     default:
       - variables:
         - name: BROWSER
-          default: Firefox
+          default: firefox
           allowed-values:
-            - Chrome
-            - Chromium
-            - Edge
-            - Firefox
+            - chrome
+            - chromium
+            - firefox
+            - msedge
 
       - step:
           name: Test

@@ -45,7 +45,7 @@ def driver(optdriver, opthub):
             )
     elif optdriver == "firefox":
         options = Options_Firefox()
-        options.add_argument("--headless=new")
+        options.add_argument("--headless")
         if opthub is None:
             _driver = webdriver.Firefox(options=options)
     elif optdriver == "edge":

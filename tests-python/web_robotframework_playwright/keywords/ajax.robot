@@ -1,13 +1,9 @@
 *** Settings ***
-Documentation     A resource file with reusable keywords and variables.
-...
-...               The system specific keywords created here form our own
-...               domain specific language. They utilize keywords provided
-...               by the imported Browser Library.
+Documentation     The AJAX page object model.
 Library           Browser
 
 *** Variables ***
-${URL}         http://harmin-demo.gitlab.io/reports/web/ajax.html
+${URL}         http://qa-demo.gitlab.io/reports/web/ajax.html
 ${BROWSER}     firefox
 ${DELAY}       0
 
@@ -16,9 +12,9 @@ ${DELAY}       0
 Open Browser To Ajax Page
     New Browser    ${BROWSER}    headless=true
     New Page    ${URL}
-    # Ajax Page Should Be Open
+    Ajax Page Should Be Open
 
-Ajax Should Be Open
+Ajax Page Should Be Open
     Get Title    contains    Ajax page
 
 Click Button

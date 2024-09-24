@@ -13,4 +13,4 @@ test_calling_subtest
     Capture Page Screenshot    EMBED
     Submit Form
     Capture Page Screenshot    EMBED
-    Success Page Should Be Open
+    Success Page Should Be Displayed

@@ -1,15 +1,11 @@
 *** Settings ***
-Documentation     A resource file with reusable keywords and variables.
-...
-...               The system specific keywords created here form our own
-...               domain specific language. They utilize keywords provided
-...               by the imported SeleniumLibrary.
+Documentation     The webform page object model.
 Library           SeleniumLibrary
 
 *** Variables ***
-${URL}         https://www.selenium.dev/selenium/web/web-form.html
-${DRIVER}     headlessfirefox
-${DELAY}       0
+${URL}       https://www.selenium.dev/selenium/web/web-form.html
+${DRIVER}    headlessfirefox
+${DELAY}     0
 
 
 *** Keywords ***
@@ -63,5 +59,56 @@ Set Range
 Submit form
     Click Button    //button[@type='submit']
 
-Success Page Should Be Open
+Success Page Should Be Displayed
     Page Should Contain    Form submitted
+
+
+
+
+
+
+Ouvrir le navigateur et afficher le formulaire web
+    Open Browser To Web Form Page
+
+Saisir identifiant
+    [Arguments]    ${var}
+    Set Login    ${var}
+
+Saisir mot de passe
+    [Arguments]    ${var}
+    Set Password    ${var}
+
+Ecrire texte
+    [Arguments]    ${var}
+    Set TextArea    ${var}
+
+Sélectionner le nombre
+    [Arguments]    ${var}
+    Set number    ${var}
+
+Sélectionner la ville
+    [Arguments]    ${var}
+    Set City    ${var}
+
+Charger le fichier
+    [Arguments]    ${var}
+    Upload File    ${var}
+
+Choisir la coleur
+    [Arguments]    ${var}
+    Set Color    ${var}
+
+Sélectionner la date
+    [Arguments]    ${var}
+    Set Date    ${var}
+
+Sélectionner Range
+    [Arguments]    ${var}
+    Execute Javascript    document.getElementsByName('my-range')[0].value = arguments[0]    ARGUMENTS    ${var}
+
+Envoyer le formulaire
+    Submit form
+
+La page de confimation est affichée
+    Success Page Should Be Displayed
+

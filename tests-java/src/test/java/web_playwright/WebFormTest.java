@@ -34,13 +34,15 @@ public class WebFormTest {
     public static void launchBrowser() {
         playwright = Playwright.create();
         LaunchOptions options = new BrowserType.LaunchOptions().setHeadless(true);
-        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium" : System.getProperty("browser");
+        String browserName = StringUtils.isEmpty(System.getProperty("browser")) ? "firefox" : System.getProperty("browser");
         if (browserName.equals("chromium"))
             browser = playwright.chromium().launch(options);
         else if (browserName.equals("firefox"))
             browser = playwright.firefox().launch(options);
         else if (browserName.equals("webkit"))
             browser = playwright.webkit().launch(options);
+        else if (browserName.equals("chrome") || browserName.equals("msedge"))
+            browser = playwright.chromium().launch(options.setChannel(browserName));
     }
 
     @BeforeEach
@@ -71,11 +73,10 @@ public class WebFormTest {
     @Issue("JIRA-123")
     @TmsLink("TEST-456")
     @Epic("Web interface (Playwright)")
-    @Feature("Web Form")
     public void fill_in_form() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
-        // Allure.epic("Web interface (Playwright)");
-        //Allure.story("Web Form");
+        //Allure.epic("Web interface (Playwright)");
+        Allure.story("Web Form");
         Allure.suite("Web interface (Playwright)");
         //Allure.feature("Web Form");
         this.page.navigate("https://www.selenium.dev/selenium/web/web-form.html");

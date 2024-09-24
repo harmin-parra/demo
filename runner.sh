@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BROWSER="Firefox"
+BROWSER="firefox"
+HEADLESS="true"
 HUB="localhost"
 
 # Read command-line arguments
@@ -8,6 +9,10 @@ while [ $# -gt 0 ]; do
   case $1 in
     --browser)
       BROWSER="$2"
+      shift 2
+      ;;
+    --headless)
+      HEADLESS="$2"
       shift 2
       ;;
     *)
@@ -20,71 +25,109 @@ done
 # Change variable values to lowercase
 BROWSER=${BROWSER,,}
 
-
-rm -rf reporting/*
 mkdir /tmp/test
 cp tests-python/file.xml /tmp/test/
 
 
-#
-# Python tests
-#
-python3 --version
+echo "################"
+echo "# Python tests #"
+echo "################"
+echo "python: "  $(python3 --version)
 cd tests-python
 export PYTHONPATH=$(pwd)
 
-#pip install --break-system-packages -r requirements.txt
+# pip install --break-system-packages -r requirements.txt
 pip install -r requirements.txt
-# playwright install-deps
 playwright install
 rfbrowser init
 
-#behave cucumber/features/petstore.feature
+echo =================
+echo Python - Cucumber
+echo =================
+behave cucumber/features/petstore.feature
+echo ===================
+echo Python - Playwright
+echo ===================
 # pytest web_playwright/tests/webform_test.py
-pytest web_playwright/tests/ --browser $BROWSER
+if [ $BROWSER = "msedge" ] || [ $BROWSER = "chrome" ]; then
+  pytest web_playwright/tests/ --browser-channel $BROWSER
+else
+  pytest web_playwright/tests/ --browser $BROWSER
+fi
+echo =================
+echo Python - Selenium
+echo =================
 pytest web_selenium/tests/ --driver $BROWSER  # --hub $HUB
-robot --outputdir ../reporting/report-robot --variable BROWSER:${BROWSER} --variable DRIVER:headless${BROWSER} ./
-  # --listener allure_robotframework:../reporting/allure-results/python \
-  # --outputdir ../reporting/report-robot ./
+echo ========================
+echo Python - Robot Framework
+echo ========================
+robot --outputdir ../reporting/report-robot --variable BROWSER:${BROWSER} --variable DRIVER:headless${BROWSER} \
+      --listener allure_robotframework:../reporting/allure-results/python ./
 
 unset PYTHONPATH
 cd ..
 
 
-#
-# Node.js tests
-#
-nodejs --version
-npm --version
+echo "#################"
+echo "# Node.js tests #"
+echo "#################"
+echo "node.js: " $(nodejs --version)
+echo "npm: " $(npm --version)
 cd tests-nodejs
 
 npm install
-# npx playwright install-deps
 npx playwright install
 
+echo ==================
+echo Node.js - Cucumber
+echo ==================
 npx cucumber-js cucumber/features/petstore.feature
+echo ====================
+echo Node.js - Playwright
+echo ====================
 # npx playwright test webform.spec.ts
 npx playwright test --project $BROWSER
+echo =================
+echo Node.js - Cypress
+echo =================
 # npx cypress run --spec web_cypress/tests/webform.cy.js
-npx cypress run --browser $BROWSER --headless
-
+if [ $BROWSER = "msedge" ]; then
+  npx cypress run --browser edge --headless
+else
+  npx cypress run --browser $BROWSER --headless
+fi
 cd ..
 
 
-#
-# Java tests
-#
-java --version
+echo "##############"
+echo "# Java tests #"
+echo "##############"
+echo "java: " $(java --version)
+echo "maven: " $(mvn --version)
 cd tests-java
 
 mvn dependency:resolve
 
+echo ===================
+echo Java - Rest-Assured
+echo ===================
+mvn -Dtest="rest_api_rest_assured/**" test
+echo =================
+echo Java - Playwright
+echo =================
 # mvn -Dtest="web_playwright/WebFormTest" test
-mvn -Dtest="web_playwright/**, rest_api_rest_assured/**" -Dbrowser=$BROWSER test
+mvn -Dtest="web_playwright/**" -Dbrowser=$BROWSER test
+echo ===============
+echo Java - Selenium
+echo ===============
 mvn -Dtest="web_selenium/**" -Dbrowser=$BROWSER test  # -Dhub=$HUB test
-# mvn -Dtest="web_karate/**, rest_api_karate/**" -Dbrowser="chrome" test
+echo =============
+echo Java - Karate
+echo =============
+# mvn -Dtest="web_karate/**, rest_api_karate/**" -Dbrowser=$BROWSER test
 mvn -Dtest="karate/TestRunner#allTests" -Dbrowser=$BROWSER test
 
+# Purge weird Allure Karate entries
 cd ..
 mv tests-java/target/karate-reports reporting/report-karate
 for filename in reporting/allure-results/java/*result.json; do

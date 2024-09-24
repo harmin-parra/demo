@@ -1,28 +1,49 @@
 import AjaxPage from "../pages/ajax.js";
+//import * as allure from "allure-cypress";
 
 
 describe("Ajax page", () => {
 
   it("Ajax verification with intercept", () =>{
-    cy.visit("https://harmin-demo.gitlab.io/reports/web/ajax.html")
+    /*
+    allure.description("Testing an AJAX page\n\nTest using ``intercept()``");
+    allure.epic("Web interface (Cypress)");
+    allure.story("Ajax");
+    allure.parentSuite("Web interface (Cypress)");
+    allure.suite("Ajax");
+    allure.link("http://qa-demo.gitlab.io/reports/web/ajax.html", "Target AJAX page");
+    allure.issue("https://example.com/JIRA-123", "JIRA-123");
+    allure.tms("https://example.com/TEST-456", "TEST-456");
+    */
+    cy.visit("http://qa-demo.gitlab.io/reports/web/ajax.html")
     const page = new AjaxPage();
     cy.screenshot();
     page.click();
     cy.screenshot();
     cy.intercept("GET", "**/ajax.txt").as("ajaxResponse");
-    cy.wait("@ajaxResponse", {timeout: 10000}).its("response.statusCode").should("equal", 200);
+    cy.wait("@ajaxResponse", {timeout: 15000}).its("response.statusCode").should("equal", 200);
     cy.screenshot();
     page.verify();
   });
 
 
   it("Ajax verification with get+should", () =>{
-    cy.visit("https://harmin-demo.gitlab.io/reports/web/ajax.html")
+    /*
+    allure.description("Testing an AJAX page\n\nTest using ``get().should('exist')``");
+    allure.epic("Web interface (Cypress)");
+    allure.story("Ajax");
+    allure.parentSuite("Web interface (Cypress)");
+    allure.suite("Ajax");
+    allure.link("http://qa-demo.gitlab.io/reports/web/ajax.html", "Target AJAX page");
+    allure.issue("https://example.com/JIRA-123", "JIRA-123");
+    allure.tms("https://example.com/TEST-456", "TEST-456");
+    */
+    cy.visit("http://qa-demo.gitlab.io/reports/web/ajax.html")
     const page = new AjaxPage();
     cy.screenshot();
     page.click();
     cy.screenshot();
-    cy.get("#title", { timeout: 10000 }).should("exist");
+    cy.get("#title", {timeout: 15000}).should("exist");
     cy.screenshot();
     page.verify();
   });

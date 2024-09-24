@@ -1,7 +1,6 @@
 #!/bin/bash
 
-EXECUTOR_NAME="Gitlab CI"
-EXECUTOR_TYPE="gitlab"
+BROWSER="firefox"
 
 # Read command-line arguments
 while [ $# -gt 0 ]; do
@@ -20,6 +19,10 @@ done
 # Browser with initial uppercase
 BROWSER=${BROWSER,,}
 BROWSER=${BROWSER^}
+# Replace Msedge by Edge
+if [ $BROWSER = "Msedge" ]; then
+  BROWSER="Edge"
+fi
 
 #
 # Java tests
@@ -27,9 +30,9 @@ BROWSER=${BROWSER^}
 cat << EOF > reporting/allure-results/java/environment.properties
 Browser = $BROWSER
 OpenJDK = 17
-Selenium = 4.21.0
-Playwright = 1.44.0
-Rest-assured = 5.4.0
+Selenium = 4.24.0
+Playwright = 1.47.0
+Rest-assured = 5.5.0
 Karate = 1.4.1
 EOF
 #Cucumber-JVM = 7.15.0
@@ -57,8 +60,8 @@ allure generate \
 cat << EOF > reporting/allure-results/nodejs/environment.properties
 Browser = $BROWSER
 Node.js = 20.13.1
-Playwright = 1.44.1
-Cucumber.js = 10.3.1
+Playwright = 1.47.1
+Cucumber.js = 10.9.0
 EOF
 
 if [ -f reporting/allure-results/nodejs/job.url ]; then
@@ -85,9 +88,9 @@ cat << EOF > reporting/allure-results/python/environment.properties
 Browser = $BROWSER
 Python = 3.10.12
 Behave = 1.2.6
-Selenium = 4.21.0
-Playwright = 1.44.0
-RobotFramework = 7.0
+Selenium = 4.24.0
+Playwright = 1.47.0
+RobotFramework = 7.1
 EOF
 
 if [ -f reporting/allure-results/python/job.url ]; then

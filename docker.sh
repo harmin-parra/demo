@@ -45,7 +45,11 @@ if [ $DOCKER = "playwright/python" ] || [ $DOCKER = "selenium/python" ] || [ $DO
 
   if [ $DOCKER = "playwright/python" ]; then
     behave cucumber/features/petstore.feature
-    pytest web_playwright/tests/ --browser $BROWSER
+    if [ $BROWSER = "msedge" ] || [ $BROWSER = "chrome" ]; then
+      pytest web_playwright/tests/ --browser-channel $BROWSER
+    else
+      pytest web_playwright/tests/ --browser $BROWSER
+    fi
   fi
 
   if [ $DOCKER = "selenium/python" ]; then
@@ -74,7 +78,11 @@ if [ $DOCKER = "playwright/node.js" ] || [ $DOCKER = "cypress" ]; then
     npx playwright test --project $BROWSER
 
   else
-    npx cypress run --browser $BROWSER --headless
+    if [[ $BROWSER == *"edge" ]]; then
+      npx cypress run --browser edge --headless
+    else
+      npx cypress run --browser $BROWSER --headless
+    fi
   fi
 
   cd ..

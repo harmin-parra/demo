@@ -1,6 +1,7 @@
 const { test, expect, Page } = require('@playwright/test');
 const fs = require('node:fs');
-import { allure, LabelName } from "allure-playwright";
+import * as allure from "allure-js-commons";
+
 import WebformPage from '../pages/webform.page';
 
 
@@ -28,12 +29,12 @@ import WebformPage from '../pages/webform.page';
     await allure.link("https://www.selenium.dev/selenium/web/web-form.html", "Target webform");
     await allure.issue("JIRA-123", "https://example.com/JIRA-123");
     await allure.tms("TEST-456", "https://example.com/TEST-456");
-    await allure.epic("Web interface");
+    await allure.epic("Web interface (Playwright)");
     //await allure.feature("Web Form");
     await allure.story("Web Form");
-    await allure.parentSuite("Web interface");
+    await allure.parentSuite("Web interface (Playwright)");
     await allure.suite("Web Form");
-    await allure.label(LabelName.PACKAGE, "web_playwright.webform.spec.ts");
+    await allure.label(allure.LabelName.PACKAGE, "web_playwright.webform.spec.ts");
 
     await allure.attachment("Empty form", await page.screenshot(), { contentType: "image/png" });
     var webform = new WebformPage(page);

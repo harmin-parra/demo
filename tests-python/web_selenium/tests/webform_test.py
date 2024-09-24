@@ -39,6 +39,7 @@ def test_fill_in_form(driver):
     webform.set_number(2)
     webform.set_city("Los Angeles")
     #webform.set_file(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "file.xml")))
+    webform.set_file("/tmp/test/file.xml")
     webform.set_color("#00ff00")
     webform.set_date("01/01/2024")
     webform.set_range(1)

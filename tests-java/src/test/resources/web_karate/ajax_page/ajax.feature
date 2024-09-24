@@ -8,8 +8,10 @@ Feature: Ajax page
   Scenario:
     * screenshot()
     * click('#button')
+    * match enabled('#button') == false
     * screenshot()
     * waitFor('#title')
     # * retry(5, 2000).waitFor('#title')
-    * screenshot()
     * match text('#title') == "AJAX"
+    * match enabled('#button') == true
+    * screenshot()

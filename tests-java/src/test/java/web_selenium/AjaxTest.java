@@ -35,19 +35,19 @@ public class AjaxTest {
     }
 
     /**
-     * Testing a webpage using AJAX.
+     * Testing an AJAX page.
      *
-     * Test using <span style="font-family:'Courier New'">WebDriverWait.until()</span>
+     * Test using <span style="font-family:'Courier New'">WebDriverWait().until()</span>.
      */
     @Test
     @Description
-    public void ajax_response() {
+    public void ajax_verification() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
-        // Allure.story("Web Form");
+        Allure.story("Ajax page");
         Allure.suite("Web interface (Selenium)");
-        Allure.feature("Ajax page");
-        this.driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html");
+        //Allure.feature("Ajax page");
+        this.driver.get("http://qa-demo.gitlab.io/reports/web/ajax.html");
         byte[] buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Initial page", new ByteArrayInputStream(buffer));
         AjaxPage page = new AjaxPage(this.driver);

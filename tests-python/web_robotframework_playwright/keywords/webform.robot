@@ -1,9 +1,5 @@
 *** Settings ***
-Documentation     A resource file with reusable keywords and variables.
-...
-...               The system specific keywords created here form our own
-...               domain specific language. They utilize keywords provided
-...               by the imported Browser Library.
+Documentation     The webform page object model.
 Library           Browser
 
 *** Variables ***
@@ -66,11 +62,11 @@ Set Range
     Fill Text    ${element}    ${var}
     #Evaluate JavaScript    ${element}    (elem, arg) => { elem.value = arg; }    arg=${var}
 
-Submit form
+Submit Form
     ${element} =    Get Element by Role    BUTTON    name=Submit
     Click    ${element}
 
-Success Page Should Be Open
+Success Page Should Be Displayed
     Get text    //h1    contains    Form submitted
 
 
@@ -78,59 +74,49 @@ Success Page Should Be Open
 Ouvrir le navigateur et afficher le formulaire web
     New Browser    ${BROWSER}    headless=true
     New Page    ${URL}
-   Le formulaire est affichée
+    Le formulaire est affichée
 
 Le formulaire est affichée
     Get Title    contains    Web form
 
 Saisir identifiant
     [Arguments]    ${var}
-    ${element} =    Get Element by    Label    Text input
-    Type Text    ${element}    ${var}
+    Set Login    ${var}
 
 Saisir mot de passe
     [Arguments]    ${var}
-    ${element} =    Get Element by    Label    Password
-    Type Text    ${element}    ${var}
+    Set Password    ${var}
 
-Ecrire paragraphe
+Ecrire texte
     [Arguments]    ${var}
-    ${element} =    Get Element by    Label    Textarea
-    Type Text    ${element}    ${var}
+    Set TextArea    ${var}
 
 Sélectionner le nombre
     [Arguments]    ${var}
-    ${element} =    Get Element    //select[@name='my-select']
-    Select Options By    ${element}    Index    ${var}
+    Set Number    ${var}
 
 Sélectionner la ville
     [Arguments]    ${var}
-    ${element} =    Get Element    //input[@name='my-datalist']
-    Type Text    ${element}    ${var}
+    Set City    ${var}
 
 Charger le fichier
     [Arguments]    ${var}
-    Upload File By Selector    //input[@name='my-file']    ${var}
+    Upload File    ${var}
 
 Choisir la coleur
     [Arguments]    ${var}
-    ${element} =    Get Element by    Label    Color picker
-    Evaluate JavaScript    ${element}    (elem, arg) => { elem.value = arg; }    arg=${var}
+    Set Color    ${var}
 
 Sélectionner la date
     [Arguments]    ${var}
-    ${element} =    Get Element by    Label    Date picker
-    Evaluate JavaScript    ${element}    (elem, arg) => { elem.value = arg; }    arg=${var}
+    Set Date    ${var}
 
 Sélectionner range
     [Arguments]    ${var}
-    ${element} =    Get Element by    Label    Example range
-    Fill Text    ${element}    ${var}
-    #Evaluate JavaScript    ${element}    (elem, arg) => { elem.value = arg; }    arg=${var}
+    Set Range    ${var}
 
 Envoyer le formulaire
-    ${element} =    Get Element by Role    BUTTON    name=Submit
-    Click    ${element}
+    Submit form
 
 La page de confimation est affichée
-    Get text    //h1    contains    Form submitted
+    Success Page Should Be Displayed

@@ -47,7 +47,7 @@ public class PetstoreTest {
         payload.put("status", "sold");
 
         with().
-            //filter(new AllureRestAssured()).
+            filter(new AllureRestAssured()).
             body(payload).
         when().
             post("/").
@@ -65,8 +65,8 @@ public class PetstoreTest {
         Allure.story("Petstore");
         Allure.suite("REST api (rest-assured)");
 
-        //with().
-            //filter(new AllureRestAssured()).
+        with().
+            filter(new AllureRestAssured()).
         when().
             get("/{id}", id).
         then().
@@ -84,8 +84,8 @@ public class PetstoreTest {
         Allure.suite("REST api (rest-assured)");
 
         // Delete pet
-        //with().
-            //filter(new AllureRestAssured()).
+        with().
+            filter(new AllureRestAssured()).
         when().
             delete("/{id}", id).
         then().
@@ -93,8 +93,8 @@ public class PetstoreTest {
             body("message", equalTo(Integer.toString(id)));
 
         // Get deleted pet
-        //with().
-            //filter(new AllureRestAssured()).
+        with().
+            filter(new AllureRestAssured()).
         when().
             get("/{id}", id).
         then().

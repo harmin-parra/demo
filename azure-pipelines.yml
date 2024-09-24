@@ -4,9 +4,16 @@ variables:
 - name: allure
   value: 2.29.0
   readonly: true
-- name: token
-  value: ygearrm3gx26babxjayh2qsn2pdt6eve6xvacgawd7w33hywg42a
+- name: EXECUTOR_NAME
+  value: "Azure DevOps"
   readonly: true
+- name: EXECUTOR_TYPE
+  value: "azure"
+  readonly: true
+- name: token
+  value: etjjsdyyqewiefnnpqe5asocjhu2csbuigvuflfikf3hks5k5cqa
+  readonly: true
+
 
 parameters:
 - name: browser
@@ -14,17 +21,10 @@ parameters:
   type: string
   default: firefox
   values:
-  - firefox
   - chrome
   - chromium
-  - edge
-- name: docker
-  displayName: The docker to run
-  type: string
-  default: harmin/qa-runner-debian
-  values:
-  - harmin/qa-runner-debian
-  - harmin/qa-runner-ubuntu
+  - firefox
+  - msedge
 
 
 stages:
@@ -33,7 +33,7 @@ stages:
   - job: test
     pool:
       vmImage: 'ubuntu-latest'
-    container: ${{ parameters.docker }}:latest
+    container: harmin/qa-runner:latest
 
     steps:
     - script: |
@@ -41,11 +41,11 @@ stages:
         python3 -m venv ~/venv
         . ~/venv/bin/activate
         ./runner.sh --browser ${{ parameters.browser }}
-        echo "BuildUri : " $(Build.BuildUri)
-        echo "Repository.Uri : " $(Build.Repository.Uri)
-        echo "BuildNumber : " $(Build.BuildNumber)
-        echo "CollectionUri : " $(System.CollectionUri)
-        echo "TeamFoundationCollectionUri : " $(System.TeamFoundationCollectionUri)
+        ./serenity.sh --browser ${{ parameters.browser }}
+        CI_JOB_URL=$(System.CollectionUri)$(Build.Repository.Name)/_build/results?buildId=$(Build.BuildId)"&view=logs"
+        echo $CI_JOB_URL > reporting/allure-results/java/job.url
+        echo $CI_JOB_URL > reporting/allure-results/nodejs/job.url
+        echo $CI_JOB_URL > reporting/allure-results/python/job.url
 
     - task: PublishBuildArtifacts@1
       inputs:
@@ -70,9 +70,8 @@ stages:
         downloadPath: './'
 
     - script: |
-        ls
         curl https://github.com/allure-framework/allure2/releases/download/${{ variables.allure }}/allure-${{ variables.allure }}.zip -L -o /tmp/allure.zip
-        unzip /tmp/allure.zip  -d /tmp/
+        unzip /tmp/allure.zip -d /tmp/
         mv /tmp/allure-${{ variables.allure }} /tmp/allure
         ./allure.sh --browser ${{ parameters.browser }}
 

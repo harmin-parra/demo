@@ -2,36 +2,36 @@
 Library         REST    https://petstore.swagger.io/v2/pet/
 
 *** Variables ***
-${add_payload}     { "id": 5432, "name": "doggie", "status": "available" }
+${payload}     { "id": 5432, "name": "doggie", "status": "available" }
 ${id}              5432
 
 
 *** Test Cases ***
 
 Add a pet
-    [TAGS]
-    ...  allure.label.epic:REST_api (Robot Framework)
+    #[TAGS]
+    #...  allure.label.epic:REST_api (Robot Framework)
     #...  allure.label.parentSuite:REST_api (Robot Framework)
     #...  allure.label.suite:REST_api
-    ...  allure.label.story:Petstore
-    ...  allure.label.package:rest_api.petstore
-    ...  allure.label.testMethod:add_pet
-    POST    /    ${add_payload}
-    # Log    Payload: ${add_payload}
-    Set Test Message    The payload: ${add_payload}
+    #...  allure.label.story:Petstore
+    #...  allure.label.package:rest_api.petstore
+    #...  allure.label.testMethod:add_pet
+    POST    /    ${payload}
+    Log    Payload: ${payload}
+    #Set Test Message    Payload: ${payload}
     Output schema    response body
     Integer    response status    200
     [Teardown]  Output schema
 
 
 Get an existing pet
-    [TAGS]
-    ...  allure.label.epic:REST_api (Robot Framework)
+    #[TAGS]
+    #...  allure.label.epic:REST_api (Robot Framework)
     #...  allure.label.parentSuite:REST_api (Robot Framework)
     #...  allure.label.suite:REST_api
-    ...  allure.label.story:Petstore
-    ...  allure.label.package:rest_api.petstore
-    ...  allure.label.testMethod:get_existing_pet
+    #...  allure.label.story:Petstore
+    #...  allure.label.package:rest_api.petstore
+    #...  allure.label.testMethod:get_existing_pet
     GET         /${id}
     Output schema   response body
     Integer     response status         200
@@ -43,13 +43,13 @@ Get an existing pet
 
 
 Delete a pet
-    [TAGS]
-    ...  allure.label.epic:REST_api (Robot Framework)
+    #[TAGS]
+    #...  allure.label.epic:REST_api (Robot Framework)
     #...  allure.label.parentSuite:REST_api (Robot Framework)
     #...  allure.label.suite:REST_api
-    ...  allure.label.story:Petstore
-    ...  allure.label.package:rest_api.petstore
-    ...  allure.label.testMethod:delete_pet
+    #...  allure.label.story:Petstore
+    #...  allure.label.package:rest_api.petstore
+    #...  allure.label.testMethod:delete_pet
     DELETE    /${id}
     Output schema   response body
     Integer    response status    200
@@ -57,13 +57,13 @@ Delete a pet
 
 
 Get an unexisting pet
-    [TAGS]
-    ...  allure.label.epic:REST_api (Robot Framework)
+    #[TAGS]
+    #...  allure.label.epic:REST_api (Robot Framework)
     #...  allure.label.parentSuite:REST_api (Robot Framework)
     #...  allure.label.suite:REST_api
-    ...  allure.label.story:Petstore
-    ...  allure.label.package:rest_api.petstore
-    ...  allure.label.testMethod:get_unexisting_pet
+    #...  allure.label.story:Petstore
+    #...  allure.label.package:rest_api.petstore
+    #...  allure.label.testMethod:get_unexisting_pet
     GET         /${id}
     Output schema   response body
     Integer    response status          404

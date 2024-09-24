@@ -60,9 +60,9 @@ public class WebFormTest {
     public void fill_in_form() {
         Allure.getLifecycle().updateTestCase(tr -> tr.getLabels().removeIf(label -> "suite".equals(label.getName())));
         Allure.epic("Web interface (Selenium)");
-        // Allure.story("Web Form");
+        Allure.story("Web Form");
         Allure.suite("Web interface (Selenium)");
-        Allure.feature("Web Form");
+        //Allure.feature("Web Form");
         this.driver.get("https://www.selenium.dev/selenium/web/web-form.html");
         byte[] buffer = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment("Empty form", new ByteArrayInputStream(buffer));

@@ -17,7 +17,7 @@ class Common {
 
     public static WebDriver getDriver() {
         WebDriver driver = null;
-        String browser = StringUtils.isEmpty(System.getProperty("browser")) ? "chromium"
+        String browser = StringUtils.isEmpty(System.getProperty("browser")) ? "firefox"
                 : System.getProperty("browser").toLowerCase();
         String url = StringUtils.isEmpty(System.getProperty("hub")) ? null : System.getProperty("hub");
         URL hub = null;
@@ -45,7 +45,7 @@ class Common {
                 else
                     driver = new RemoteWebDriver(hub, opt2);
                 break;
-            case "edge":
+            case "msedge":
                 EdgeOptions opt3 = new EdgeOptions();
                 opt3.addArguments("--headless=new");
                 if (hub == null)

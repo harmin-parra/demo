@@ -12,7 +12,7 @@ Feature: Web form page
     * input('input[name=my-password]', 'password')
     * input('textarea[name=my-textarea]', 'Hello, World!')
     * select('select[name=my-select]', 2)
-    # * if (browser = 'chrome') driver.inputFile('input[name=my-file]', '../../file.txt')
+    # * if (browser == 'chrome') driver.inputFile('input[name=my-file]', '/tmp/test/file.txt')
     * input('input[name=my-datalist]', 'Los Angeles')
     * script("document.getElementsByName('my-colors')[0].value = '#00FF00';")
     * script("document.getElementsByName('my-date')[0].value = '01/01/2024';")

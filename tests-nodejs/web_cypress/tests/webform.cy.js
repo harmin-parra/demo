@@ -1,9 +1,32 @@
 import WebFormPage from "../pages/webform";
+//import * as allure from "allure-cypress";
 
 
 describe('Web Form', () => {
 
   it('fill in form', () => {
+    /*
+    allure.description(
+      "Testing the following field types of a webform :\n\n" +
+      "- Input text\n" +
+      "- Text area\n" +
+      "- Select\n" +
+      "- Checkbox\n" +
+      "- Radio button\n" +
+      "- File upload\n" +
+      "- Color picker\n" +
+      "- Date picker\n" +
+      "- Input range\n" +
+      "- Button\n"
+    );
+    allure.epic("Web interface (Cypress)");
+    allure.story("Web Form");
+    allure.parentSuite("Web interface (Cypress)");
+    allure.suite("Web Form");
+    allure.link("https://www.selenium.dev/selenium/web/web-form.html", "Target webform");
+    allure.issue("https://example.com/JIRA-123", "JIRA-123");
+    allure.tms("https://example.com/TEST-456", "TEST-456");
+    */
     cy.visit('https://www.selenium.dev/selenium/web/web-form.html')
     const page = new WebFormPage();
     cy.screenshot();

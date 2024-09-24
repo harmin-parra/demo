@@ -11,13 +11,13 @@ from web_selenium import pages
 @allure.epic("Web interface (Selenium)")
 #@allure.story("Ajax")
 @allure.feature("Ajax")
-def test_ajax_response(driver):
+def test_ajax_verification(driver):
     """
-    Testing a webpage using AJAX.
+    Testing an AJAX page.
 
-    Test using WebDriverWait.until()
+    Test using WebDriverWait().until()
     """
-    driver.get("http://harmin-demo.gitlab.io/reports/web/ajax.html")
+    driver.get("http://qa-demo.gitlab.io/reports/web/ajax.html")
     allure.attach(
         driver.get_screenshot_as_png(),
         name="Initial page",
