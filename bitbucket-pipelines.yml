@@ -14,10 +14,18 @@ pipelines:
           name: Test
           image: harmin/qa-runner-debian:latest
           script:
+            - echo "BITBUCKET_BUILD_NUMBER: " $BITBUCKET_BUILD_NUMBER
+            - echo "BITBUCKET_WORKSPACE: " $BITBUCKET_WORKSPACE
+            - echo "BITBUCKET_PROJECT_UUID: " $BITBUCKET_PROJECT_UUID
+            - echo "BITBUCKET_PROJECT_KEY: " $BITBUCKET_PROJECT_KEY
+            - echo "BITBUCKET_REPO_UUID: " $BITBUCKET_REPO_UUID
+            - echo "BITBUCKET_REPO_FULL_NAME: " $BITBUCKET_REPO_FULL_NAME
+            - exit
             - export PATH=$PATH:$HOME/.local/bin
             - python3 -m venv ~/venv
             - . ~/venv/bin/activate
             - ./runner.sh --browser $BROWSER
+            - ./serenity.sh --browser $BROWSER
             - echo $CI_JOB_URL > reporting/allure-results/java/job.url
             - echo $CI_JOB_URL > reporting/allure-results/nodejs/job.url
             - echo $CI_JOB_URL > reporting/allure-results/python/job.url
@@ -28,6 +36,7 @@ pipelines:
           name: Report
           image: openjdk:8-jre
           script:
+            - exit
             - curl https://github.com/allure-framework/allure2/releases/download/${ALLURE}/allure-${ALLURE}.zip -L -o /tmp/allure.zip
             - unzip /tmp/allure.zip -d /usr/local/
             - ln -s /usr/local/allure-${ALLURE}/bin/allure /usr/local/bin/allure
@@ -43,10 +52,10 @@ pipelines:
             - git config --global user.name "Bitbucket Pipeline"
             - git config --global user.email "bitbucket@bitbucket.org"
             - git clone https://x-token-auth:$TOKEN@bitbucket.org/harmin-parra/reports.git
-            - mv reporting/allure-reports/* reporting/
-            - rm -rf reporting/allure-reports reporting/allure-results
-            - cp -r reporting/* reports/
             - cd reports
+            - git rm -r report-*
+            - mv ../reporting/report-* ./
+            - mv ../reporting/allure-reports/report-* ./
             - git add *
             - git commit -m "Bitbucket Pipeline"
             - git push

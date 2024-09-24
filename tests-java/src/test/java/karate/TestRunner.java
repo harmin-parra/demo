@@ -21,7 +21,7 @@ public class TestRunner {
     }
 
     @Test
-    public void folderTests() {
+    public void folderTest() {
         // Results results = Runner.path("classpath:" + getClass().getPackageName().replace('.', '/'))
         Results results = Runner.path("classpath:web_karate/form_page")
                 .outputCucumberJson(true)
@@ -31,7 +31,7 @@ public class TestRunner {
     }
 
     @Test
-    public void modularityTests() {
+    public void modularityTest() {
         // Results results = Runner.path("classpath:" + getClass().getPackageName().replace('.', '/'))
         Results results = Runner.path("classpath:karate/modularity")
                 .outputCucumberJson(true)
