@@ -77,7 +77,7 @@ jobs:
           path: reporting
 
 
-  publish:
+  commit:
     needs: report
     runs-on: ubuntu-latest  
     steps:
@@ -92,7 +92,7 @@ jobs:
         with:
           name: artifact_report
           path: reporting
-      - name: Publish
+      - name: Commit
         run: |
           rm -rf docs/*
           mv reporting/report-* docs/
@@ -104,7 +104,7 @@ jobs:
           git push origin main
 
         
-#  commit:
+#  publish:
 #    needs: report
 #    runs-on: ubuntu-latest
 #    steps:
@@ -115,7 +115,7 @@ jobs:
 #        with:
 #          name: artifact_report
 #          path: reporting
-#      - name: Commit
+#      - name: Publish
 #        run: |
 #          rm -rf docs/*
 #          mv reporting/report-* docs/
@@ -123,5 +123,5 @@ jobs:
 #          git add -f docs/*
 #          git config user.name "GitHub Actions"
 #          git config user.email "noreply@github.com"
-#          git commit -m "Github Commit - Java tests"
+#          git commit -m "Github Actions commitGithub Commit - Java tests"
 #          git push origin main
