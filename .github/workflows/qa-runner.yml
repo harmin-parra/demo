@@ -96,11 +96,11 @@ jobs:
           path: reporting
       - name: Commit
         run: |
-          rm -rf docs/*
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "noreply@github.com"
+          git -rf docs/report-*
           mv reporting/report-* docs/
           mv reporting/allure-reports/report-* docs/
           git add -f docs/*
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "noreply@github.com"
           git commit -m "Github Actions commit"
           git push origin main
