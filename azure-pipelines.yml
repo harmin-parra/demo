@@ -11,7 +11,7 @@ variables:
   value: "azure"
   readonly: true
 - name: token
-  value: etjjsdyyqewiefnnpqe5asocjhu2csbuigvuflfikf3hks5k5cqa
+  value: xxxxx
   readonly: true
 
 
