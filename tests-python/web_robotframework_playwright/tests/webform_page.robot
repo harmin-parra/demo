@@ -25,7 +25,7 @@ Library           OperatingSystem
 
 *** Test Cases ***
 test_fill_in_form_en
-    Documentation     Testing the following field types of a webform :
+    [Documentation]     Testing the following field types of a webform :
     ...
     ...    - Input text
     ...    - Text area
@@ -71,7 +71,7 @@ test_fill_in_form_en
 
 *** Test Cases ***
 test_fill_in_form_fr
-    Documentation     Test d'un formulaire web avec les champs suivants :
+    [Documentation]     Test d'un formulaire web avec les champs suivants :
     ...
     ...    - Input text
     ...    - Text area
