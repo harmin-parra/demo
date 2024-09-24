@@ -98,7 +98,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "noreply@github.com"
-          git -rf docs/report-*
+          git rm -r docs/report-*
           mv reporting/report-* docs/
           mv reporting/allure-reports/report-* docs/
           git add -f docs/*
