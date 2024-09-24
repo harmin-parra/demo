@@ -84,7 +84,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/harmin-parra/reports.git
+          repository: harmin-parra/reports
           ref: 'main'
           token:  ${{ vars.TOKEN }}
       #- name: Download artifact
