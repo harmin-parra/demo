@@ -31,7 +31,3 @@ jobs:
         with:
           name: artifact_test
           path: reporting
-
-          git add -f docs/*
-          git commit -m "Github Commit"
-          git push origin main
