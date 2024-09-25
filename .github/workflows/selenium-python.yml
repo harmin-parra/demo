@@ -1,7 +1,7 @@
 name: selenium/python
 
 env:
-  ALLURE: 2.29.0
+  ALLURE: 2.30.0
 
 on:
   workflow_dispatch:
