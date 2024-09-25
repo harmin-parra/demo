@@ -58,6 +58,13 @@ echo =================
 echo Python - Selenium
 echo =================
 pytest web_selenium/tests/ --driver $BROWSER  # --hub $HUB
+echo ===============
+echo Python - Pytest
+echo ===============
+pytest web_pytest/tests/ --driver $BROWSER \
+    --alluredir /tmp \
+    --html=../reporting/report-pytest/index.html \
+    --css=report.css
 echo ========================
 echo Python - Robot Framework
 echo ========================
@@ -125,6 +132,7 @@ echo =============
 echo Java - Karate
 echo =============
 # mvn -Dtest="web_karate/**, rest_api_karate/**" -Dbrowser=$BROWSER test
+# mvn -Dtest="karate/TestRunner#modularityTest" -Dbrowser=firefox test
 mvn -Dtest="karate/TestRunner#allTests" -Dbrowser=$BROWSER test
 
 # Purge weird Allure Karate entries
