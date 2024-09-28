@@ -10,7 +10,7 @@
         <playwright.version>1.47.0</playwright.version>
         <selenium.version>4.24.0</selenium.version>
         <cucumber.version>7.18.1</cucumber.version>
-        <karate.version>1.4.1</karate.version>
+        <karate.version>1.5.0</karate.version>
         <rest-assured.version>5.5.0</rest-assured.version>
         <junit.version>5.11.0</junit.version>
 
@@ -58,7 +58,12 @@
             <version>${rest-assured.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.intuit.karate</groupId>
+            <groupId>io.karatelabs</groupId>
+            <artifactId>karate-playwright</artifactId>
+            <version>${karate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.karatelabs</groupId>
             <artifactId>karate-junit5</artifactId>
             <version>${karate.version}</version>
         </dependency>

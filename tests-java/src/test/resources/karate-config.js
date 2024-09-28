@@ -20,6 +20,7 @@ function fn() {
       karate.configure('driver', { type: 'geckodriver', executable: '/opt/webdriver/geckodriver', webDriverSession: { capabilities: { alwaysMatch: {browserName: 'firefox', "moz:firefoxOptions": { args: ['--headless'] } } } } });
     else
       karate.configure('driver', { type: 'chromedriver', executable: '/opt/webdriver/chromedriver', webDriverSession: { capabilities: { alwaysMatch: {browserName: 'chrome', "goog:chromeOptions": { args: ['headless'] } } } } });
+      // karate.configure('driver', { type: 'playwright', headless: true });
   } else {
     if( browser == "firefox" )
       karate.configure('driver', { type: 'geckodriver', executable: '/opt/webdriver/geckodriver' });

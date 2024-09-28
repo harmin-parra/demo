@@ -5,15 +5,15 @@ class WebFormPage:
 
     def __init__(self, page: Page):
         self.page = page
-        self.input = page.get_by_label("Text input")
-        self.password = page.get_by_label("Password")
-        self.textarea = page.get_by_label("Textarea")
+        self.input = page.locator("[id='my-text-id']")
+        self.password = page.locator("[name='my-password']")
+        self.textarea = page.locator("[name='my-textarea']")
         self.number = page.locator("//select[@name='my-select']")
         self.city = page.locator("//input[@name='my-datalist']")
-        self.color = page.get_by_label("Color picker")
-        self.date = page.get_by_label("Date picker")
-        self.range = page.get_by_label("Example range")
-        self.file = page.get_by_label("File input")
+        self.color = page.locator("[name='my-colors']")
+        self.date = page.locator("[name='my-date']")
+        self.range = page.locator("[name='my-range']")
+        self.file = page.locator("[name='my-file']")
         self.button_submit = page.get_by_role("button", name="Submit")
 
     def set_input(self, value):
@@ -39,7 +39,7 @@ class WebFormPage:
         # Click elsewhere to close the calendar
         #self.page.locator("body").click()
         self.date.evaluate("(elem, val) => elem.setAttribute('value', val);", value)
-        
+
     def set_range(self, value):
         # Two solutions
         # Solution #1: Trigger mouse events to move the range handler
