@@ -2,7 +2,7 @@ function fn() {
 
   var headless = 'true';
   var browser = 'chrome';
-  
+
   var config = {
     url_form_page: 'https://www.selenium.dev/selenium/web/web-form.html',
     url_ajax_page: 'http://qa-demo.gitlab.io/reports/web/ajax.html',
@@ -11,7 +11,7 @@ function fn() {
 
   headless = karate.properties['headless'] || headless;
   browser = karate.properties['browser'].toLowerCase() || browser;
-  
+
   if( browser != "firefox" && browser != "chrome" )
     throw new Error("Invalid 'browser' parameter value: " + browser);
 
